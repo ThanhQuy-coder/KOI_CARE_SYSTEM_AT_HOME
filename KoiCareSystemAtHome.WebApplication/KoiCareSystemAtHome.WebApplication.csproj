@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KoiCareSystemAtHome.Services\KoiCareSystemAtHome.Services.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\image\icon\" />
+    <ProjectReference Include="..\KoiCareSystemAtHome.Services\KoiCareSystemAtHome.Services.csproj" />
   </ItemGroup>
 
 </Project>
