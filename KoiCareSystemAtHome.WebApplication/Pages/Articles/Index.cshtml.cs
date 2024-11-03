@@ -21,3 +21,4 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.Articles
             Articles = await _context.Articles.Include(a => a.Category).ToListAsync();
         }
     }
+}

@@ -13,5 +13,5 @@ public partial class FeedingSchedule
 
     public string FoodType { get; set; } = null!;
 
-    public virtual Koifish? Fish { get; set; }
+    public virtual KoiFish? Fish { get; set; }
 }

@@ -21,3 +21,4 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.Categories
             Categories = await _context.Categories.ToListAsync();
         }
     }
+}

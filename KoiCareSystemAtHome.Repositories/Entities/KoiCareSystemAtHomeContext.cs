@@ -17,7 +17,7 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
     public virtual DbSet<FeedingSchedule> FeedingSchedules { get; set; }
 
-    public virtual DbSet<Koifish> Koifishes { get; set; }
+    public virtual DbSet<KoiFish> KoiFishes { get; set; }
 
     public virtual DbSet<News> News { get; set; }
 

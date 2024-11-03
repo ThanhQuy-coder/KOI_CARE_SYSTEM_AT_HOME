@@ -21,3 +21,4 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.Comments
             Comments = await _context.Comments.Include(c => c.Article).ToListAsync();
         }
     }
+}
