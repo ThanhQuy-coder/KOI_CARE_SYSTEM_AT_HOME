@@ -1,0 +1,30 @@
+﻿@page
+@model CommentsModel
+@{
+    ViewData["Title"] = "Danh sách bình luận";
+}
+<h2>Danh sách bình luận</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nội dung</th>
+            <th>Bài viết</th>
+            <th>Ngày tạo</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comment in Model.Comments)
+        {
+            <tr>
+                <td>@comment.Content</td>
+                <td>@comment.Article?.Title</td>
+                <td>@comment.CreatedDate.ToShortDateString()</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@comment.CommentId">Sửa</a> |
+                    <a asp-page="./Delete" asp-route-id="@comment.CommentId">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
