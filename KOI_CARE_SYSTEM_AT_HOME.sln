@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KoiCareSystemAtHome.Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KoiCareSystemAtHome.Repositories", "KoiCareSystemAtHome.Repositories\KoiCareSystemAtHome.Repositories.csproj", "{26A72B22-B834-48D1-BE64-5E826B768916}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoiCareSystemAtHome.WebApplication", "KoiCareSystemAtHome.WebApplication\KoiCareSystemAtHome.WebApplication.csproj", "{1ED9BE4C-09D9-4D24-870C-59D4B3860AA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KoiCareSystemAtHome.WebApplication", "KoiCareSystemAtHome.WebApplication\KoiCareSystemAtHome.WebApplication.csproj", "{1ED9BE4C-09D9-4D24-870C-59D4B3860AA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
