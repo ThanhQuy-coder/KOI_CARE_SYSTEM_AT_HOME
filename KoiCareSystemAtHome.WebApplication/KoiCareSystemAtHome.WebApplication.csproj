@@ -18,4 +18,10 @@
     <ProjectReference Include="..\KoiCareSystemAtHome.Services\KoiCareSystemAtHome.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Articles\" />
+    <Folder Include="Pages\Categories\" />
+    <Folder Include="Pages\Comments\" />
+  </ItemGroup>
+
 </Project>
