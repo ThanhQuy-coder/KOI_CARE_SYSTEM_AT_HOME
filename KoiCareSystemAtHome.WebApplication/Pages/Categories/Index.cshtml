@@ -1,0 +1,26 @@
+﻿@page
+@model CategoriesModel
+@{
+    ViewData["Title"] = "Danh sách danh mục";
+}
+<h2>Danh sách danh mục</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên danh mục</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model.Categories)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@category.CategoryId">Sửa</a> |
+                    <a asp-page="./Delete" asp-route-id="@category.CategoryId">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
