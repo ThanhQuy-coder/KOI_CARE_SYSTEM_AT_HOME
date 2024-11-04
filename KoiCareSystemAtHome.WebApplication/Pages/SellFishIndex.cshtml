@@ -1,0 +1,52 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "SellFish";
+}
+@{
+    Layout = "_SellFishLayout";
+}
+
+<h1>Shop Cá Koi</h1>
+<input type="text" placeholder="Tìm kiếm cá Koi...">
+
+<section class="filters">
+    <h2>Bộ lọc</h2>
+    <label>
+        <input type="checkbox" name="type" value="Tancho"> Tancho
+    </label>
+    <label>
+        <input type="checkbox" name="type" value="Showa"> Showa
+    </label>
+    <label>
+        <input type="checkbox" name="type" value="Kohaku"> Kohaku
+    </label>
+    <label>
+        <input type="checkbox" name="type" value="Sanke"> Sanke
+    </label>
+</section>
+
+<section class="product-list">
+    <div class="product-card">
+        <img src="https://via.placeholder.com/150" alt="Tancho Koi">
+        <h3>Tancho Koi</h3>
+        <p>Size: 30 cm</p>
+        <p>Giá: 5,000,000 VND</p>
+        <button>Thêm vào giỏ hàng</button>
+    </div>
+
+    <div class="product-card">
+        <img src="https://via.placeholder.com/150" alt="Showa Koi">
+        <h3>Showa Koi</h3>
+        <p>Size: 25 cm</p>
+        <p>Giá: 3,500,000 VND</p>
+        <button>Thêm vào giỏ hàng</button>
+    </div>
+
+    <div class="product-card">
+        <img src="https://via.placeholder.com/150" alt="Kohaku Koi">
+        <h3>Kohaku Koi</h3>
+        <p>Size: 40 cm</p>
+        <p>Giá: 8,000,000 VND</p>
+        <button>Thêm vào giỏ hàng</button>
+    </div>
