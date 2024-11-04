@@ -1,8 +1,19 @@
+using KoiCareSystemAtHome.Repositories;
+using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Repositories.Interfaces;
+using KoiCareSystemAtHome.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
 
+builder.Services.AddRazorPages();
+//Di
+builder.Services.AddDbContext<KoiCareSystemAtHomeContext>();
+//Di Repositories
+builder.Services.AddScoped<IPondReponsitory, PondReponsitory>();
+//Di Services
+builder.Services.AddScoped<IPondService, IPondService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
