@@ -21,7 +21,7 @@ public partial class Pond
 
     public double? PumpCapacity { get; set; }
 
-    public virtual ICollection<Koifish> Koifishes { get; set; } = new List<Koifish>();
+    public virtual ICollection<KoiFish> Koifishes { get; set; } = new List<KoiFish>();
 
     public virtual User? User { get; set; }
 }

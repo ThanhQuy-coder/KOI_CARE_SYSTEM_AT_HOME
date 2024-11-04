@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KoiCareSystemAtHome.Repositories.Entities;
 
-public partial class WarterParameter
+public partial class WaterParameter
 {
     public string? PondId { get; set; }
 

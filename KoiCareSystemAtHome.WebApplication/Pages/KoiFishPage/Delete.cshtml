@@ -1,0 +1,88 @@
+﻿@page
+@model KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage.DeleteModel
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>KoiFish</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiFish.NameFish)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiFish.NameFish)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiFish.ImageFish)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiFish.ImageFish)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiFish.BodyShape)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiFish.BodyShape)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiFish.AgeFish)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiFish.AgeFish)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiFish.Size)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiFish.Size)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiFish.WeightFish)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiFish.WeightFish)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiFish.Gender)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiFish.Gender)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiFish.Breed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiFish.Breed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiFish.Origin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiFish.Origin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiFish.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiFish.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiFish.FishLocation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiFish.FishLocation)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiFish.Pond)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiFish.Pond.PondId)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="KoiFish.FishId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

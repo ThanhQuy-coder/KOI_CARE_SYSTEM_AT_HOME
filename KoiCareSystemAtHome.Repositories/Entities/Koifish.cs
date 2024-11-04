@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 namespace KoiCareSystemAtHome.Repositories.Entities;
 
-public partial class Koifish
+public partial class KoiFish
 {
+    public string Id;
+
     public string? PondId { get; set; }
 
     public string FishId { get; set; } = null!;
