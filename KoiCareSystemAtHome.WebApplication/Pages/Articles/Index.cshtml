@@ -1,0 +1,30 @@
+﻿@page
+@model ArticlesIndexModel
+@{
+    ViewData["Title"] = "Danh sách bài viết";
+}
+<h2>Danh sách bài viết</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tiêu đề</th>
+            <th>Danh mục</th>
+            <th>Ngày xuất bản</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var article in Model.Articles)
+        {
+            <tr>
+                <td>@article.Title</td>
+                <td>@article.Category?.Name</td>
+                <td>@article.PublishDate.ToShortDateString()</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@article.ArticleId">Sửa</a> |
+                    <a asp-page="./Delete" asp-route-id="@article.ArticleId">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
