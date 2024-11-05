@@ -14,7 +14,9 @@ public partial class KoiCareSystemAtHomeContext : DbContext
         : base(options)
     {
     }
-
+    public virtual DbSet<Article> Articles { get; set; } // Bảng bài viết
+    public virtual DbSet<Category> Categories { get; set; } // Bảng danh mục
+    public virtual DbSet<Comment> Comments { get; set; } // Bảng bình luận
     public virtual DbSet<FeedingSchedule> FeedingSchedules { get; set; }
 
     public virtual DbSet<Koifish> Koifishes { get; set; }
@@ -37,6 +39,34 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<Article>(entity =>
+        {
+            entity.HasKey(e => e.ArticleId).HasName("PK_Article");
+            entity.Property(e => e.Title).HasMaxLength(200).IsRequired();
+            entity.Property(e => e.Content).IsRequired();
+            entity.Property(e => e.PublishDate).HasColumnType("datetime");
+            entity.HasOne(e => e.Category)
+                  .WithMany(c => c.Articles)
+                  .HasForeignKey(e => e.CategoryId);
+        });
+
+        modelBuilder.Entity<Comment>(entity =>
+        {
+            entity.HasKey(e => e.CommentId).HasName("PK_Comment");
+            entity.Property(e => e.Content).IsRequired();
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.HasOne(e => e.Article)
+                  .WithMany(a => a.Comments)
+                  .HasForeignKey(e => e.ArticleId);
+        });
+
+        modelBuilder.Entity<Category>(entity =>
+        {
+            entity.HasKey(e => e.CategoryId).HasName("PK_Category");
+            entity.Property(e => e.Name).HasMaxLength(100).IsRequired();
+        });
+
         modelBuilder.Entity<FeedingSchedule>(entity =>
         {
             entity
