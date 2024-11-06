@@ -5,9 +5,9 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class Product
 {
-    public string? UserId { get; set; }
+    public int UserId { get; set; }
 
-    public string ProductId { get; set; } = null!;
+    public int ProductId { get; set; }
 
     public string ProductName { get; set; } = null!;
 
@@ -21,5 +21,5 @@ public partial class Product
 
     public DateTime DatePlace { get; set; }
 
-    public virtual User? User { get; set; }
+    public virtual User User { get; set; } = null!;
 }

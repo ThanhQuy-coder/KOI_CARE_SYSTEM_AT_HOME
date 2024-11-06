@@ -5,7 +5,7 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class News
 {
-    public string PostId { get; set; } = null!;
+    public int PostId { get; set; }
 
     public string Author { get; set; } = null!;
 

@@ -5,17 +5,17 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class User
 {
-    public string UserId { get; set; } = null!;
+    public int UserId { get; set; }
 
-    public string Username { get; set; } = null!;
+    public string FullName { get; set; } = null!;
 
-    public string PasswordUser { get; set; } = null!;
+    public DateTime BirthDate { get; set; }
 
     public string Gender { get; set; } = null!;
 
-    public string Email { get; set; } = null!;
+    public string Roled { get; set; } = null!;
 
-    public string? Roled { get; set; }
+    public virtual ICollection<Account> Accounts { get; set; } = new List<Account>();
 
     public virtual ICollection<Pond> Ponds { get; set; } = new List<Pond>();
 

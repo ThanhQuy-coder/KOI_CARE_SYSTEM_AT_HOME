@@ -3,9 +3,11 @@ using System.Collections.Generic;
 
 namespace KoiCareSystemAtHome.Repositories.Entities;
 
-public partial class WarterParameter
+public partial class WaterParameter
 {
-    public string? PondId { get; set; }
+    public int? PondId { get; set; }
+
+    public int WaterParameterId { get; set; }
 
     public double? Temperature { get; set; }
 

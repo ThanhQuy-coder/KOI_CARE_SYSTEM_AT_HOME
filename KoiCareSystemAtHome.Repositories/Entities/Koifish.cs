@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace KoiCareSystemAtHome.Repositories.Entities;
 
-public partial class Koifish
+public partial class KoiFish
 {
-    public string? PondId { get; set; }
+    public int PondId { get; set; }
 
-    public string FishId { get; set; } = null!;
+    public int FishId { get; set; }
 
     public string NameFish { get; set; } = null!;
 
@@ -31,5 +31,7 @@ public partial class Koifish
 
     public int FishLocation { get; set; }
 
-    public virtual Pond? Pond { get; set; }
+    public virtual ICollection<FeedingSchedule> FeedingSchedules { get; set; } = new List<FeedingSchedule>();
+
+    public virtual Pond Pond { get; set; } = null!;
 }
