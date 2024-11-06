@@ -1,0 +1,17 @@
+﻿@page "{id:int}"
+@model EditCategoryModel
+@{
+    ViewData["Title"] = "Chỉnh sửa danh mục";
+}
+
+<h2>Chỉnh sửa danh mục</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Category.Name" class="control-label"></label>
+        <input asp-for="Category.Name" class="form-control" />
+        <span asp-validation-for="Category.Name" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Lưu thay đổi</button> |
+    <a asp-page="./Index" class="btn btn-secondary">Hủy</a>
+</form>

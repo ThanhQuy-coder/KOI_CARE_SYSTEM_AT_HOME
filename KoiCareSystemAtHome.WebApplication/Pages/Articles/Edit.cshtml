@@ -1,0 +1,26 @@
+﻿@page "{id:int}"
+@model KoiCareSystemAtHome.WebApplication.Pages.Articles.EditModel
+@{
+    ViewData["Title"] = "Edit Article";
+}
+
+<h2>Edit Article</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Article.Title"></label>
+        <input asp-for="Article.Title" class="form-control" />
+        <span asp-validation-for="Article.Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Article.Content"></label>
+        <textarea asp-for="Article.Content" class="form-control"></textarea>
+        <span asp-validation-for="Article.Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Article.PublishDate"></label>
+        <input asp-for="Article.PublishDate" class="form-control" />
+        <span asp-validation-for="Article.PublishDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
