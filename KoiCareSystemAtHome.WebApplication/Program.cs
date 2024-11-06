@@ -10,7 +10,7 @@ builder.Services.AddRazorPages();
 
 // Register services for DI (Step 6)
 builder.Services.AddDbContext<KoiCareSystemAtHomeContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("KoiCareSystemAtHomeContext")));
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IArticlesService, ArticlesService>();
