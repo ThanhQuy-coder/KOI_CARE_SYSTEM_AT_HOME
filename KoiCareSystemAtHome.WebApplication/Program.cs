@@ -1,7 +1,7 @@
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
 using KoiCareSystemAtHome.Repositories.Repositories;
-using KoiCareSystemAtHome.Services;
+using KoiCareSystemAtHome.Services.Interfaces;
 using KoiCareSystemAtHome.Services.Services;
 using Microsoft.EntityFrameworkCore;
 

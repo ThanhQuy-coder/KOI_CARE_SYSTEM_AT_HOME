@@ -9,63 +9,83 @@ using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.Repositories.Repositories
 {
-	public class KoiFishRepository : IKoiFishRepository
-	{
-		private readonly KoiCareSystemAtHomeContext _dbContext;
-		public KoiFishRepository(KoiCareSystemAtHomeContext dbContext)
-		{
-			_dbContext = dbContext;
-		}
-
-        public Task<int> AddKoiFishAsync(object koiFish)
+    public class KoiFishRepository : IKoiFishRepository
+    {
+        private readonly KoiCareSystemAtHomeContext _dbContext;
+        public KoiFishRepository(KoiCareSystemAtHomeContext dbContext)
         {
+            _dbContext = dbContext;
+        }
+
+        public bool AddKoiFish(KoiFish koiFish)
+        {
+            try
+            {
+
+            }catch (Exception ex)
+            {
+                _dbContext.Koifishes.Add(koiFish);
+                //await _dbContext.Koifishes.AddAsync(koiFish);
+                _dbContext.SaveChanges();
+                return true;
+            }
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteKoiFishAsync(int koiFishId)
+        public bool DeleteKoiFish(string Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var objDel = _dbContext.Koifishes.Where(p => p.FishId.Equals(Id)).FirstOrDefault();
+                if (objDel != null)
+                {
+                    _dbContext.Koifishes.Remove(objDel);
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException(ex.ToString());
+            }
         }
 
-        public Task DeleteKoiFishAsync(KoiFish koiFish)
+        public bool DeleteKoiFish(KoiFish koiFish)
         {
-            throw new NotImplementedException();
+            
+            try
+            {
+                _dbContext.Koifishes.Remove(koiFish);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException(ex.ToString());
+            }
         }
 
-        public	async Task<List<KoiFish>> GetKoiFish()
-		{
-			List<KoiFish> koiFishes = null;
-			try
-			{
-				koiFishes = await _dbContext.Koifishes.ToListAsync();
-
-			}
-			catch(Exception ex) 
-			{
-				koiFishes?.Add(new KoiFish());
-			}
-			return koiFishes;
-			
-		}
-
-        public Task<List<Pond>> GetPondsAsync()
+        public async Task<List<KoiFish>> GetAllKoiFish()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Koifishes.ToListAsync();
         }
 
-        public Task<int> RemoveKoiFishAsync(int koiFishId)
+        public async Task<KoiFish> GetKoiFishById(string Id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Koifishes.Where(p=>p.FishId.Equals(Id)).FirstOrDefaultAsync();
         }
 
-        public Task SaveChangesAsync()
+        public bool UpdateKoiFish(KoiFish koifish)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> UpdateKoiFishAsync(KoiFish koifish)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                _dbContext.Koifishes.Update(koifish);
+                return true;
+            }catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

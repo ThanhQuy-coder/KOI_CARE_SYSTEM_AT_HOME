@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KoiCareSystemAtHome.Services
+namespace KoiCareSystemAtHome.Services.Interfaces
 {
-	public interface IKoiFishService
-	{
-		Task<List<KoiFish>> GetKoifishAsync();
-		Task<int> AddKoiFishAsync(KoiFish koifish);
-        Task<bool> DeleteKoiFishAsync(int koiFishId);
-		Task<int> RemoveKoiFishAsync(int koiFishId);
-		Task<int> UpdateKoiFishAsync(KoiFish koifish);
-        Task<IList<KoiFish>> KoiFishes();
+    public interface IKoiFishService
+    {
+        Task<List<KoiFish>> GetAllKoiFish();
+        Boolean AddKoiFish(KoiFish koiFish);
+        Boolean DeleteKoiFish(string Id);
+        Boolean DeleteKoiFish(KoiFish koiFish);
+        Task<KoiFish> GetKoiFishById(string Id);
+        Boolean UpdateKoiFish(KoiFish koifish);
     }
 }

@@ -6,54 +6,54 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
-using KoiCareSystemAtHome.Services.Interfaces;
 
-namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
+namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
 {
     public class DeleteModel : PageModel
     {
-        private readonly IKoiFishService _service;
+        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
 
-        public DeleteModel(IKoiFishService service)
+        public DeleteModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
         {
-            _service = service;
+            _context = context;
         }
 
         [BindProperty]
-        public KoiFish KoiFish { get; set; } = default!;
+        public Product Product { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var koifish = await _service.GetKoiFishById(id); // `id` là kiểu string
+            var product = await _context.Products.FirstOrDefaultAsync(m => m.ProductId == id);
 
-            if (koifish == null)
+            if (product == null)
             {
                 return NotFound();
             }
             else
             {
-                KoiFish = koifish;
+                Product = product;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string id)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null)
             {
                 return NotFound();
             }
 
-            bool result = _service.DeleteKoiFish(id); // Truyền `id` là string
-
-            if (!result)
+            var product = await _context.Products.FindAsync(id);
+            if (product != null)
             {
-                return NotFound();
+                Product = product;
+                _context.Products.Remove(Product);
+                await _context.SaveChangesAsync();
             }
 
             return RedirectToPage("./Index");

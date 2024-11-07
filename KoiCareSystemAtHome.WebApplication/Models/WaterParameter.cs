@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace KoiCareSystemAtHome.Repositories.Entities;
+namespace KoiCareSystemAtHome.WebApplication.Models;
 
 public partial class WaterParameter
 {
@@ -24,7 +23,7 @@ public partial class WaterParameter
 
     public DateTime MeasurementTime { get; set; }
 
-    public string? IdWaterParameter { set; get; } = null!;
+    public string IdWaterParameter { get; set; } = null!;
 
     public virtual Pond? Pond { get; set; }
 }

@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.Repositories.Interfaces
 {
-	public interface IKoiFishRepository
+	public interface IKoiFishRepository     
 	{
-        Task<int> AddKoiFishAsync(object koiFish);
-        Task<bool> DeleteKoiFishAsync(int koiFishId);
-        Task DeleteKoiFishAsync(KoiFish koiFish);
-        Task<List<KoiFish>> GetKoiFish();
-        Task<List<Pond>> GetPondsAsync();
-        Task<int> RemoveKoiFishAsync(int koiFishId);
-        Task SaveChangesAsync();
-        Task<int> UpdateKoiFishAsync(KoiFish koifish);
+        Task<List<KoiFish>> GetAllKoiFish();
+        Boolean AddKoiFish(KoiFish koiFish);
+        Boolean DeleteKoiFish(string Id);
+        Boolean DeleteKoiFish(KoiFish koiFish);
+        Task<KoiFish> GetKoiFishById(string Id);
+        Boolean UpdateKoiFish(KoiFish koifish);
     }
 }

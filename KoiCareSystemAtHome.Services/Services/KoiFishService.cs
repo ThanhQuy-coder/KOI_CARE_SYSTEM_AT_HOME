@@ -1,6 +1,6 @@
 ﻿using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
-using KoiCareSystemAtHome.Services;
+using KoiCareSystemAtHome.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,52 +9,41 @@ using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.Services.Services
 {
-	public class KoiFishService : IKoiFishService
-	{
-		private readonly IKoiFishRepository _repository;
-		public KoiFishService(IKoiFishRepository repository)
-		{
-			_repository = repository;
-		}
-		public async Task<int> AddKoiFishAsync(KoiFish koifish)
-		{
-			throw new NotImplementedException();
-		}
-
-		public Task<bool> DeleteKoiFishAsync(int koiFishId)
-		{
-			throw new NotImplementedException();
-		}
-
-        public async Task DeleteKoiFishAsync(KoiFish koiFish)
+    public class KoiFishService : IKoiFishService
+    {
+        private readonly IKoiFishRepository _repository;
+        public KoiFishService(IKoiFishRepository repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+        }
+        public bool AddKoiFish(KoiFish koiFish)
+        {
+            return _repository.AddKoiFish(koiFish);
         }
 
-        public async Task<List<KoiFish>> GetKoifishAsync()
-		{
-			return await _repository.GetKoiFish();
-		}
-
-        public async Task<IList<KoiFish>> KoiFishes()
+        public bool DeleteKoiFish(string Id)
         {
-            return await _repository.GetKoiFish();
+            return _repository.DeleteKoiFish(Id);
         }
 
-
-        public Task<int> RemoveKoiFishAsync(int koiFishId)
-		{
-			throw new NotImplementedException();
-		}
-
-        public async Task SaveChangesAsync()
+        public bool DeleteKoiFish(KoiFish koiFish)
         {
-            throw new NotImplementedException();
+            return _repository.DeleteKoiFish(koiFish);
         }
 
-        public Task<int> UpdateKoiFishAsync(KoiFish koifish)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public Task<List<KoiFish>> GetAllKoiFish()
+        {
+            return _repository.GetAllKoiFish();
+        }
+
+        public Task<KoiFish> GetKoiFishById(string Id)
+        {
+            return _repository.GetKoiFishById(Id);
+        }
+
+        public bool UpdateKoiFish(KoiFish koifish)
+        {
+            return _repository.UpdateKoiFish(koifish);
+        }
+    }
 }
