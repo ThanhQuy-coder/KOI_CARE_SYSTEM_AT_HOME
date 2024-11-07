@@ -1,0 +1,69 @@
+﻿@page
+@model KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages.EditModel
+
+<h4>WaterParameter</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="WaterParameter.PondId" class="control-label"></label>
+                <select asp-for="WaterParameter.PondId" class="form-control" asp-items="ViewBag.PondId"></select>
+                <span asp-validation-for="WaterParameter.PondId" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="WaterParameter.WaterParameterId" />
+            <div class="form-group">
+                <label asp-for="WaterParameter.Temperature" class="control-label"></label>
+                <input asp-for="WaterParameter.Temperature" class="form-control" />
+                <span asp-validation-for="WaterParameter.Temperature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WaterParameter.SaltLevel" class="control-label"></label>
+                <input asp-for="WaterParameter.SaltLevel" class="form-control" />
+                <span asp-validation-for="WaterParameter.SaltLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WaterParameter.PH" class="control-label"></label>
+                <input asp-for="WaterParameter.PH" class="form-control" />
+                <span asp-validation-for="WaterParameter.PH" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WaterParameter.Oxygen" class="control-label"></label>
+                <input asp-for="WaterParameter.Oxygen" class="form-control" />
+                <span asp-validation-for="WaterParameter.Oxygen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WaterParameter.Nitrie" class="control-label"></label>
+                <input asp-for="WaterParameter.Nitrie" class="form-control" />
+                <span asp-validation-for="WaterParameter.Nitrie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WaterParameter.Nitrate" class="control-label"></label>
+                <input asp-for="WaterParameter.Nitrate" class="form-control" />
+                <span asp-validation-for="WaterParameter.Nitrate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WaterParameter.Phospate" class="control-label"></label>
+                <input asp-for="WaterParameter.Phospate" class="form-control" />
+                <span asp-validation-for="WaterParameter.Phospate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WaterParameter.MeasurementTime" class="control-label"></label>
+                <input asp-for="WaterParameter.MeasurementTime" class="form-control" />
+                <span asp-validation-for="WaterParameter.MeasurementTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

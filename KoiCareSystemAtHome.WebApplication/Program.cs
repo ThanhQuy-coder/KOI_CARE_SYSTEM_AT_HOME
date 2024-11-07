@@ -1,7 +1,21 @@
+using KoiCareSystemAtHome.Repositories;
+using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Repositories.Interfaces;
+using KoiCareSystemAtHome.Services;
+using KoiCareSystemAtHome.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+//DI 
+builder.Services.AddDbContext<KoiCareSystemAtHomeContext>();
+//DI Repositories
+builder.Services.AddScoped<IWaterParameterRepository, WaterParameterRepository>();
+//DI Service
+builder.Services.AddScoped<IWaterParameterService, WaterParameterService>();
+
+
 
 var app = builder.Build();
 

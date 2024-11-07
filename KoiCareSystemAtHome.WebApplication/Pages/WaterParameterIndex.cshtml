@@ -1,0 +1,47 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "WaterParameter";
+}
+@{
+    Layout = "_WaterParameterLayout";
+}
+<header>
+    <h1>Water Parameters for Koi Fish</h1>
+    <p>Real-time monitoring to ensure a healthy environment for your Koi.</p>
+</header>
+
+<div class="parameter-card">
+    <h2>Pond ID: 001</h2>
+    <p class="measurement-time">Measurement Time: 2024-11-01 10:00 AM</p>
+    <div class="parameters">
+        <div class="parameter">
+            <span>Temperature</span>
+            <strong>25.5°C</strong>
+        </div>
+        <div class="parameter">
+            <span>Salt Level</span>
+            <strong>0.1%</strong>
+        </div>
+        <div class="parameter">
+            <span>pH Level</span>
+            <strong>7.8</strong>
+        </div>
+        <div class="parameter">
+            <span>Oxygen Level</span>
+            <strong>8.5 mg/L</strong>
+        </div>
+        <div class="parameter">
+            <span>Nitrite</span>
+            <strong>0.02 mg/L</strong>
+        </div>
+        <div class="parameter">
+            <span>Nitrate</span>
+            <strong>0.5 mg/L</strong>
+        </div>
+        <div class="parameter">
+            <span>Phosphate</span>
+            <strong>0.1 mg/L</strong>
+        </div>
+    </div>
+</div>

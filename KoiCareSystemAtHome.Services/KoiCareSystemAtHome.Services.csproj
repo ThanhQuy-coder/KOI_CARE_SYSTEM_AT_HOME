@@ -7,12 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KoiCareSystemAtHome.Repositories\KoiCareSystemAtHome.Repositories.csproj" />
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\KoiCareSystemAtHome.Repositories\KoiCareSystemAtHome.Repositories.csproj" />
   </ItemGroup>
 
 </Project>
