@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
 {
     public class EditModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly IKoiFishService _service;
 
-        public EditModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public EditModel(IKoiFishService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -24,23 +24,25 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
                 return NotFound();
             }
 
-            var koifish =  await _context.Koifishes.FirstOrDefaultAsync(m => m.FishId == id);
+            var koifish = await _service.GetKoiFishById(id);
             if (koifish == null)
             {
                 return NotFound();
             }
+
             KoiFish = koifish;
-           ViewData["PondId"] = new SelectList(_context.Ponds, "PondId", "PondId");
+
+            // Nếu cần danh sách PondId cho dropdown
+            // ViewData["PondId"] = new SelectList(await _service.GetAllPonds(), "PondId", "PondId");
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -48,30 +50,27 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
                 return Page();
             }
 
-            _context.Attach(KoiFish).State = EntityState.Modified;
+            bool result = _service.UpdateKoiFish(KoiFish);
 
-            try
+            if (!result)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!KoiFishExists(KoiFish.FishId))
+                if (!await KoiFishExists(KoiFish.FishId))
                 {
                     return NotFound();
                 }
                 else
                 {
-                    throw;
+                    throw new Exception("Lỗi cập nhật cá koi.");
                 }
             }
 
             return RedirectToPage("./Index");
         }
 
-        private bool KoiFishExists(string id)
+        private async Task<bool> KoiFishExists(string id)
         {
-            return _context.Koifishes.Any(e => e.FishId == id);
+            var koiFish = await _service.GetKoiFishById(id);
+            return koiFish != null;
         }
     }
 }

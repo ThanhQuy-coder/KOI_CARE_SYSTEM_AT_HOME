@@ -1,42 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
 {
     public class CreateModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly IKoiFishService _service;
 
-        public CreateModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public CreateModel(IKoiFishService service)
         {
-            _context = context;
-        }
-
-        public IActionResult OnGet()
-        {
-        ViewData["PondId"] = new SelectList(_context.Ponds, "PondId", "PondId");
-            return Page();
+            _service = service;
         }
 
         [BindProperty]
         public KoiFish KoiFish { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnGet()
+        {
+            return Page();
+        }
+
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Koifishes.Add(KoiFish);
-            await _context.SaveChangesAsync();
+            var result = _service.AddKoiFish(KoiFish);
+            if (!result)
+            {
+                ModelState.AddModelError(string.Empty, "Error adding Koi Fish.");
+                return Page();
+            }
 
             return RedirectToPage("./Index");
         }

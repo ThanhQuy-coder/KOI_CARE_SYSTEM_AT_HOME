@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.Repositories.Repositories
@@ -12,6 +11,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
     public class KoiFishRepository : IKoiFishRepository
     {
         private readonly KoiCareSystemAtHomeContext _dbContext;
+
         public KoiFishRepository(KoiCareSystemAtHomeContext dbContext)
         {
             _dbContext = dbContext;
@@ -21,22 +21,22 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
         {
             try
             {
-
-            }catch (Exception ex)
-            {
                 _dbContext.Koifishes.Add(koiFish);
-                //await _dbContext.Koifishes.AddAsync(koiFish);
-                _dbContext.SaveChanges();
+                _dbContext.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
                 return true;
             }
-            throw new NotImplementedException();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Không thể thêm cá do trùng dữ liệu !: {ex.Message}");
+                return false;
+            }
         }
 
         public bool DeleteKoiFish(string Id)
         {
             try
             {
-                var objDel = _dbContext.Koifishes.Where(p => p.FishId.Equals(Id)).FirstOrDefault();
+                var objDel = _dbContext.Koifishes.FirstOrDefault(p => p.FishId.Equals(Id));
                 if (objDel != null)
                 {
                     _dbContext.Koifishes.Remove(objDel);
@@ -47,13 +47,13 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException(ex.ToString());
+                Console.WriteLine($"Lỗi, không thể xóa bằng Id ! {ex.Message}");
+                return false;
             }
         }
 
         public bool DeleteKoiFish(KoiFish koiFish)
         {
-            
             try
             {
                 _dbContext.Koifishes.Remove(koiFish);
@@ -62,7 +62,8 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException(ex.ToString());
+                Console.WriteLine($"Lỗi, không thể xóa !: {ex.Message}");
+                return false;
             }
         }
 
@@ -73,7 +74,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
 
         public async Task<KoiFish> GetKoiFishById(string Id)
         {
-            return await _dbContext.Koifishes.Where(p=>p.FishId.Equals(Id)).FirstOrDefaultAsync();
+            return await _dbContext.Koifishes.FirstOrDefaultAsync(p => p.FishId.Equals(Id));
         }
 
         public bool UpdateKoiFish(KoiFish koifish)
@@ -81,9 +82,12 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             try
             {
                 _dbContext.Koifishes.Update(koifish);
+                _dbContext.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
                 return true;
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
+                Console.WriteLine($"Lỗi, không thể cập nhật: {ex.Message}");
                 return false;
             }
         }
