@@ -7,12 +7,12 @@ using KoiCareSystemAtHome.Repositories.Entities;
 
 namespace KoiCareSystemAtHome.Repositories.Interfaces
 {
-    public interface IKoiFishSellFish
+    public interface IProductRepository
     {
-        Task<int> AddKoiFishAsync(object KoiFish);
-        Task<bool> DeleteKoiFishAsync(int KoiFishId);
-        Task<int> UpdateKoiFishAsync(Koifish KoiFish);
+        Task<int> AddProductAsync(object Product);
+        Task<bool> DeleteProductAsync(int Product);
+        Task<int> UpdateProductAsync(Product product);
         Task SaveChangesAsync();
-        Task<List<Koifish>> GetKoiFish();
+        Task<List<Product>> GetProduct();
     }
 }

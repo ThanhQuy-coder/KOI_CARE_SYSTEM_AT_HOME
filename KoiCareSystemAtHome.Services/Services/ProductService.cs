@@ -8,24 +8,36 @@ using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.Services.Services
 {
-    public class KoiFishService : IKoiFishService
+    public class ProductService : IProductService
     {
-        public Task<int> AddKoiFishAsync(object KoiFish)
+        private readonly KoiCareSystemAtHomeContext _repository;
+        public ProductService(KoiCareSystemAtHomeContext repository)
+        {
+            _repository = repository;
+        }
+
+
+        public Task<int> AddProductAsync(object Product)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteKoiFishAsync(int KoiFishId)
+        
+
+        public Task<bool> DeleteProductAsync(int Product)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Koifish>> GetKoiFishAsync()
+       
+
+        public Task<List<Product>> GetProductAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Koifish>> KoiFishes()
+        
+        public Task<List<Product>> Product()
         {
             throw new NotImplementedException();
         }
@@ -35,7 +47,9 @@ namespace KoiCareSystemAtHome.Services.Services
             throw new NotImplementedException();
         }
 
-        public Task<int> UpdateKoiFishAsync(Koifish KoiFish)
+       
+
+        public Task<int> UpdateProductAsync(Product product)
         {
             throw new NotImplementedException();
         }

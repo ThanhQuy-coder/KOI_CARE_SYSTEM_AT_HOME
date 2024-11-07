@@ -1,0 +1,43 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Product";
+}
+@{
+    Layout = "_ProductLayout";
+}
+<header>
+<h1>Product Store</h1>
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Products</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact</a>
+</nav>
+    </header>
+
+<section class="product-container">
+    <div class="product-card">
+        <img src="https://th.bing.com/th?q=H%c3%acnh+T%c3%b4+M%c3%a0u+C%c3%a1+Koi&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.3&pid=InlineBlock&mkt=en-WW&cc=VN&setlang=en&adlt=moderate&t=1&mw=247" alt="Product Image">
+        <h2>Product Name 1</h2>
+        <p>Short description of the product goes here. It should be concise and engaging.</p>
+        <span class="price">$25.00</span>
+        <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+        <img src="https://th.bing.com/th/id/OIP.6HN5WrtB1GCyLfDhD_e4gQHaF6?w=213&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Product Image">
+        <h2>Product Name 2</h2>
+        <p>Short description of the product goes here. It should be concise and engaging.</p>
+        <span class="price">$35.00</span>
+        <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+        <img src="https://th.bing.com/th/id/OIP.q_NwTfk-88KhADAVVq6OgQHaEK?w=303&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Product Image">
+        <h2>Product Name 3</h2>
+        <p>Short description of the product goes here. It should be concise and engaging.</p>
+        <span class="price">$45.00</span>
+        <button>Add to Cart</button>
+    </div>
+</section>  
