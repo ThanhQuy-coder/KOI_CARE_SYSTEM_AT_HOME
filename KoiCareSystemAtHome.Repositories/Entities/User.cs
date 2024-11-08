@@ -15,8 +15,6 @@ public partial class User
 
     public string Roled { get; set; } = null!;
 
-    public virtual ICollection<Account> Accounts { get; set; } = new List<Account>();
-
     public virtual ICollection<Pond> Ponds { get; set; } = new List<Pond>();
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();

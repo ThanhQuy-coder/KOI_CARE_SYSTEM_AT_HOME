@@ -57,11 +57,6 @@ public partial class KoiCareSystemAtHomeContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("passWorkHash");
             entity.Property(e => e.Username).HasMaxLength(100);
-
-            entity.HasOne(d => d.User).WithMany(p => p.Accounts)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Account__UserId__4F7CD00D");
         });
 
         modelBuilder.Entity<FeedingSchedule>(entity =>
