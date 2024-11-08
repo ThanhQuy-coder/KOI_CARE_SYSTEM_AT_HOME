@@ -5,12 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Services.Interfaces;
-
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 namespace KoiCareSystemAtHome.Services.Services
 {
     public class ProductService : IProductService
     {
         private readonly KoiCareSystemAtHomeContext _repository;
+
+        public string ImageFileName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public ProductService(KoiCareSystemAtHomeContext repository)
         {
             _repository = repository;
@@ -53,5 +57,20 @@ namespace KoiCareSystemAtHome.Services.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task<string> SaveImageAsync(IFormFile imageFile)
+        {
+            if (imageFile != null)
+            {
+                var filePath = Path.Combine("wwwroot/uploads", imageFile.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(stream);
+                }
+                return "/uploads/" + imageFile.FileName;
+            }
+            return null;
+        }
+
     }
 }
