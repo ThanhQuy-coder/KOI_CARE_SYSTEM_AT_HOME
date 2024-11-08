@@ -6,16 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly IWaterParameterService _service;
 
-        public DeleteModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public DeleteModel(IWaterParameterService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -23,12 +24,16 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            int Id = 0;
             if (id == null)
+
             {
+                Id = 0;
                 return NotFound();
             }
+            Id = (int)id;
 
-            var waterparameter = await _context.WaterParameters.FirstOrDefaultAsync(m => m.WaterParameterId == id);
+            var waterparameter = await _service.GetWaterParameterById(Id);
 
             if (waterparameter == null)
             {
@@ -47,15 +52,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             {
                 return NotFound();
             }
-
-            var waterparameter = await _context.WaterParameters.FindAsync(id);
-            if (waterparameter != null)
-            {
-                WaterParameter = waterparameter;
-                _context.WaterParameters.Remove(WaterParameter);
-                await _context.SaveChangesAsync();
-            }
-
+            _service.DelWaterParameter((int)id);
             return RedirectToPage("./Index");
         }
     }

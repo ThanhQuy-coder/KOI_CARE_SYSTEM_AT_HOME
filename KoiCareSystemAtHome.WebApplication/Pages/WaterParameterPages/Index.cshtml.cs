@@ -23,7 +23,8 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
 
         public async Task OnGetAsync()
         {
-            WaterParameter = await _service.WaterParameters();
+            WaterParameter = await _service.GetAllWaterParameter();
         }
+
     }
 }

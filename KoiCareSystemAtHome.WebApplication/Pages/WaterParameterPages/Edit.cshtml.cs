@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
 {
     public class EditModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly IWaterParameterService _service;
 
-        public EditModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public EditModel(IWaterParameterService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -24,12 +25,15 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            int Id = 0;
             if (id == null)
             {
+                Id = 0;
                 return NotFound();
             }
+            Id = (int)id;
 
-            var waterparameter =  await _context.WaterParameters.FirstOrDefaultAsync(m => m.WaterParameterId == id);
+            var waterparameter = await _service.GetWaterParameterById(Id);
             if (waterparameter == null)
             {
                 return NotFound();

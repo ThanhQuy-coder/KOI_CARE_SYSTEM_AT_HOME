@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,9 +18,74 @@ namespace KoiCareSystemAtHome.Repositories
             _dbContext=dbContext;
         }
 
-        public async Task<List<WaterParameter>> GetAllWaterParameters()
+        public bool AddWaterParameter(WaterParameter parameter)
+        {
+            try
+            {
+                _dbContext.WaterParameters.Add(parameter);
+                _dbContext.SaveChanges();
+                return true;
+            }catch(Exception ex)
+            {
+                throw new NotImplementedException();
+            }
+           
+        }
+
+        public bool DelWaterParameter(WaterParameter parameter)
+        {
+            try
+            {
+                _dbContext.WaterParameters.Remove(parameter);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException(ex.ToString());
+                return false;
+            }
+        }
+
+        public bool DelWaterParameter(int Id)
+        {
+            try
+            {
+                var objDel = _dbContext.WaterParameters.Where(p => p.WaterParameterId.Equals(Id)).FirstOrDefault();
+                if(objDel != null)
+                {
+                    _dbContext.WaterParameters.Remove(objDel);
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+                return false;
+
+            }catch(Exception ex)
+            {
+                throw new NotImplementedException(ex.ToString());
+            }
+        }
+
+        public async Task<List<WaterParameter>> GetAllWaterParameter()
         {
             return await _dbContext.WaterParameters.ToListAsync();
+        }
+
+        public async Task<WaterParameter> GetWaterParameterById(int Id)
+        {
+            return await _dbContext.WaterParameters.Where(p=>p.WaterParameterId.Equals(Id)).FirstOrDefaultAsync();
+        }
+
+        public bool UppWaterParameter(WaterParameter parameter)
+        {
+            try
+            {
+                _dbContext.WaterParameters.Update(parameter);
+                return true;
+            }catch(Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

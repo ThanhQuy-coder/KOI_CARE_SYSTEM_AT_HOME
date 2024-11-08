@@ -6,37 +6,39 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
 {
     public class CreateModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly IWaterParameterService _service;
 
-        public CreateModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public CreateModel(IWaterParameterService service)
         {
-            _context = context;
+            _service = service;
         }
-
+        [BindProperty]
+        public WaterParameter WaterParameter { get; set; } = default!;
         public IActionResult OnGet()
         {
-        ViewData["PondId"] = new SelectList(_context.Ponds, "PondId", "NamePond");
             return Page();
         }
 
-        [BindProperty]
-        public WaterParameter WaterParameter { get; set; } = default!;
-
         // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.WaterParameters.Add(WaterParameter);
-            await _context.SaveChangesAsync();
+            var result = _service.AddWaterParameter(WaterParameter);
+            if (!result)
+            {
+                ModelState.AddModelError(string.Empty, "Error adding WaterParameter.");
+                return Page();
+            }
 
             return RedirectToPage("./Index");
         }

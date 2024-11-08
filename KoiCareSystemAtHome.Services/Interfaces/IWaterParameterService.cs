@@ -9,6 +9,11 @@ namespace KoiCareSystemAtHome.Services.Interfaces
 {
     public interface IWaterParameterService
     {
-        Task<List<WaterParameter>> WaterParameters();
+        Task<List<WaterParameter>> GetAllWaterParameter();
+        Boolean DelWaterParameter(int Id);
+        Boolean DelWaterParameter(WaterParameter parameter);
+        Boolean AddWaterParameter(WaterParameter parameter);
+        Boolean UppWaterParameter(WaterParameter parameter);
+        Task<WaterParameter> GetWaterParameterById(int Id);
     }
 }
