@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using KoiCareSystemAtHome.Repositories.Entities;
 
-
 namespace KoiCareSystemAtHome.Services.Interfaces
 {
     public interface IProductService
     {
-        Task<int> AddProductAsync(object Product);
-        Task<bool> DeleteProductAsync(int Product);
-        Task<int> UpdateProductAsync(Product product);
-        Task SaveChangesAsync();
-        Task<List<Product>> Product();
-        Task<List<Product>> GetProductAsync();
+        Task<List<Product>> GetAllProducts();  // Lấy tất cả sản phẩm
 
-        Task<string> SaveImageAsync(IFormFile imageFile);
+        bool AddProduct(Product product);  // Thêm sản phẩm
 
-        public string ImageFileName { get; set; }
+        bool DeleteProduct(string id);  // Xóa sản phẩm theo ID
+
+        bool DeleteProduct(Product product);  // Xóa sản phẩm theo đối tượng Product
+
+        Task<Product> GetProductById(string id);  // Lấy sản phẩm theo ID
+
+        bool UpdateProduct(Product product);  // Cập nhật sản phẩm
+
+        
     }
 }

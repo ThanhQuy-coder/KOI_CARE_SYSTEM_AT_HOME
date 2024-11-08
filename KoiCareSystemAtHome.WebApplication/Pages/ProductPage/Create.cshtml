@@ -1,5 +1,5 @@
 ﻿@page
-@model KoiCareSystemAtHome.WebApplication.Pages.ProductPages.CreateModel
+@model KoiCareSystemAtHome.WebApplication.Pages.ProductPage.CreateModel
 
 <h4>Product</h4>
 <hr />
@@ -12,21 +12,15 @@
                 <select asp-for="Product.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Product.ProductId" class="control-label"></label>
-                <input asp-for="Product.ProductId" class="form-control" />
-                <span asp-validation-for="Product.ProductId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Product.ProductName" class="control-label"></label>
                 <input asp-for="Product.ProductName" class="form-control" />
                 <span asp-validation-for="Product.ProductName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Product.ImageProduct" class="control-label"></label>
-                <input asp-for="Product.ImageProduct" type="file" class="form-control" />
+                <input asp-for="Product.ImageProduct" class="form-control" />
                 <span asp-validation-for="Product.ImageProduct" class="text-danger"></span>
             </div>
-            
             <div class="form-group">
                 <label asp-for="Product.Price" class="control-label"></label>
                 <input asp-for="Product.Price" class="form-control" />

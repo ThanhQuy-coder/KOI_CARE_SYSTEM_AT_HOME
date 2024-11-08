@@ -9,10 +9,16 @@ namespace KoiCareSystemAtHome.Repositories.Interfaces
 {
     public interface IProductRepository
     {
-        Task<int> AddProductAsync(object Product);
-        Task<bool> DeleteProductAsync(int Product);
-        Task<int> UpdateProductAsync(Product product);
-        Task SaveChangesAsync();
-        Task<List<Product>> GetProduct();
+        Task<List<Product>> GetAllProducts();  // Lấy tất cả sản phẩm
+
+        bool AddProduct(Product product);  // Thêm sản phẩm
+
+        bool DeleteProduct(int id);  // Xóa sản phẩm theo ID
+
+        bool DeleteProduct(Product product);  // Xóa sản phẩm theo đối tượng Product
+
+        Task<Product> GetProductById(int id);  // Lấy sản phẩm theo ID
+
+        bool UpdateProduct(Product product);  // Cập nhật sản phẩm
     }
 }

@@ -17,34 +17,86 @@ public class ProductRepository : IProductRepository
        _dbContext = dbContext;
     }
 
-    
-    public Task<int> AddProductAsync(object Product)
+
+    public bool AddProduct(Product product)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _dbContext.Products.Add(product);
+            _dbContext.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Không thể thêm sản phẩm do lỗi: {ex.Message}");
+            return false;
+        }
+    }
+
+    public bool DeleteProduct(int id)
+    {
+        try
+        {
+            var objDel = _dbContext.Products.FirstOrDefault(p => p.ProductId.Equals(id));
+            if (objDel != null)
+            {
+                _dbContext.Products.Remove(objDel);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Lỗi, không thể xóa sản phẩm bằng ID: {ex.Message}");
+            return false;
+        }
+    }
+
+    public bool DeleteProduct(Product product)
+    {
+        try
+        {
+            _dbContext.Products.Remove(product);
+            _dbContext.SaveChanges();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Lỗi, không thể xóa sản phẩm: {ex.Message}");
+            return false;
+        }
+    }
+
+
+
+    public async Task<List<Product>> GetAllProducts()
+    {
+        return await _dbContext.Products.ToListAsync();
+    }
+
+    public async Task<Product> GetProductById(int id)
+    {
+        return await _dbContext.Products.FirstOrDefaultAsync(p => p.ProductId.Equals(id));
     }
 
     
 
-    public Task<bool> DeleteProductAsync(int Product)
+    public bool UpdateProduct(Product product)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _dbContext.Products.Update(product);
+            _dbContext.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Lỗi, không thể cập nhật sản phẩm: {ex.Message}");
+            return false;
+        }
     }
 
-    
-    public Task<List<Product>> GetProduct()
-    {
-        throw new NotImplementedException();
-    }
 
-    public Task SaveChangesAsync()
-    {
-        throw new NotImplementedException();
-    }
 
-    public Task<int> UpdateProductAsync(Product product)
-    {
-        throw new NotImplementedException();
-    }
-
-  
 }

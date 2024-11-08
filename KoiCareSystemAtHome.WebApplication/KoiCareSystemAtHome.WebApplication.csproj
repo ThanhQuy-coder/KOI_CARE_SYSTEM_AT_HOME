@@ -25,8 +25,4 @@
     <ProjectReference Include="..\KoiCareSystemAtHome.Services\KoiCareSystemAtHome.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\WTPA\" />
-  </ItemGroup>
-
 </Project>
