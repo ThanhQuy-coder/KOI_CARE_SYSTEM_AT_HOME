@@ -16,9 +16,9 @@ namespace KoiCareSystemAtHome.Services
             _repository = repository;
         }
 
-        public bool AddWaterParameter(WaterParameter parameter)
+        public bool AddWaterParameter(WaterParameter WaterParameter)
         {
-            return _repository.AddWaterParameter(parameter);
+            return _repository.AddWaterParameter(WaterParameter);
         }
 
         public bool DelWaterParameter(int id)
@@ -26,9 +26,9 @@ namespace KoiCareSystemAtHome.Services
             return _repository.DelWaterParameter(id);
         }
 
-        public bool DelWaterParameter(WaterParameter parameter)
+        public bool DelWaterParameter(WaterParameter WaterParameter)
         {
-            return _repository.DelWaterParameter(parameter);
+            return _repository.DelWaterParameter(WaterParameter);
         }
 
         public Task<List<WaterParameter>> GetAllWaterParameter()
@@ -41,9 +41,9 @@ namespace KoiCareSystemAtHome.Services
             return _repository.GetWaterParameterById(id);
         }
 
-        public bool UppWaterParameter(WaterParameter parameter)
+        public bool UppWaterParameter(WaterParameter WaterParameter)
         {
-            return _repository.UppWaterParameter(parameter);
+            return _repository.UppWaterParameter(WaterParameter);
         }
     }
 }

@@ -18,11 +18,11 @@ namespace KoiCareSystemAtHome.Repositories
             _dbContext=dbContext;
         }
 
-        public bool AddWaterParameter(WaterParameter parameter)
+        public bool AddWaterParameter(WaterParameter WaterParameter)
         {
             try
             {
-                _dbContext.WaterParameters.Add(parameter);
+                _dbContext.WaterParameters.Add(WaterParameter);
                 _dbContext.SaveChanges();
                 return true;
             }catch(Exception ex)
@@ -32,11 +32,11 @@ namespace KoiCareSystemAtHome.Repositories
            
         }
 
-        public bool DelWaterParameter(WaterParameter parameter)
+        public bool DelWaterParameter(WaterParameter WaterParameter)
         {
             try
             {
-                _dbContext.WaterParameters.Remove(parameter);
+                _dbContext.WaterParameters.Remove(WaterParameter);
                 _dbContext.SaveChanges();
                 return true;
             }
@@ -76,11 +76,12 @@ namespace KoiCareSystemAtHome.Repositories
             return await _dbContext.WaterParameters.Where(p=>p.WaterParameterId.Equals(Id)).FirstOrDefaultAsync();
         }
 
-        public bool UppWaterParameter(WaterParameter parameter)
+        public bool UppWaterParameter(WaterParameter WaterParameter)
         {
             try
             {
-                _dbContext.WaterParameters.Update(parameter);
+                _dbContext.WaterParameters.Update(WaterParameter);
+                _dbContext.SaveChanges();
                 return true;
             }catch(Exception ex)
             {

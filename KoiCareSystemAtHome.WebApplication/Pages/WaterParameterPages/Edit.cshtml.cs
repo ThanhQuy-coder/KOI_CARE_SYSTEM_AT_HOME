@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Services.Interfaces;
+using System.Reflection.Metadata;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
 {
@@ -38,44 +39,42 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             {
                 return NotFound();
             }
-            WaterParameter = waterparameter;
-           ViewData["PondId"] = new SelectList(_context.Ponds, "PondId", "NamePond");
+            else
+            {
+                WaterParameter = waterparameter;
+            }
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://aka.ms/RazorPagesCRUD.
+    public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(WaterParameter).State = EntityState.Modified;
-
-            try
+            bool result = _service.UppWaterParameter(WaterParameter);
+            if (!result)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!WaterParameterExists(WaterParameter.WaterParameterId))
+                if (!await WaterParameterExists(WaterParameter.WaterParameterId))
                 {
                     return NotFound();
                 }
                 else
                 {
-                    throw;
+                    throw new Exception("Loi cap nhat thong so nuoc.");
                 }
             }
 
             return RedirectToPage("./Index");
         }
 
-        private bool WaterParameterExists(int id)
+        private async Task<bool> WaterParameterExists(int id)
         {
-            return _context.WaterParameters.Any(e => e.WaterParameterId == id);
+            var WaterParameter = await _service.GetWaterParameterById(id);
+            return WaterParameter != null;
         }
     }
 }
