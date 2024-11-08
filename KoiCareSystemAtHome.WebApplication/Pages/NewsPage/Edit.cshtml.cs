@@ -1,45 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using KoiCareSystemAtHome.Services.Interfaces;
+using KoiCareSystemAtHome.Repositories.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using KoiCareSystemAtHome.Repositories.Entities;
+using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
 {
     public class EditModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly INewsService _newsService;
 
-        public EditModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public EditModel(INewsService newsService)
         {
-            _context = context;
+            _newsService = newsService;
         }
 
         [BindProperty]
         public News News { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
+            News = _newsService.GetNewsById(id);
+
+            if (News == null)
             {
                 return NotFound();
             }
 
-            var news =  await _context.News.FirstOrDefaultAsync(m => m.PostId == id);
-            if (news == null)
-            {
-                return NotFound();
-            }
-            News = news;
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -47,30 +37,9 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
                 return Page();
             }
 
-            _context.Attach(News).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!NewsExists(News.PostId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _newsService.UpdateNews(News);
 
             return RedirectToPage("./Index");
-        }
-
-        private bool NewsExists(int id)
-        {
-            return _context.News.Any(e => e.PostId == id);
         }
     }
 }

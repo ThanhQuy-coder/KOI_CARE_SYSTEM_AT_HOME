@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using KoiCareSystemAtHome.Repositories.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
 {
     public class IndexModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly INewsService _newsService;
 
-        public IndexModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public IndexModel(INewsService newsService)
         {
-            _context = context;
+            _newsService = newsService;
         }
 
-        public IList<News> News { get;set; } = default!;
+        public IList<News> News { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGet()
         {
-            News = await _context.News.ToListAsync();
+            News = (IList<News>)_newsService.GetAllNews();
         }
     }
 }
+

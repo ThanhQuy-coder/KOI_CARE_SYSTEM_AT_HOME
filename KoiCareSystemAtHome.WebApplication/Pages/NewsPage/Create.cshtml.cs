@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using KoiCareSystemAtHome.Services.Interfaces;
+using KoiCareSystemAtHome.Repositories.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using KoiCareSystemAtHome.Repositories.Entities;
+using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
 {
     public class CreateModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly INewsService _newsService;
 
-        public CreateModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public CreateModel(INewsService newsService)
         {
-            _context = context;
+            _newsService = newsService;
         }
+
+        [BindProperty]
+        public News News { get; set; } = default!;
 
         public IActionResult OnGet()
         {
             return Page();
         }
 
-        [BindProperty]
-        public News News { get; set; } = default!;
-
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -34,9 +30,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
                 return Page();
             }
 
-            _context.News.Add(News);
-            await _context.SaveChangesAsync();
-
+            _newsService.AddNews(News);
             return RedirectToPage("./Index");
         }
     }
