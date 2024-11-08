@@ -1,4 +1,18 @@
+using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Repositories.Interfaces;
+using KoiCareSystemAtHome.Repositories.Repositories;
+using KoiCareSystemAtHome.Services.Interfaces;
+using KoiCareSystemAtHome.Services.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<KoiCareSystemAtHomeContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"));
+});
+builder.Services.AddScoped<INewsService, NewsService>();
+builder.Services.AddScoped<INewsRepository, NewsRepository>();
+
 
 // Add services to the container.
 builder.Services.AddRazorPages();
