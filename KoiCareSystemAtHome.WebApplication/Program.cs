@@ -1,4 +1,15 @@
+using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
+using KoiCareSystemAtHome.Services.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+//DI
+builder.Services.AddDbContext<KoiCareSystemAtHomeContext>(options =>
+{
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"));
+});
+builder.Services.AddScoped<IFeedingScheduleService, FeedingScheduleService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();

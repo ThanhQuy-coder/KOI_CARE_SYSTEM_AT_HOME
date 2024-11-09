@@ -10,10 +10,10 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
 {
     public interface FeedingScheduleRepository : IFeedingScheduleRepository
     {
-        private readonly KoiCareSystemAtHomeContext _dbContext;
-        public FeedingScheduleRepository(KoiCareSystemAtHomeContext _dbContext)
+        private readonly KoiCareSystemAtHomeContext  DbContext;
+        public FeedingScheduleRepository(KoiCareSystemAtHomeContext dbContext)
         {
-            _dbContext = DbContext;
+            DbContext = DbContext;
         }
 
         public async Task<List<FeedingSchedule>> GetFeedingSchedules()
@@ -21,7 +21,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             List<FeedingSchedule> feedingSchedules = null;
             try
             {
-                feedingSchedules = await _dbContext.FeedingSchedules.ToListAsync();
+                feedingSchedules = await DbContext.FeedingSchedules.ToListAsync();
             }
             catch (Exception ex)
             {
