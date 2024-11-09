@@ -28,7 +28,7 @@ public class ProductRepository : IProductRepository
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Không thể thêm sản phẩm do lỗi: {ex.Message}");
+           
             return false;
         }
     }

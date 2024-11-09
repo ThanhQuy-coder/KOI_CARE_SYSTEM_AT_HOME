@@ -1,7 +1,6 @@
 ﻿using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
 using KoiCareSystemAtHome.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +23,7 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.AddProduct(product);
         }
 
-        public bool DeleteProduct(string id)
+        public bool DeleteProduct(int id)
         {
             return _repository.DeleteProduct(id);
         }
@@ -34,15 +33,18 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.DeleteProduct(product);
         }
 
+        
+
         public Task<List<Product>> GetAllProducts()
         {
             return _repository.GetAllProducts();
         }
 
-        public Task<Product> GetProductById(string id)
+        public Task<Product> GetProductById(int id)
         {
             return _repository.GetProductById(id);
         }
+
 
         public bool UpdateProduct(Product product)
         {
