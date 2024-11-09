@@ -1,55 +1,47 @@
 ﻿using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
 using KoiCareSystemAtHome.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace KoiCareSystemAtHome.Services.Services
 {
     public class NewsService : INewsService
     {
-        private readonly KoiCareSystemAtHomeContext _context;
+        private readonly INewsRepository _repository;
 
-        public NewsService(KoiCareSystemAtHomeContext context)
+        public NewsService(INewsRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        public IEnumerable<News> GetAllNews()
+        public async Task<List<News>> GetAllNewsAsync()
         {
-            return _context.News.ToList();
+            return await _repository.GetAllNewsAsync();
         }
 
-        public News GetNewsById(int id)
+        public async Task<News> GetNewsByIdAsync(int id)
         {
-            return _context.News.Find(id);
+            return await _repository.GetNewsByIdAsync(id);
         }
 
-        public void AddNews(News news)
+        public bool AddNews(News news)
         {
-            _context.News.Add(news);
-            _context.SaveChanges();
+            return _repository.AddNews(news);
         }
 
-        public void UpdateNews(News news)
+        public bool UpdateNews(News news)
         {
-            _context.Entry(news).State = EntityState.Modified;
-            _context.SaveChanges();
+            return _repository.UpdateNews(news);
         }
 
-        public void DeleteNews(int id)
+        public bool DeleteNews(int id)
         {
-            var news = _context.News.Find(id);
-            if (news != null)
-            {
-                _context.News.Remove(news);
-                _context.SaveChanges();
-            }
+            return _repository.DeleteNews(id);
+        }
+
+        public bool DeleteNews(News news)
+        {
+            return _repository.DeleteNews(news);
         }
     }
 }
@@ -58,7 +50,9 @@ namespace KoiCareSystemAtHome.Services.Services
 
 
 
-     
-   
+
+
+
+
 
 

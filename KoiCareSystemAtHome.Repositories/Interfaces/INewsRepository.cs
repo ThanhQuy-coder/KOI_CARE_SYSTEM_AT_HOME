@@ -6,11 +6,13 @@ namespace KoiCareSystemAtHome.Repositories.Interfaces
 {
     public interface INewsRepository
     {
-        IEnumerable<News> GetAllNews();
-        News GetNewsById(int id);
-        void AddNews(News news);
-        void UpdateNews(News news);
-        void DeleteNews(int id);
+        Task<List<News>> GetAllNewsAsync();
+        bool DeleteNews(int id);
+        bool DeleteNews(News news);
+        bool AddNews(News news);
+        bool UpdateNews(News news);
+        Task<News> GetNewsByIdAsync(int id);
     }
 }
+
 
