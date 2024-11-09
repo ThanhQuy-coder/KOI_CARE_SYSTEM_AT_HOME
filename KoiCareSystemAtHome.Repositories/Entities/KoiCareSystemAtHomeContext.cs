@@ -33,23 +33,25 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
     public virtual DbSet<WaterParameter> WaterParameters { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=THANHQUY;Initial Catalog=KoiCareSystemAtHome;Integrated Security=True;Trust Server Certificate=True");
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("Data Source=THANHQUY;Initial Catalog=KoiCareSystemAtHome;Integrated Security=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA586D24B7059");
+            entity.HasKey(e => e.AccountId).HasName("PK__tmp_ms_x__349DA586406643AA");
 
             entity.ToTable("Account");
 
-            entity.HasIndex(e => e.Username, "UQ__Account__536C85E4FC7909F8").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__tmp_ms_x__536C85E40EDF69F8").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Account__AB6E6164F0D9774A").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__tmp_ms_x__AB6E6164A05EFC1F").IsUnique();
 
-            entity.Property(e => e.AccountId).HasColumnName("AccountID");
+            entity.Property(e => e.AccountId)
+                .HasDefaultValueSql("(newid())")
+                .HasColumnName("AccountID");
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .HasColumnName("email");

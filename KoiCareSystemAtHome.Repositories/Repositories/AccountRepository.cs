@@ -30,7 +30,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool DelAccount(int Id)
+        public bool DelAccount(Guid Id)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public async Task<Account?> GetAccountById(int? Id)
+        public async Task<Account?> GetAccountById(Guid? Id)
         {
             return await _dbContext.Accounts.Where(p => p.AccountId.Equals(Id)).FirstOrDefaultAsync();
         }

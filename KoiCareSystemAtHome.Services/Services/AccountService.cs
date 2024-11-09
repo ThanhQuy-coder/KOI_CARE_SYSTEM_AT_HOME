@@ -25,7 +25,7 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.AddAccount(account);
         }
 
-        public bool DelAccount(int Id)
+        public bool DelAccount(Guid Id)
         {
             return _repository.DelAccount(Id);
         }
@@ -35,7 +35,7 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.DelAccount(account);
         }
 
-        public Task<Account?> GetAccountById(int? Id)
+        public Task<Account?> GetAccountById(Guid? Id)
         {
             return _repository.GetAccountById(Id);
         }

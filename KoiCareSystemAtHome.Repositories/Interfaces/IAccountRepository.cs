@@ -10,10 +10,10 @@ namespace KoiCareSystemAtHome.Repositories.Interfaces
     public interface IAccountRepository
     {
         Task<List<Account>> GetAllAccount();
-        Boolean DelAccount(int Id);
+        Boolean DelAccount(Guid Id);
         Boolean DelAccount(Account account);
         Boolean AddAccount(Account account);
         Boolean UpdateAccount(Account account);
-        Task<Account?> GetAccountById(int? Id);
+        Task<Account?> GetAccountById(Guid? Id);
     }
 }

@@ -10,10 +10,10 @@ namespace KoiCareSystemAtHome.Services.Interfaces
     public interface IAccountService
     {
         Task<List<Account>> Accounts();
-        Boolean DelAccount(int Id);
+        Boolean DelAccount(Guid Id);
         Boolean DelAccount(Account account);
         Boolean AddAccount(Account account);
         Boolean UpdateAccount(Account account);
-        Task<Account?> GetAccountById(int? Id);
+        Task<Account?> GetAccountById(Guid? Id);
     }
 }

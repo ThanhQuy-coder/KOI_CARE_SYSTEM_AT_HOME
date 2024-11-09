@@ -21,14 +21,14 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
 
         public Account Account { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var account = await _accountService.GetAccountById((int)id);
+            var account = await _accountService.GetAccountById((Guid)id);
             if (account == null)
             {
                 return NotFound();

@@ -11,9 +11,9 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
 {
     public class CreateModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly KoiCareSystemAtHomeContext _context;
 
-        public CreateModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public CreateModel(KoiCareSystemAtHomeContext context)
         {
             _context = context;
         }

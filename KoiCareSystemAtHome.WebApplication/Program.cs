@@ -3,14 +3,20 @@ using KoiCareSystemAtHome.Repositories.Interfaces;
 using KoiCareSystemAtHome.Repositories.Repositories;
 using KoiCareSystemAtHome.Services.Interfaces;
 using KoiCareSystemAtHome.Services.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 //DI
-builder.Services.AddDbContext<KoiCareSystemAtHomeContext>();
+builder.Services.AddDbContext<KoiCareSystemAtHomeContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"));
+});
+
 //DI Repository
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 //DI Services

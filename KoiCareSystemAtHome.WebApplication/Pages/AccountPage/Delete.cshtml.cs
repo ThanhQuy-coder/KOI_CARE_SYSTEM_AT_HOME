@@ -21,7 +21,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
         [BindProperty]
         public Account Account { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             
             if (id == null)
@@ -29,7 +29,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
                 return NotFound();
             }
 
-            var account = await _accountService.GetAccountById((int)id);
+            var account = await _accountService.GetAccountById(id);
 
             if (account == null)
             {
@@ -42,14 +42,14 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            _accountService.DelAccount((int)id);
+            _accountService.DelAccount((Guid)id);
             return RedirectToPage("./Index");
         }
     }
