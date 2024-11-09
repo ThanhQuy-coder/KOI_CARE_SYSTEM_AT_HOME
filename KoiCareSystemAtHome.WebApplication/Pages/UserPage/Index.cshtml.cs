@@ -8,21 +8,22 @@ using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Services.Interfaces;
 
-namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
+namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
 {
     public class IndexModel : PageModel
     {
-        private readonly IAccountService _service;
-        public IndexModel(IAccountService service)
+        private readonly IUserService _userService;
+
+        public IndexModel(IUserService userService)
         {
-            _service = service;
+            _userService = userService;
         }
 
-        public IList<Account> Account { get;set; } = default!;
+        public IList<User> User { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Account = await _service.GetAllAccount();
+            User = await _userService.GetAllUser();
         }
     }
 }

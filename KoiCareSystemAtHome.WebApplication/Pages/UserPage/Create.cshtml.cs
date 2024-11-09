@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Services.Interfaces;
+using KoiCareSystemAtHome.Services.Services;
 
-namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
+namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
 {
     public class CreateModel : PageModel
     {
-        private readonly IAccountService _accountService;
+        private readonly IUserService _userService;
 
-        public CreateModel(IAccountService context)
+        public CreateModel(IUserService userService)
         {
-            _accountService = context;
+            _userService = userService;
         }
 
         public IActionResult OnGet()
@@ -25,7 +26,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
         }
 
         [BindProperty]
-        public Account Account { get; set; } = default!;
+        public User User { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -35,8 +36,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
                 return Page();
             }
 
-
-            var result = _accountService.AddAccount(Account);
+            var result = _userService.AddUser(User);
             if (!result)
             {
                 ModelState.AddModelError(string.Empty, "Error");

@@ -9,7 +9,7 @@ namespace KoiCareSystemAtHome.Services.Interfaces
 {
     public interface IAccountService
     {
-        Task<List<Account>> Accounts();
+        Task<List<Account>> GetAllAccount();
         Boolean DelAccount(Guid Id);
         Boolean DelAccount(Account account);
         Boolean AddAccount(Account account);

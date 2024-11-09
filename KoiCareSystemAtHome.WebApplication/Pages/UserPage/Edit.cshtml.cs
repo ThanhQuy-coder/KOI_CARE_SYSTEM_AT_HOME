@@ -10,19 +10,19 @@ using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Services.Interfaces;
 using KoiCareSystemAtHome.Services.Services;
 
-namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
+namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
 {
     public class EditModel : PageModel
     {
-        private readonly IAccountService _accountService;
+        private readonly IUserService _userService;
 
-        public EditModel(IAccountService accountService)
+        public EditModel(IUserService userService)
         {
-            _accountService = accountService;
+            _userService = userService;
         }
 
         [BindProperty]
-        public Account Account { get; set; } = default!;
+        public User User { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -30,13 +30,12 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
             {
                 return NotFound();
             }
-
-            var account =  await _accountService.GetAccountById((Guid)id);  
-            if (account == null)
+            var user = await _userService.GetUserById((Guid)id);
+            if (user == null)
             {
                 return NotFound();
             }
-            Account = account;
+            User = user;
             return Page();
         }
 
@@ -48,8 +47,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
             {
                 return Page();
             }
-            //_accountService.UpdateAccount(Account);
-            bool result = await Task.Run(() => _accountService.UpdateAccount(Account));
+            bool result = await Task.Run(() => _userService.UpdateUser(User));
 
             if (!result)
             {

@@ -15,7 +15,7 @@ namespace KoiCareSystemAtHome.Services.Services
         public AccountService(IAccountRepository repository) {
             _repository = repository;
         } 
-        public Task<List<Account>> Accounts()
+        public Task<List<Account>> GetAllAccount()
         {
             return _repository.GetAllAccount();
         }

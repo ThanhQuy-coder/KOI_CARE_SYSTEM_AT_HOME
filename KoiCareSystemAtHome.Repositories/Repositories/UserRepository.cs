@@ -9,18 +9,19 @@ using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.Repositories.Repositories
 {
-    public class AccountRepository : IAccountRepository
+    public class UserRepository : IUserRepository
     {
         private readonly KoiCareSystemAtHomeContext _dbContext;
-        public AccountRepository(KoiCareSystemAtHomeContext dbContext) {
-            _dbContext = dbContext;
+        public UserRepository(KoiCareSystemAtHomeContext dbcontext)
+        {
+            _dbContext = dbcontext;
         }
 
-        public bool AddAccount(Account account)
+        public bool AddUser(User user)
         {
             try
             {
-                _dbContext.Accounts.Add(account);
+                _dbContext.Users.Add(user);
                 _dbContext.SaveChanges();
                 return true;
             }
@@ -30,14 +31,14 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool DelAccount(Guid Id)
+        public bool DelUser(Guid Id)
         {
             try
             {
-                var objDel = _dbContext.Accounts.Where(p=>p.AccountId.Equals(Id)).FirstOrDefault();
+                var objDel = _dbContext.Users.Where(p => p.UserId.Equals(Id)).FirstOrDefault();
                 if (objDel != null)
                 {
-                    _dbContext.Accounts.Remove(objDel);
+                    _dbContext.Users.Remove(objDel);
                     _dbContext.SaveChanges();
                     return true;
                 }
@@ -48,11 +49,12 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
                 throw new NotImplementedException(ex.ToString());
             }
         }
-        public bool DelAccount(Account account)
+
+        public bool DelUser(User user)
         {
             try
             {
-                _dbContext.Remove(account);
+                _dbContext.Remove(user);
                 _dbContext.SaveChanges();
                 return true;
             }
@@ -62,21 +64,21 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public async Task<Account?> GetAccountById(Guid? Id)
+        public async Task<User?> GetUserById(Guid? Id)
         {
-            return await _dbContext.Accounts.Where(p => p.AccountId.Equals(Id)).FirstOrDefaultAsync();
+            return await _dbContext.Users.Where(p => p.UserId.Equals(Id)).FirstOrDefaultAsync();
         }
 
-        public async Task<List<Account>> GetAllAccount()
+        public async Task<List<User>> GetAllUser()
         {
-            return await _dbContext.Accounts.ToListAsync();
+            return await _dbContext.Users.ToListAsync();
         }
 
-        public bool UpdateAccount(Account account)
+        public bool UpdateUser(User user)
         {
             try
             {
-                _dbContext.Accounts.Update(account);
+                _dbContext.Users.Update(user);
                 _dbContext.SaveChanges();
                 return true;
             }

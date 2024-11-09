@@ -7,37 +7,38 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Services.Interfaces;
+using KoiCareSystemAtHome.Services.Services;
 
-namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
+namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
 {
     public class DeleteModel : PageModel
     {
-        private readonly IAccountService _accountService;
-        public DeleteModel(IAccountService accountService)
+        private readonly IUserService _userService;
+
+        public DeleteModel(IUserService context)
         {
-            _accountService = accountService;
+            _userService = context;
         }
 
         [BindProperty]
-        public Account Account { get; set; } = default!;
+        public User User { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            
             if (id == null)
             {
                 return NotFound();
             }
 
-            var account = await _accountService.GetAccountById(id);
+            var user = await _userService.GetUserById(id);
 
-            if (account == null)
+            if (user == null)
             {
                 return NotFound();
             }
             else
             {
-                Account = account;
+                User = user;
             }
             return Page();
         }
@@ -49,13 +50,9 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
                 return NotFound();
             }
 
-            _accountService.DelAccount((Guid)id);
+            _userService.DelUser((Guid)id);
+
             return RedirectToPage("./Index");
-        }
-        private async Task<bool> AccountExists(Guid id)
-        {
-            var koiFish = await _accountService.GetAccountById((Guid)id);
-            return koiFish != null;
         }
     }
 }
