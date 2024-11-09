@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using KoiCareSystemAtHome.Repositories.Entities;
 
 namespace KoiCareSystemAtHome.Services.Interfaces
-{
+{ 
     public interface IFeedingScheduleService
     {
         Task<List<FeedingSchedule>> getFeedingScheduleAsnyc();
