@@ -1,5 +1,5 @@
-﻿using KoiCareSystemAtHome.Repositories.Entities;
-using KoiCareSystemAtHome.Services.Interfaces;
+﻿using KoiCareSystemAtHome.Services.Interfaces;
+using KoiCareSystemAtHome.Repositories.Entities;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,12 +15,13 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
             _newsService = newsService;
         }
 
-        public IList<News> News { get; set; } = default!;
+        public List<News> News { get; set; } = new();
 
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
-            News = (IList<News>)_newsService.GetAllNews();
+            News = await _newsService.GetAllNewsAsync();
         }
     }
 }
+
 

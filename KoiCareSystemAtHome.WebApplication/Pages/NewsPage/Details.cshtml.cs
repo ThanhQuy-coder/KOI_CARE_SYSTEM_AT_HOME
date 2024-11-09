@@ -19,7 +19,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            News = _newsService.GetNewsById(id);
+            News = (News)await _newsService.GetNewsByIdAsync(id);
 
             if (News == null)
             {

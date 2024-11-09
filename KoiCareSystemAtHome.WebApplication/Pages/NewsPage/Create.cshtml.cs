@@ -23,15 +23,15 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return Task.FromResult<IActionResult>(Page());
             }
 
             _newsService.AddNews(News);
-            return RedirectToPage("./Index");
+            return Task.FromResult<IActionResult>(RedirectToPage("./Index"));
         }
     }
 }

@@ -20,7 +20,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            News = _newsService.GetNewsById(id);
+            News = (News)await _newsService.GetNewsByIdAsync(id);
 
             if (News == null)
             {
@@ -30,16 +30,16 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return Task.FromResult<IActionResult>(Page());
             }
 
-            _newsService.UpdateNews(News);
+             _newsService.UpdateNews(News);
 
-            return RedirectToPage("./Index");
+            return Task.FromResult<IActionResult>(RedirectToPage("./Index"));
         }
     }
 }

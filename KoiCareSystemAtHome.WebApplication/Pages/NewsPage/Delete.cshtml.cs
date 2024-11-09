@@ -20,7 +20,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            News = _newsService.GetNewsById(id);
+            News = await _newsService.GetNewsByIdAsync(id);
 
             if (News == null)
             {
@@ -32,11 +32,11 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
 
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            var news = _newsService.GetNewsById(id);
+            var success =  _newsService.DeleteNews(id);
 
-            if (news != null)
+            if (!success)
             {
-                _newsService.DeleteNews(id);
+                return NotFound();
             }
 
             return RedirectToPage("./Index");
