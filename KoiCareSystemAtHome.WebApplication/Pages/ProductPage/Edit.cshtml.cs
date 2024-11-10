@@ -22,14 +22,14 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
         [BindProperty]
         public Product Product { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _service.GetProductById((int)id);
+            var product = await _service.GetProductById((Guid)id);
             if (product == null)
             {
                 return NotFound();
@@ -63,7 +63,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
             return RedirectToPage("./Index");
         }
 
-        private async Task<bool> ProductExists(int id)
+        private async Task<bool> ProductExists(Guid id)
         {
             var product = await _service.GetProductById(id);
             return product != null;

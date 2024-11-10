@@ -13,11 +13,11 @@ namespace KoiCareSystemAtHome.Repositories.Interfaces
 
         bool AddProduct(Product product);  // Thêm sản phẩm
 
-        bool DeleteProduct(int id);  // Xóa sản phẩm theo ID
+        bool DeleteProduct(Guid id);  // Xóa sản phẩm theo ID
 
         bool DeleteProduct(Product product);  // Xóa sản phẩm theo đối tượng Product
 
-        Task<Product> GetProductById(int id);  // Lấy sản phẩm theo ID
+        Task<Product> GetProductById(Guid id);  // Lấy sản phẩm theo ID
 
         bool UpdateProduct(Product product);  // Cập nhật sản phẩm
     }

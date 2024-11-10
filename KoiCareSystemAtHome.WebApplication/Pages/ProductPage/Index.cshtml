@@ -64,3 +64,22 @@
 }
     </tbody>
 </table>
+
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var product in Model.Product)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="@product.ImageProduct" class="card-img-top" alt="@product.ProductName">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.ProductName</h5>
+                        <p class="card-text">@product.Desciption</p>
+                        <p class="card-text text-primary">@string.Format("{0:C}", product.Price)</p>
+                        <a href="/ProductPage/Details/@product.ProductId" class="btn btn-primary">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

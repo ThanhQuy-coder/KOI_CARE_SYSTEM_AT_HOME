@@ -23,7 +23,7 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.AddProduct(product);
         }
 
-        public bool DeleteProduct(int id)
+        public bool DeleteProduct(Guid id)
         {
             return _repository.DeleteProduct(id);
         }
@@ -40,7 +40,7 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.GetAllProducts();
         }
 
-        public Task<Product> GetProductById(int id)
+        public Task<Product> GetProductById(Guid id)
         {
             return _repository.GetProductById(id);
         }
@@ -50,10 +50,6 @@ namespace KoiCareSystemAtHome.Services.Services
         {
             return _repository.UpdateProduct(product);
         }
-
-        
-
-
 
     }
 }

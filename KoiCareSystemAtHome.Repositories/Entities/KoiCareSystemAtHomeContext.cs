@@ -35,19 +35,19 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
 //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Data Source=THANHQUY;Initial Catalog=KoiCareSystemAtHome;Integrated Security=True;Trust Server Certificate=True");
+//        => optionsBuilder.UseSqlServer("Data Source=LAPTOP-58P0M9U0;Initial Catalog=KoiCareSystemAtHome;Integrated Security=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA586D24B7059");
+            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5866037D800");
 
             entity.ToTable("Account");
 
-            entity.HasIndex(e => e.Username, "UQ__Account__536C85E4FC7909F8").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Account__536C85E4346AF449").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Account__AB6E6164F0D9774A").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Account__AB6E6164828C56EB").IsUnique();
 
             entity.Property(e => e.AccountId).HasColumnName("AccountID");
             entity.Property(e => e.Email)
@@ -66,7 +66,7 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
         modelBuilder.Entity<FeedingSchedule>(entity =>
         {
-            entity.HasKey(e => e.FeedingScheduleId).HasName("PK__FeedingS__1B08C845BDBBAE22");
+            entity.HasKey(e => e.FeedingScheduleId).HasName("PK__FeedingS__1B08C8453BE2ACD0");
 
             entity.ToTable("FeedingSchedule");
 
@@ -88,7 +88,7 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
         modelBuilder.Entity<KoiFish>(entity =>
         {
-            entity.HasKey(e => e.FishId).HasName("PK__KoiFish__5222DA39CBB47EF1");
+            entity.HasKey(e => e.FishId).HasName("PK__KoiFish__5222DA393F753994");
 
             entity.ToTable("KoiFish");
 
@@ -124,9 +124,9 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
         modelBuilder.Entity<News>(entity =>
         {
-            entity.HasKey(e => e.PostId).HasName("PK__News__DD0C73BA2F14B939");
+            entity.HasKey(e => e.PostId).HasName("PK__News__DD0C73BA41DD23B3");
 
-            entity.HasIndex(e => e.Author, "UQ__News__C2E6DB675DAAF9EF").IsUnique();
+            entity.HasIndex(e => e.Author, "UQ__News__C2E6DB6758D63111").IsUnique();
 
             entity.Property(e => e.PostId).HasColumnName("postID");
             entity.Property(e => e.Author)
@@ -143,7 +143,7 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
         modelBuilder.Entity<Pond>(entity =>
         {
-            entity.HasKey(e => e.PondId).HasName("PK__Pond__D18BF85470D3F99D");
+            entity.HasKey(e => e.PondId).HasName("PK__Pond__D18BF8546C9E9012");
 
             entity.ToTable("Pond");
 
@@ -163,11 +163,13 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK___Product__2D10D14AEDFD2C81");
+            entity.HasKey(e => e.ProductId).HasName("PK__tmp_ms_x__2D10D14AD0A5C0D3");
 
             entity.ToTable("_Product");
 
-            entity.Property(e => e.ProductId).HasColumnName("productID");
+            entity.Property(e => e.ProductId)
+                .HasDefaultValueSql("(newid())")
+                .HasColumnName("productID");
             entity.Property(e => e.DatePlace)
                 .HasColumnType("datetime")
                 .HasColumnName("datePlace");
@@ -186,12 +188,12 @@ public partial class KoiCareSystemAtHomeContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Products)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK___Product__UserId__47DBAE45");
+                .HasConstraintName("FK___Product__UserId__5DCAEF64");
         });
 
         modelBuilder.Entity<SaltCalculation>(entity =>
         {
-            entity.HasKey(e => e.SaltCalculationId).HasName("PK__SaltCalc__69E083781EB09A49");
+            entity.HasKey(e => e.SaltCalculationId).HasName("PK__SaltCalc__69E08378FD8E1058");
 
             entity.ToTable("SaltCalculation");
 
@@ -210,7 +212,7 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK___User__1788CC4C7745BA70");
+            entity.HasKey(e => e.UserId).HasName("PK___User__1788CC4C83BBE6B7");
 
             entity.ToTable("_User");
 
@@ -228,7 +230,7 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
         modelBuilder.Entity<WaterParameter>(entity =>
         {
-            entity.HasKey(e => e.WaterParameterId).HasName("PK__WaterPar__74A7C6F2144DC7A8");
+            entity.HasKey(e => e.WaterParameterId).HasName("PK__WaterPar__74A7C6F21D6C1063");
 
             entity.ToTable("WaterParameter");
 

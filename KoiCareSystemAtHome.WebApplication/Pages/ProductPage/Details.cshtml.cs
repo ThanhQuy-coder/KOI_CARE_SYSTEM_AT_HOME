@@ -20,18 +20,14 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
 
         public Product Product { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
            
-                int Id = 0;
                 if (id == null)
                 {
-                    Id = 0;
                     return NotFound();
                 }
-                Id = (int)id;
-
-                var product = await _service.GetProductById(Id);
+            var product = await _service.GetProductById((Guid)id);
                 if (product == null)
             {
                 return NotFound();

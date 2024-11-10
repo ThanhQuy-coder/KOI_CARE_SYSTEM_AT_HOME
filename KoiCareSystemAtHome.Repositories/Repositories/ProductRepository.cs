@@ -33,7 +33,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public bool DeleteProduct(int id)
+    public bool DeleteProduct(Guid id)
     {
         try
         {
@@ -75,7 +75,7 @@ public class ProductRepository : IProductRepository
         return await _dbContext.Products.ToListAsync();
     }
 
-    public async Task<Product> GetProductById(int id)
+    public async Task<Product> GetProductById(Guid id)
     {
         return await _dbContext.Products.FirstOrDefaultAsync(p => p.ProductId.Equals(id));
     }
