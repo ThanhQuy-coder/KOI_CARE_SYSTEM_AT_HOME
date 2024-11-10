@@ -22,18 +22,15 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
         [BindProperty]
         public WaterParameter WaterParameter { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            int Id = 0;
             if (id == null)
 
             {
-                Id = 0;
                 return NotFound();
             }
-            Id = (int)id;
 
-            var waterparameter = await _service.GetWaterParameterById(Id);
+            var waterparameter = await _service.GetWaterParameterById((Guid)id);
 
             if (waterparameter == null)
             {
@@ -46,13 +43,13 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            _service.DelWaterParameter((int)id);
+            _service.DelWaterParameter((Guid)id);
             return RedirectToPage("./Index");
         }
     }

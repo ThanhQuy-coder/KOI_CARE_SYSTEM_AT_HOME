@@ -8,14 +8,14 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KoiCareSystemAtHome.Repositories
+namespace KoiCareSystemAtHome.Repositories.Repositories
 {
     public class WaterParameterRepository : IWaterParameterRepository
     {
         private readonly KoiCareSystemAtHomeContext _dbContext;
         public WaterParameterRepository(KoiCareSystemAtHomeContext dbContext)
         {
-            _dbContext=dbContext;
+            _dbContext = dbContext;
         }
 
         public bool AddWaterParameter(WaterParameter WaterParameter)
@@ -25,11 +25,12 @@ namespace KoiCareSystemAtHome.Repositories
                 _dbContext.WaterParameters.Add(WaterParameter);
                 _dbContext.SaveChanges();
                 return true;
-            }catch(Exception ex)
-            {
-                throw new NotImplementedException();
             }
-           
+            catch (Exception ex)
+            {
+                throw new NotImplementedException(ex.ToString());
+            }
+
         }
 
         public bool DelWaterParameter(WaterParameter WaterParameter)
@@ -47,12 +48,12 @@ namespace KoiCareSystemAtHome.Repositories
             }
         }
 
-        public bool DelWaterParameter(int Id)
+        public bool DelWaterParameter(Guid Id)
         {
             try
             {
                 var objDel = _dbContext.WaterParameters.Where(p => p.WaterParameterId.Equals(Id)).FirstOrDefault();
-                if(objDel != null)
+                if (objDel != null)
                 {
                     _dbContext.WaterParameters.Remove(objDel);
                     _dbContext.SaveChanges();
@@ -60,7 +61,8 @@ namespace KoiCareSystemAtHome.Repositories
                 }
                 return false;
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new NotImplementedException(ex.ToString());
             }
@@ -71,9 +73,9 @@ namespace KoiCareSystemAtHome.Repositories
             return await _dbContext.WaterParameters.ToListAsync();
         }
 
-        public async Task<WaterParameter> GetWaterParameterById(int Id)
+        public async Task<WaterParameter> GetWaterParameterById(Guid Id)
         {
-            return await _dbContext.WaterParameters.Where(p=>p.WaterParameterId.Equals(Id)).FirstOrDefaultAsync();
+            return await _dbContext.WaterParameters.Where(p => p.WaterParameterId.Equals(Id)).FirstOrDefaultAsync();
         }
 
         public bool UppWaterParameter(WaterParameter WaterParameter)
@@ -83,10 +85,12 @@ namespace KoiCareSystemAtHome.Repositories
                 _dbContext.WaterParameters.Update(WaterParameter);
                 _dbContext.SaveChanges();
                 return true;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return false;
-            }
+            }         
         }
+        // dinh nghia ham tinh toan
     }
 }

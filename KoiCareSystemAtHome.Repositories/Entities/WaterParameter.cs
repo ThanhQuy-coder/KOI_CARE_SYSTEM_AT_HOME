@@ -7,7 +7,7 @@ public partial class WaterParameter
 {
     public int? PondId { get; set; }
 
-    public int WaterParameterId { get; set; }
+    public Guid WaterParameterId { get; set; }
 
     public double? Temperature { get; set; }
 

@@ -1,8 +1,8 @@
-using KoiCareSystemAtHome.Repositories;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
-using KoiCareSystemAtHome.Services;
+using KoiCareSystemAtHome.Repositories.Repositories;
 using KoiCareSystemAtHome.Services.Interfaces;
+using KoiCareSystemAtHome.Services.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

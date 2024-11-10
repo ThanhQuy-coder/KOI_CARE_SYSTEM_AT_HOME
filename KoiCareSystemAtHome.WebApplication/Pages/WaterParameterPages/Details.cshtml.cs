@@ -21,17 +21,15 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
 
         public WaterParameter WaterParameter { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            int Id = 0;
             if (id == null)
+
             {
-                Id = 0;
                 return NotFound();
             }
-            Id = (int)id;
 
-            var waterparameter = await _service.GetWaterParameterById(Id);
+            var waterparameter = await _service.GetWaterParameterById((Guid)id);
             if (waterparameter == null)
             {
                 return NotFound();
