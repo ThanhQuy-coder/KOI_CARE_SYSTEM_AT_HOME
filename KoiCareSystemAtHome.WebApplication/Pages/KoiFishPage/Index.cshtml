@@ -1,6 +1,7 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage.IndexModel
 
+
 <p>
     <a asp-page="Create">Create New</a>
 </p>
@@ -42,9 +43,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.KoiFish[0].Pond)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].FishId)
             </th>
             <th></th>
         </tr>
@@ -88,9 +86,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Pond.PondId)
             </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FishId)
-                </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.FishId">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.FishId">Details</a> |

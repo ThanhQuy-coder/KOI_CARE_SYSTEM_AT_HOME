@@ -22,14 +22,17 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
         [BindProperty]
         public KoiFish KoiFish { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (string.IsNullOrEmpty(id))
+            
+            if (id == null)
             {
+               
                 return NotFound();
             }
+         
 
-            var koifish = await _service.GetKoiFishById(id); // `id` là kiểu string
+            var koifish = await _service.GetKoiFishById((Guid)id); 
 
             if (koifish == null)
             {
@@ -42,19 +45,16 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string id)
+        public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null)
             {
+            
                 return NotFound();
             }
+          
 
-            bool result = _service.DeleteKoiFish(id); // Truyền `id` là string
-
-            if (!result)
-            {
-                return NotFound();
-            }
+            var koifish = await _service.GetKoiFishById((Guid)id);
 
             return RedirectToPage("./Index");
         }

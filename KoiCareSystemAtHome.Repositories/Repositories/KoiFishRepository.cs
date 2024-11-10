@@ -21,7 +21,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
         {
             try
             {
-                _dbContext.Koifishes.Add(koiFish);
+                _dbContext.KoiFishes.Add(koiFish);
                 _dbContext.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
                 return true;
             }
@@ -32,14 +32,14 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool DeleteKoiFish(string Id)
+        public bool DeleteKoiFish(Guid Id)
         {
             try
             {
-                var objDel = _dbContext.Koifishes.FirstOrDefault(p => p.FishId.Equals(Id));
+                var objDel = _dbContext.KoiFishes.FirstOrDefault(p => p.FishId.Equals(Id));
                 if (objDel != null)
                 {
-                    _dbContext.Koifishes.Remove(objDel);
+                    _dbContext.KoiFishes.Remove(objDel);
                     _dbContext.SaveChanges();
                     return true;
                 }
@@ -56,7 +56,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
         {
             try
             {
-                _dbContext.Koifishes.Remove(koiFish);
+                _dbContext.KoiFishes.Remove(koiFish);
                 _dbContext.SaveChanges();
                 return true;
             }
@@ -69,19 +69,19 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
 
         public async Task<List<KoiFish>> GetAllKoiFish()
         {
-            return await _dbContext.Koifishes.ToListAsync();
+            return await _dbContext.KoiFishes.ToListAsync();
         }
 
-        public async Task<KoiFish> GetKoiFishById(string Id)
+        public async Task<KoiFish> GetKoiFishById(Guid Id)
         {
-            return await _dbContext.Koifishes.FirstOrDefaultAsync(p => p.FishId.Equals(Id));
+            return await _dbContext.KoiFishes.FirstOrDefaultAsync(p => p.FishId.Equals(Id));
         }
 
         public bool UpdateKoiFish(KoiFish koifish)
         {
             try
             {
-                _dbContext.Koifishes.Update(koifish);
+                _dbContext.KoiFishes.Update(koifish);
                 _dbContext.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
                 return true;
             }

@@ -21,7 +21,7 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.AddKoiFish(koiFish);
         }
 
-        public bool DeleteKoiFish(string Id)
+        public bool DeleteKoiFish(Guid Id)
         {
             return _repository.DeleteKoiFish(Id);
         }
@@ -36,7 +36,7 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.GetAllKoiFish();
         }
 
-        public Task<KoiFish> GetKoiFishById(string Id)
+        public Task<KoiFish> GetKoiFishById(Guid Id)
         {
             return _repository.GetKoiFishById(Id);
         }

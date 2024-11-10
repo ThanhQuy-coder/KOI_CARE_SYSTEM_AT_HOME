@@ -11,9 +11,9 @@ namespace KoiCareSystemAtHome.Repositories.Interfaces
 	{
         Task<List<KoiFish>> GetAllKoiFish();
         Boolean AddKoiFish(KoiFish koiFish);
-        Boolean DeleteKoiFish(string Id);
+        Boolean DeleteKoiFish(Guid Id);
         Boolean DeleteKoiFish(KoiFish koiFish);
-        Task<KoiFish> GetKoiFishById(string Id);
+        Task<KoiFish> GetKoiFishById(Guid Id);
         Boolean UpdateKoiFish(KoiFish koifish);
     }
 }
