@@ -9,10 +9,11 @@ namespace KoiCareSystemAtHome.Services.Interfaces
 { 
     public interface IFeedingScheduleService
     {
-        Task<List<FeedingSchedule>> getFeedingScheduleAsnyc();
-        Task<int> AddFeedingScheduleAsync(FeedingSchedule feedingSchedule);
-        Task<int> RemoveFeedingScheduleAsync(int feedingScheduleId);
-        Task<bool> DeleteFeedingScheduleAsync(int feedingSchedule);
-        Task<int> UpdateFeedingSchedule(FeedingSchedule feedingSchedule);
+        Task<List<FeedingSchedule>> GetAllFeedingSchedules();
+        Boolean DelFeedingSchedule(int Id);
+        Boolean DelFeedingSchedule(FeedingSchedule feeding);
+        Boolean AddFeedingSchedule(FeedingSchedule feeding);
+        Boolean UpdateFeedingSchedule(FeedingSchedule feeding);
+        Task<FeedingSchedule?> GetFeedingScheduleById(int? Id);
     }
 }

@@ -14,38 +14,39 @@ namespace KoiCareSystemAtHome.Services.Services
 {
     public class FeedingScheduleService : IFeedingScheduleService
     {
-        private IFeedingScheduleRepository _feedingScheduleRepository;
-        public FeedingScheduleService(IFeedingScheduleRepository feedingScheduleRepository)
+        private readonly IFeedingScheduleRepository _repository;
+        public FeedingScheduleService(IFeedingScheduleRepository repository)
         {
-            _feedingScheduleRepository = feedingScheduleRepository;
+            _repository = repository;
         }
-        public async Task<int> AddFeedingScheduleAsync(FeedingSchedule feedingSchedule)
+        public bool AddFeedingSchedule(FeedingSchedule feeding)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteFeedingScheduleAsync(int feedingScheduleId)
-        {
-            throw new NotImplementedException();
+            return _repository.AddFeedingSchedule(feeding);
         }
 
-        public async Task<List<FeedingSchedule>>GetFeedingScheduleAsync()
+        public bool DelFeedingSchedule(int Id)
         {
-            return await _feedingScheduleRepository.GetFeedingSchedules();
+            return _repository.DelFeedingSchedule(Id);
         }
 
-        public Task<List<FeedingSchedule>> GetFeedingSchedulesAsync()
+        public bool DelFeedingSchedule(FeedingSchedule feeding)
         {
-            throw new NotImplementedException();
-        }
-        public Task<int> RemoveFeedingScheduleAsync(int feedingScheduleId)
-        {
-            throw new NotImplementedException();
+            return _repository.DelFeedingSchedule(feeding);
         }
 
-        public Task<int> UpdateFeedingSchedule(FeedingSchedule feedingSchedule)
+        public Task<List<FeedingSchedule>> GetAllFeedingSchedules()
         {
-            throw new NotImplementedException();
+            return _repository.GetAllFeedingSchedules();
+        }
+
+        public Task<FeedingSchedule?> GetFeedingScheduleById(int? Id)
+        {
+            return _repository.GetFeedingScheduleById(Id);
+        }
+
+        public bool UpdateFeedingSchedule(FeedingSchedule feeding)
+        {
+            return _repository.UpdateFeedingSchedule(feeding);
         }
     }
 }

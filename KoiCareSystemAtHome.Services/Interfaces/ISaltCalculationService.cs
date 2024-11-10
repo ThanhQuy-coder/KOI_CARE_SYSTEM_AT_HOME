@@ -9,6 +9,11 @@ namespace KoiCareSystemAtHome.Services.Interfaces
 {
     public interface ISaltCalculationService
     {
-        Task<List<SaltCalculation>> SaltCalculation();
+        Task<List<SaltCalculation>> GetAllSaltCalculation();
+        Boolean DelSaltCalculation(int Id);
+        Boolean DelSaltCalculation(SaltCalculation salt);
+        Boolean AddSaltCalculation(SaltCalculation salt);
+        Boolean UpdateSaltCalculation(SaltCalculation salt);
+        Task<SaltCalculation?> GetSaltCalculationById(int? Id);
     }
 }

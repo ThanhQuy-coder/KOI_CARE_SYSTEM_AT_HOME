@@ -9,7 +9,11 @@ namespace KoiCareSystemAtHome.Repositories.Interfaces
 {
     public interface IFeedingScheduleRepository
     {
-        Task<List<FeedingSchedule>> GetFeedingSchedules();
-
+        Task<List<FeedingSchedule>> GetAllFeedingSchedules();
+        Boolean DelFeedingSchedule(int Id);
+        Boolean DelFeedingSchedule(FeedingSchedule feeding);
+        Boolean AddFeedingSchedule(FeedingSchedule feeding);
+        Boolean UpdateFeedingSchedule(FeedingSchedule feeding);
+        Task<FeedingSchedule?> GetFeedingScheduleById(int? Id);
     }
 }

@@ -1,6 +1,13 @@
-using KoiCareSystemAtHome.Repositories;
+/*
+	Chinh sua lai DI va appsetting.json
+ */
+
+
+
+
 using KoiCareSystemAtHome.Repositories.Entities;
-using KoiCareSystemAtHome.Services;
+using KoiCareSystemAtHome.Repositories.Interfaces;
+using KoiCareSystemAtHome.Repositories.Repositories;
 using KoiCareSystemAtHome.Services.Interfaces;
 using KoiCareSystemAtHome.Services.Services;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +18,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 //DI
-builder.Services.AddDbContext<KoiCareSystemAtHomeContext>();
+builder.Services.AddDbContext<KoiCareSystemAtHomeContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"));
+});
 //DI Repository
+builder.Services.AddScoped<IFeedingScheduleRepository, FeedingScheduleRepository>();
 builder.Services.AddScoped<ISaltCalculationRepository, SaltCalculationRepository>();
 //Di Services
+builder.Services.AddScoped<IFeedingScheduleService, FeedingScheduleService>();
 builder.Services.AddScoped<ISaltCalculationService, SaltCalculationService>();
 var app = builder.Build();
 

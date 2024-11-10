@@ -1,26 +1,24 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
+
 namespace KoiCareSystemAtHome.Repositories.Repositories
 {
-    public class FeedingScheduleRepository : IFeedingScheduleRepository
+    public class SaltCalculationRepository : ISaltCalculationRepository
     {
         private readonly KoiCareSystemAtHomeContext _DbContext;
-        public FeedingScheduleRepository(KoiCareSystemAtHomeContext dbcontext)
+        public SaltCalculationRepository(KoiCareSystemAtHomeContext dbContext)
         {
-            _DbContext = dbcontext;
+            _DbContext = dbContext;
         }
-
-        public bool AddFeedingSchedule(FeedingSchedule feeding)
+        public bool AddSaltCalculation(SaltCalculation salt)
         {
             try
             {
-                _DbContext.FeedingSchedules.Add(feeding);
+                _DbContext.SaltCalculations.Add(salt);
                 _DbContext.SaveChanges();
                 return true;
             }
@@ -30,14 +28,14 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool DelFeedingSchedule(int Id)
+        public bool DelSaltCalculation(int Id)
         {
             try
             {
-                var objDel = _DbContext.FeedingSchedules.Where(p => p.FeedingScheduleId.Equals(Id)).FirstOrDefault();
+                var objDel = _DbContext.SaltCalculations.Where(p => p.SaltCalculationId.Equals(Id)).FirstOrDefault();
                 if (objDel != null)
                 {
-                    _DbContext.FeedingSchedules.Remove(objDel);
+                    _DbContext.SaltCalculations.Remove(objDel);
                     _DbContext.SaveChanges();
                     return true;
                 }
@@ -49,11 +47,11 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool DelFeedingSchedule(FeedingSchedule feeding)
+        public bool DelSaltCalculation(SaltCalculation salt)
         {
             try
             {
-                _DbContext.Remove(feeding);
+                _DbContext.Remove(salt);
                 _DbContext.SaveChanges();
                 return true;
             }
@@ -63,21 +61,21 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public async Task<List<FeedingSchedule>> GetAllFeedingSchedules()
+        public async Task<List<SaltCalculation>> GetAllSaltCalculation()
         {
-            return await _DbContext.FeedingSchedules.ToListAsync();
+            return await _DbContext.SaltCalculations.ToListAsync();
         }
 
-        public async Task<FeedingSchedule?> GetFeedingScheduleById(int? Id)
+        public async Task<SaltCalculation?> GetSaltCalculationById(int? Id)
         {
-            return await _DbContext.FeedingSchedules.Where(p => p.FeedingScheduleId.Equals(Id)).FirstOrDefaultAsync();
+            return await _DbContext.SaltCalculations.Where(p => p.SaltCalculationId.Equals(Id)).FirstOrDefaultAsync();
         }
 
-        public bool UpdateFeedingSchedule(FeedingSchedule feeding)
+        public bool UpdateSaltCalculation(SaltCalculation salt)
         {
             try
             {
-                _DbContext.FeedingSchedules.Update(feeding);
+                _DbContext.SaltCalculations.Update(salt);
                 _DbContext.SaveChanges();
                 return true;
             }
@@ -88,4 +86,3 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
         }
     }
 }
-
