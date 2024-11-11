@@ -19,7 +19,7 @@ namespace KoiCareSystemAtHome.Services.Services
             return await _repository.GetAllNewsAsync();
         }
 
-        public async Task<News> GetNewsByIdAsync(int id)
+        public async Task<News> GetNewsByIdAsync(Guid id)
         {
             return await _repository.GetNewsByIdAsync(id);
         }
@@ -34,7 +34,7 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.UpdateNews(news);
         }
 
-        public bool DeleteNews(int id)
+        public bool DeleteNews(Guid id)
         {
             return _repository.DeleteNews(id);
         }

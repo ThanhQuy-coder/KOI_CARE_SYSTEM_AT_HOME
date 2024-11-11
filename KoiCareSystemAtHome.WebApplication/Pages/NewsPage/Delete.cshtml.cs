@@ -18,7 +18,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
         [BindProperty]
         public News News { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             News = await _newsService.GetNewsByIdAsync(id);
 
@@ -30,7 +30,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
             var success =  _newsService.DeleteNews(id);
 

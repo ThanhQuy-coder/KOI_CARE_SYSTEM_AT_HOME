@@ -5,9 +5,9 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class KoiFish
 {
-    public int PondId { get; set; }
+    public Guid PondId { get; set; }
 
-    public int FishId { get; set; }
+    public Guid FishId { get; set; }
 
     public string NameFish { get; set; } = null!;
 

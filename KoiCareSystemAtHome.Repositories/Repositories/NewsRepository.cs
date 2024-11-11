@@ -21,7 +21,7 @@ namespace KoiCareSystemAtHome.Repositories
             return await _context.News.ToListAsync();
         }
 
-        public bool DeleteNews(int id)
+        public bool DeleteNews(Guid id)
         {
             var news = _context.News.Find(id);
             if (news != null)
@@ -66,7 +66,7 @@ namespace KoiCareSystemAtHome.Repositories
             return false;
         }
 
-        public async Task<News> GetNewsByIdAsync(int id)
+        public async Task<News> GetNewsByIdAsync(Guid id)
         {
             return await _context.News.FindAsync(id);
         }

@@ -18,7 +18,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
         [BindProperty]
         public News News { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             News = (News)await _newsService.GetNewsByIdAsync(id);
 
