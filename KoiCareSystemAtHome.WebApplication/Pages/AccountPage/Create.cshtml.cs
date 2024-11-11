@@ -34,8 +34,6 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
             {
                 return Page();
             }
-
-
             var result = _accountService.AddAccount(Account);
             if (!result)
             {
@@ -43,7 +41,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
                 return Page();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/UserPage/Create");
         }
     }
 }

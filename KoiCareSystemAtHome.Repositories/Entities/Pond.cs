@@ -7,7 +7,7 @@ public partial class Pond
 {
     public Guid UserId { get; set; }
 
-    public int PondId { get; set; }
+    public Guid PondId { get; set; }
 
     public string NamePond { get; set; } = null!;
 

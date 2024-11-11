@@ -5,9 +5,9 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class SaltCalculation
 {
-    public int PondId { get; set; }
+    public Guid PondId { get; set; }
 
-    public int SaltCalculationId { get; set; }
+    public Guid SaltCalculationId { get; set; }
 
     public double? RequiredSaltAmount { get; set; }
 

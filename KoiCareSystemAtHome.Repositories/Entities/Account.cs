@@ -12,4 +12,6 @@ public partial class Account
     public string PassWorkHash { get; set; } = null!;
 
     public string Email { get; set; } = null!;
+
+    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

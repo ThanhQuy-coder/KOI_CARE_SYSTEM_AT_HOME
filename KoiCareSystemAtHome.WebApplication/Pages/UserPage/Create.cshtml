@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model KoiCareSystemAtHome.WebApplication.Pages.UserPage.CreateModel
 
 <h4>User</h4>
@@ -23,9 +23,9 @@
                 <span asp-validation-for="User.Gender" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.Roled" class="control-label"></label>
-                <input asp-for="User.Roled" class="form-control" />
-                <span asp-validation-for="User.Roled" class="text-danger"></span>
+                <label asp-for="User.Role" class="control-label"></label>
+                <input asp-for="User.Role" class="form-control" />
+                <span asp-validation-for="User.Role" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
