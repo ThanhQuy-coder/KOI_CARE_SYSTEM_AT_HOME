@@ -9,6 +9,7 @@ public partial class FeedingSchedule
 
     public Guid FeedingScheduleId { get; set; }
 
+
     public DateTime FeedingTime { get; set; }
 
     public double RequiredFoodAmount { get; set; }
@@ -16,4 +17,5 @@ public partial class FeedingSchedule
     public string FoodType { get; set; } = null!;
 
     public virtual KoiFish? Fish { get; set; }
+
 }
