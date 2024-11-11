@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
 {
     public class EditModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly IPondService _service;
 
-        public EditModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public EditModel(IPondService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -24,23 +24,22 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
                 return NotFound();
             }
 
-            var pond =  await _context.Ponds.FirstOrDefaultAsync(m => m.PondId == id);
+            var pond = await _service.GetPondById(id);
             if (pond == null)
             {
                 return NotFound();
             }
+
             Pond = pond;
-           ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -48,30 +47,26 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
                 return Page();
             }
 
-            _context.Attach(Pond).State = EntityState.Modified;
+            bool result = _service.UpdatePond(Pond);
 
-            try
+            if (!result)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PondExists(Pond.PondId))
+                if (!await PondExists(Pond.PondId))
                 {
                     return NotFound();
                 }
                 else
                 {
-                    throw;
+                    throw new Exception("Lỗi cập nhật hồ.");
                 }
             }
 
             return RedirectToPage("./Index");
         }
 
-        private bool PondExists(string id)
+        private async Task<bool> PondExists(string pondId)
         {
-            return _context.Ponds.Any(e => e.PondId == id);
+            throw new NotImplementedException();
         }
     }
 }

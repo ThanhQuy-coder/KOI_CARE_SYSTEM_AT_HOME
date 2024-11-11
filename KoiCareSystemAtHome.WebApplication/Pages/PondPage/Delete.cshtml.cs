@@ -6,16 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
 {
     public class DeleteModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly IPondService _service;
 
-        public DeleteModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public DeleteModel(IPondService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -23,12 +24,12 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
                 return NotFound();
             }
 
-            var pond = await _context.Ponds.FirstOrDefaultAsync(m => m.PondId == id);
+            var pond = await _service.GetPondById(id); 
 
             if (pond == null)
             {
@@ -43,17 +44,16 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
 
         public async Task<IActionResult> OnPostAsync(string id)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
                 return NotFound();
             }
 
-            var pond = await _context.Ponds.FindAsync(id);
-            if (pond != null)
+            bool result = _service.DeletePond(id); // Truyền `id` là string
+
+            if (!result)
             {
-                Pond = pond;
-                _context.Ponds.Remove(Pond);
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
 
             return RedirectToPage("./Index");

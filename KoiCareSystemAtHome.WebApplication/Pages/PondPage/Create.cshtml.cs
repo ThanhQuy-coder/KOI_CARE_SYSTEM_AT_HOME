@@ -1,42 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
+
 {
     public class CreateModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly IPondService _service;
 
-        public CreateModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public CreateModel(IPondService service)
         {
-            _context = context;
-        }
-
-        public IActionResult OnGet()
-        {
-        ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
-            return Page();
+            _service = service;
         }
 
         [BindProperty]
         public Pond Pond { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnGet()
+        {
+            return Page();
+        }
+
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Ponds.Add(Pond);
-            await _context.SaveChangesAsync();
+            var result = _service.AddPond(Pond);
+            if (!result)
+            {
+                ModelState.AddModelError(string.Empty, "Error adding Pond.");
+                return Page();
+            }
 
             return RedirectToPage("./Index");
         }
