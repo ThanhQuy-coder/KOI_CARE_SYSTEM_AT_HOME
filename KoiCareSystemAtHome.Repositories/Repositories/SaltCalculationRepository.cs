@@ -14,11 +14,11 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
         {
             _DbContext = dbContext;
         }
-        public bool AddSaltCalculation(SaltCalculation salt)
+        public bool AddSaltCalculation(SaltCalculation SaltCalculation)
         {
             try
             {
-                _DbContext.SaltCalculations.Add(salt);
+                _DbContext.SaltCalculations.Add(SaltCalculation);
                 _DbContext.SaveChanges();
                 return true;
             }
@@ -47,11 +47,11 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool DelSaltCalculation(SaltCalculation salt)
+        public bool DelSaltCalculation(SaltCalculation SaltCalculation)
         {
             try
             {
-                _DbContext.Remove(salt);
+                _DbContext.Remove(SaltCalculation);
                 _DbContext.SaveChanges();
                 return true;
             }
@@ -71,11 +71,11 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             return await _DbContext.SaltCalculations.Where(p => p.SaltCalculationId.Equals(Id)).FirstOrDefaultAsync();
         }
 
-        public bool UpdateSaltCalculation(SaltCalculation salt)
+        public bool UpdateSaltCalculation(SaltCalculation SaltCalculation)
         {
             try
             {
-                _DbContext.SaltCalculations.Update(salt);
+                _DbContext.SaltCalculations.Update(SaltCalculation);
                 _DbContext.SaveChanges();
                 return true;
             }

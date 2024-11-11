@@ -11,9 +11,9 @@ namespace KoiCareSystemAtHome.Services.Interfaces
     {
         Task<List<FeedingSchedule>> GetAllFeedingSchedules();
         Boolean DelFeedingSchedule(int Id);
-        Boolean DelFeedingSchedule(FeedingSchedule feeding);
-        Boolean AddFeedingSchedule(FeedingSchedule feeding);
-        Boolean UpdateFeedingSchedule(FeedingSchedule feeding);
+        Boolean DelFeedingSchedule(FeedingSchedule FeedingSchedule);
+        Boolean AddFeedingSchedule(FeedingSchedule FeedingSchedule);
+        Boolean UpdateFeedingSchedule(FeedingSchedule FeedingSchedule);
         Task<FeedingSchedule?> GetFeedingScheduleById(int? Id);
     }
 }

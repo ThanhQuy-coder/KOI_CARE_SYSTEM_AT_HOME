@@ -16,11 +16,11 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             _DbContext = dbcontext;
         }
 
-        public bool AddFeedingSchedule(FeedingSchedule feeding)
+        public bool AddFeedingSchedule(FeedingSchedule FeedingSchedule)
         {
             try
             {
-                _DbContext.FeedingSchedules.Add(feeding);
+                _DbContext.FeedingSchedules.Add(FeedingSchedule);
                 _DbContext.SaveChanges();
                 return true;
             }
@@ -49,11 +49,11 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool DelFeedingSchedule(FeedingSchedule feeding)
+        public bool DelFeedingSchedule(FeedingSchedule FeedingSchedule)
         {
             try
             {
-                _DbContext.Remove(feeding);
+                _DbContext.Remove(FeedingSchedule);
                 _DbContext.SaveChanges();
                 return true;
             }
@@ -73,11 +73,11 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             return await _DbContext.FeedingSchedules.Where(p => p.FeedingScheduleId.Equals(Id)).FirstOrDefaultAsync();
         }
 
-        public bool UpdateFeedingSchedule(FeedingSchedule feeding)
+        public bool UpdateFeedingSchedule(FeedingSchedule FeedingSchedule)
         {
             try
             {
-                _DbContext.FeedingSchedules.Update(feeding);
+                _DbContext.FeedingSchedules.Update(FeedingSchedule);
                 _DbContext.SaveChanges();
                 return true;
             }

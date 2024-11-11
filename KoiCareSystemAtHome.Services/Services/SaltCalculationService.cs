@@ -18,9 +18,9 @@ namespace KoiCareSystemAtHome.Services.Services
             _repository = repository;
         }
 
-        public bool AddSaltCalculation(SaltCalculation salt)
+        public bool AddSaltCalculation(SaltCalculation SaltCalculation)
         {
-            return _repository.AddSaltCalculation(salt);
+            return _repository.AddSaltCalculation(SaltCalculation);
         }
 
         public bool DelSaltCalculation(int Id)
@@ -28,9 +28,9 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.DelSaltCalculation(Id);
         }
 
-        public bool DelSaltCalculation(SaltCalculation salt)
+        public bool DelSaltCalculation(SaltCalculation SaltCalculation)
         {
-            return _repository.DelSaltCalculation(salt);
+            return _repository.DelSaltCalculation(SaltCalculation);
         }
 
         public Task<List<SaltCalculation>> GetAllSaltCalculation()
@@ -43,9 +43,10 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.GetSaltCalculationById(Id);
         }
 
-        public bool UpdateSaltCalculation(SaltCalculation salt)
+        public bool UpdateSaltCalculation(SaltCalculation SaltCalculation)
         {
-            return _repository.UpdateSaltCalculation(salt);
+            return _repository.UpdateSaltCalculation(SaltCalculation);
         }
+
     }
 }

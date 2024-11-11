@@ -1,0 +1,39 @@
+﻿@page
+@model KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages.EditModel
+
+<h4>SaltCalculation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SaltCalculation.PondId" class="control-label"></label>
+                <select asp-for="SaltCalculation.PondId" class="form-control" asp-items="ViewBag.PondId"></select>
+                <span asp-validation-for="SaltCalculation.PondId" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="SaltCalculation.SaltCalculationId" />
+            <div class="form-group">
+                <label asp-for="SaltCalculation.RequiredSaltAmount" class="control-label"></label>
+                <input asp-for="SaltCalculation.RequiredSaltAmount" class="form-control" />
+                <span asp-validation-for="SaltCalculation.RequiredSaltAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SaltCalculation.CalculationTime" class="control-label"></label>
+                <input asp-for="SaltCalculation.CalculationTime" class="form-control" />
+                <span asp-validation-for="SaltCalculation.CalculationTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

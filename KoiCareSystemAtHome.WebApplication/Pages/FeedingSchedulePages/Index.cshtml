@@ -1,0 +1,48 @@
+﻿@page
+@model KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages.IndexModel
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FeedingSchedule[0].FeedingTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeedingSchedule[0].RequiredFoodAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeedingSchedule[0].FoodType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeedingSchedule[0].Fish)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.FeedingSchedule) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeedingTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequiredFoodAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fish.BodyShape)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FeedingScheduleId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.FeedingScheduleId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.FeedingScheduleId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

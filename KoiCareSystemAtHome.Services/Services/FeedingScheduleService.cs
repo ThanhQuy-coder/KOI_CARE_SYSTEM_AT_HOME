@@ -19,9 +19,9 @@ namespace KoiCareSystemAtHome.Services.Services
         {
             _repository = repository;
         }
-        public bool AddFeedingSchedule(FeedingSchedule feeding)
+        public bool AddFeedingSchedule(FeedingSchedule FeedingSchedule)
         {
-            return _repository.AddFeedingSchedule(feeding);
+            return _repository.AddFeedingSchedule(FeedingSchedule);
         }
 
         public bool DelFeedingSchedule(int Id)
@@ -29,9 +29,9 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.DelFeedingSchedule(Id);
         }
 
-        public bool DelFeedingSchedule(FeedingSchedule feeding)
+        public bool DelFeedingSchedule(FeedingSchedule FeedingSchedule)
         {
-            return _repository.DelFeedingSchedule(feeding);
+            return _repository.DelFeedingSchedule(FeedingSchedule);
         }
 
         public Task<List<FeedingSchedule>> GetAllFeedingSchedules()
@@ -44,9 +44,9 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.GetFeedingScheduleById(Id);
         }
 
-        public bool UpdateFeedingSchedule(FeedingSchedule feeding)
+        public bool UpdateFeedingSchedule(FeedingSchedule FeedingSchedule)
         {
-            return _repository.UpdateFeedingSchedule(feeding);
+            return _repository.UpdateFeedingSchedule(FeedingSchedule);
         }
     }
 }
