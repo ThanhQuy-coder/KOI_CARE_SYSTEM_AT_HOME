@@ -13,5 +13,5 @@ public partial class SaltCalculation
 
     public DateTime CalculationTime { get; set; }
 
-    public virtual Pond? Pond { get; set; }
+    public virtual Pond Pond { get; set; } = null!;
 }

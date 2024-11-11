@@ -5,11 +5,11 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class FeedingSchedule
 {
+
     public Guid? FishId { get; set; }
 
 
     public Guid FeedingScheduleId { get; set; }
-
 
 
     public DateTime FeedingTime { get; set; }
