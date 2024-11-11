@@ -5,7 +5,7 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class KoiFish
 {
-    public Guid PondId { get; set; }
+    public Guid? PondId { get; set; }
 
     public Guid FishId { get; set; }
 
@@ -33,5 +33,5 @@ public partial class KoiFish
 
     public virtual ICollection<FeedingSchedule> FeedingSchedules { get; set; } = new List<FeedingSchedule>();
 
-    public virtual Pond Pond { get; set; } = null!;
+    public virtual Pond? Pond { get; set; }
 }

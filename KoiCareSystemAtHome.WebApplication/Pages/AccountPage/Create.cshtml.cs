@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
 {
@@ -41,7 +43,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
                 return Page();
             }
 
-            return RedirectToPage("/UserPage/Create");
+            return RedirectToPage("/UserPage/Create", new { AccountId = Account.AccountId });
         }
     }
 }

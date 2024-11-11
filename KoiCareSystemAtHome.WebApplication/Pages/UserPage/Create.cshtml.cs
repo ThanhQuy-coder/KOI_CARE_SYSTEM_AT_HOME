@@ -22,8 +22,10 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
             _userService = userService;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(Guid accountId)
         {
+            // Gán PondId vào KoiFish
+            User = new User { AccountId = accountId };
             return Page();
         }
 
@@ -33,8 +35,14 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
         // For more information, see https://aka.ms/RazorPagesCRUD.
         // Nhận AccountID từ query string khi chuyển hướng từ trang tạo Account
         
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(Guid accountId)
         {
+            if (User.AccountId == Guid.Empty)
+            {
+                ModelState.AddModelError(string.Empty, "AccountId is required.");
+                return Page();
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
