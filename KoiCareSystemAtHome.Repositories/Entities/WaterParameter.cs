@@ -5,7 +5,7 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class WaterParameter
 {
-    public Guid PondId { get; set; }
+    public Guid? PondId { get; set; }
 
     public Guid WaterParameterId { get; set; }
 
@@ -25,5 +25,5 @@ public partial class WaterParameter
 
     public DateTime MeasurementTime { get; set; }
 
-    public virtual Pond Pond { get; set; } = null!;
+    public virtual Pond? Pond { get; set; }
 }

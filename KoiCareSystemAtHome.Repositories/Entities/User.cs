@@ -5,7 +5,7 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class User
 {
-    public Guid AccountId { get; set; }
+    public Guid? AccountId { get; set; }
 
     public Guid UserId { get; set; }
 
@@ -17,7 +17,7 @@ public partial class User
 
     public string Role { get; set; } = null!;
 
-    public virtual Account Account { get; set; } = null!;
+    public virtual Account? Account { get; set; }
 
     public virtual ICollection<Pond> Ponds { get; set; } = new List<Pond>();
 
