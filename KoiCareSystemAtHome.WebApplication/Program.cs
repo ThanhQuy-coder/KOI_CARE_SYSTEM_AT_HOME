@@ -14,15 +14,17 @@ builder.Services.AddDbContext<KoiCareSystemAtHomeContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"));
 });
 // DI Repository
+builder.Services.AddScoped<IWaterParameterRepository, WaterParameterRepository>();
 builder.Services.AddScoped<IPondRepository, PondRepository>();
 builder.Services.AddScoped<IKoiFishRepository, KoiFishRepository>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
 
 // DI Services
+builder.Services.AddScoped<IWaterParameterService, WaterParameterService>();
 builder.Services.AddScoped<IPondService, PondService>();
 builder.Services.AddScoped<IKoiFishService, KoiFishService>();
 builder.Services.AddScoped<INewsService, NewsService>();
-//var app= builder.Build();
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 
