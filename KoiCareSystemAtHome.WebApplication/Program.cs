@@ -1,3 +1,4 @@
+using KoiCareSystemAtHome.Repositories;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
 using KoiCareSystemAtHome.Repositories.Repositories;
@@ -13,11 +14,14 @@ builder.Services.AddDbContext<KoiCareSystemAtHomeContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"));
 });
 // DI Repository
-builder.Services.AddScoped<IKoiFishService, KoiFishService>();
+builder.Services.AddScoped<IPondRepository, PondRepository>();
 builder.Services.AddScoped<IKoiFishRepository, KoiFishRepository>();
+builder.Services.AddScoped<INewsRepository, NewsRepository>();
+
 // DI Services
 builder.Services.AddScoped<IPondService, PondService>();
-builder.Services.AddScoped<IPondRepository, PondRepository>();
+builder.Services.AddScoped<IKoiFishService, KoiFishService>();
+builder.Services.AddScoped<INewsService, NewsService>();
 //var app= builder.Build();
 // Add services to the container.
 builder.Services.AddRazorPages();
