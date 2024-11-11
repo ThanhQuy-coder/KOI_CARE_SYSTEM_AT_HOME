@@ -9,14 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // DI
 builder.Services.AddDbContext<KoiCareSystemAtHomeContext>(options =>
 {
-
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"));
 });
+
 builder.Services.AddScoped<IKoiFishService, KoiFishService>();
 builder.Services.AddScoped<IKoiFishRepository, KoiFishRepository>();
 builder.Services.AddScoped<IPondService, PondService>();
 builder.Services.AddScoped<IPondRepository, PondRepository>();
-
 //var app= builder.Build();
 // Add services to the container.
 builder.Services.AddRazorPages();
