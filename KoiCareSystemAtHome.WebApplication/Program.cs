@@ -1,31 +1,30 @@
-using KoiCareSystemAtHome.Repositories;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
-using KoiCareSystemAtHome.Services;
+using KoiCareSystemAtHome.Repositories.Repositories;
 using KoiCareSystemAtHome.Services.Interfaces;
+using KoiCareSystemAtHome.Services.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddRazorPages();
-//DI
+// DI
 builder.Services.AddDbContext<KoiCareSystemAtHomeContext>(options =>
 {
-	options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"));
 });
-//DI Repository
-builder.Services.AddScoped<IPondRepository, PondRepository>();
-//DI Service
 builder.Services.AddScoped<IPondService, PondService>();
+builder.Services.AddScoped<IPondRepository, PondRepository>();
+//var app= builder.Build();
+// Add services to the container.
+builder.Services.AddRazorPages();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    IApplicationBuilder applicationBuilder = app.UseExceptionHandler("/Error");
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-	app.UseHsts();
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();

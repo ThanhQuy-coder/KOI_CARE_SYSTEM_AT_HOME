@@ -22,14 +22,14 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
         [BindProperty]
         public Pond Pond { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var pond = await _service.GetPondById(id); 
+            var pond = await _service.GetPondById((Guid)id); 
 
             if (pond == null)
             {
@@ -42,19 +42,15 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string id)
+        public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null)
             {
                 return NotFound();
             }
 
-            bool result = _service.DeletePond(id); // Truyền `id` là string
 
-            if (!result)
-            {
-                return NotFound();
-            }
+            var pond = await _service.GetPondById((Guid)id);
 
             return RedirectToPage("./Index");
         }

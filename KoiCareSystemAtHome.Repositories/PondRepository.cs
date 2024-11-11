@@ -32,7 +32,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool DeletePond(string Id)
+        public bool DeletePond(Guid Id)
         {
             try
             {
@@ -72,12 +72,12 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             return await _dbContext.Ponds.ToListAsync();
         }
 
-        public Task<Pond> GetPonById(string Id)
+        public Task<Pond> GetPonById(Guid Id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Pond> GetPondById(string Id)
+        public async Task<Pond> GetPondById(Guid Id)
         {
             return await _dbContext.Ponds.FirstOrDefaultAsync(p => p.PondId.Equals(Id));
         }

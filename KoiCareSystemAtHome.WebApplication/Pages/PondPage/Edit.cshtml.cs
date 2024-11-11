@@ -22,20 +22,24 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
         [BindProperty]
         public Pond Pond { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null)
             {
+
                 return NotFound();
             }
 
-            var pond = await _service.GetPondById(id);
+
+            var pond = await _service.GetPondById((Guid)id);
             if (pond == null)
             {
                 return NotFound();
             }
 
             Pond = pond;
+
+        
 
             return Page();
         }
@@ -67,6 +71,12 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
         private async Task<bool> PondExists(string pondId)
         {
             throw new NotImplementedException();
+        }
+
+        private async Task<bool> PondExists(Guid id)
+        {
+            var pond = await _service.GetPondById(id);
+            return pond != null;
         }
     }
 }

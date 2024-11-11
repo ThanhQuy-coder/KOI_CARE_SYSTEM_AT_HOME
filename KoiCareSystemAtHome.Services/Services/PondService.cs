@@ -22,7 +22,7 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.AddPond(pond);
         }
 
-        public bool DeletePond(string Id)
+        public bool DeletePond(Guid Id)
         {
             return _repository.DeletePond(Id);
         }
@@ -37,12 +37,9 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.GetAllPond();
         }
 
-        public Task GetKoiFishById(string id)
-        {
-            throw new NotImplementedException();
-        }
+        
 
-        public Task<Pond> GetPondById(string Id)
+        public Task<Pond> GetPondById(Guid Id)
         {
             return _repository.GetPondById(Id);
         }

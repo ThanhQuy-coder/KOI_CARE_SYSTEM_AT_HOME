@@ -11,10 +11,10 @@ namespace KoiCareSystemAtHome.Services.Interfaces
     {
         Task<List<Pond>> GetAllPond();
         Boolean AddPond(Pond pond);
-        Boolean DeletePond(string Id);
+        Boolean DeletePond(Guid Id);
         Boolean DeletePond(Pond pond);
-        Task<Pond> GetPondById(string Id);
+        Task<Pond> GetPondById(Guid Id);
         Boolean UpdatePond(Pond pond);
-        Task GetKoiFishById(string id);
+       
     }
 }
