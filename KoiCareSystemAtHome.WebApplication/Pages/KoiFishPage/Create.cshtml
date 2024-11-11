@@ -7,11 +7,9 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="KoiFish.PondId" class="control-label"></label>
-                <select asp-for="KoiFish.PondId" class ="form-control" asp-items="ViewBag.PondId"></select>
-       
-            </div>
+
+            <!-- Trường hidden để lưu PondId từ model KoiFish -->
+            <input type="hidden" asp-for="KoiFish.PondId" />
             <div class="form-group">
                 <label asp-for="KoiFish.NameFish" class="control-label"></label>
                 <input asp-for="KoiFish.NameFish" class="form-control" />

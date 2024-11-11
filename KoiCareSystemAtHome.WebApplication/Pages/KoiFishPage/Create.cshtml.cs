@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using KoiCareSystemAtHome.Repositories.Entities;
@@ -18,13 +19,22 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
         [BindProperty]
         public KoiFish KoiFish { get; set; } = default!;
 
-        public IActionResult OnGet()
+        // Nhận PondId từ query string trong URL
+        public IActionResult OnGet(Guid pondId)
         {
+            // Gán PondId vào KoiFish
+            KoiFish = new KoiFish { PondId = pondId };
             return Page();
         }
 
         public IActionResult OnPost()
         {
+            if (KoiFish.PondId == Guid.Empty)
+            {
+                ModelState.AddModelError(string.Empty, "PondId is required.");
+                return Page();
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -39,5 +49,6 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
 
             return RedirectToPage("./Index");
         }
+
     }
 }

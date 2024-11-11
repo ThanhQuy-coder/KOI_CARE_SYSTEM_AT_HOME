@@ -7,7 +7,7 @@ public partial class FeedingSchedule
 {
     public Guid FishId { get; set; }
 
-    public int FeedingScheduleId { get; set; }
+    public Guid FeedingScheduleId { get; set; }
 
     public DateTime FeedingTime { get; set; }
 

@@ -41,15 +41,17 @@ public partial class KoiCareSystemAtHomeContext : DbContext
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5867E2EE720");
+            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5864AD078A5");
 
             entity.ToTable("Account");
 
-            entity.HasIndex(e => e.Username, "UQ__Account__536C85E42CC75C69").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Account__536C85E41B250C64").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Account__AB6E6164388ECCA8").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Account__AB6E6164B6E4246C").IsUnique();
 
-            entity.Property(e => e.AccountId).HasColumnName("AccountID");
+            entity.Property(e => e.AccountId)
+                .HasDefaultValueSql("(newid())")
+                .HasColumnName("AccountID");
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .HasColumnName("email");
@@ -57,20 +59,17 @@ public partial class KoiCareSystemAtHomeContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("passWorkHash");
             entity.Property(e => e.Username).HasMaxLength(100);
-
-            entity.HasOne(d => d.User).WithMany(p => p.Accounts)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Account__UserId__3C69FB99");
         });
 
         modelBuilder.Entity<FeedingSchedule>(entity =>
         {
-            entity.HasKey(e => e.FeedingScheduleId).HasName("PK__tmp_ms_x__1B08C84566FE2361");
+            entity.HasKey(e => e.FeedingScheduleId).HasName("PK__FeedingS__1B08C845A6AC3890");
 
             entity.ToTable("FeedingSchedule");
 
-            entity.Property(e => e.FeedingScheduleId).HasColumnName("feeding_ScheduleID");
+            entity.Property(e => e.FeedingScheduleId)
+                .HasDefaultValueSql("(newid())")
+                .HasColumnName("feeding_ScheduleID");
             entity.Property(e => e.FeedingTime)
                 .HasColumnType("datetime")
                 .HasColumnName("feedingTime");
@@ -83,12 +82,12 @@ public partial class KoiCareSystemAtHomeContext : DbContext
             entity.HasOne(d => d.Fish).WithMany(p => p.FeedingSchedules)
                 .HasForeignKey(d => d.FishId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__FeedingSc__fishI__4222D4EF");
+                .HasConstraintName("FK__FeedingSc__fishI__34C8D9D1");
         });
 
         modelBuilder.Entity<KoiFish>(entity =>
         {
-            entity.HasKey(e => e.FishId).HasName("PK__tmp_ms_x__5222DA3983075FB6");
+            entity.HasKey(e => e.FishId).HasName("PK__KoiFish__5222DA399BBE1683");
 
             entity.ToTable("KoiFish");
 
@@ -120,17 +119,18 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
             entity.HasOne(d => d.Pond).WithMany(p => p.KoiFishes)
                 .HasForeignKey(d => d.PondId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__KoiFish__PondID__4316F928");
+                .HasConstraintName("FK__KoiFish__PondID__46E78A0C");
         });
 
         modelBuilder.Entity<News>(entity =>
         {
-            entity.HasKey(e => e.PostId).HasName("PK__News__DD0C73BAECAE2A01");
+            entity.HasKey(e => e.PostId).HasName("PK__News__DD0C73BA7A55853C");
 
-            entity.HasIndex(e => e.Author, "UQ__News__C2E6DB67FC078D8F").IsUnique();
+            entity.HasIndex(e => e.Author, "UQ__News__C2E6DB67A90843D4").IsUnique();
 
-            entity.Property(e => e.PostId).HasColumnName("postID");
+            entity.Property(e => e.PostId)
+                .HasDefaultValueSql("(newid())")
+                .HasColumnName("postID");
             entity.Property(e => e.Author)
                 .HasMaxLength(20)
                 .HasColumnName("author");
@@ -145,11 +145,13 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
         modelBuilder.Entity<Pond>(entity =>
         {
-            entity.HasKey(e => e.PondId).HasName("PK__Pond__D18BF854B174921F");
+            entity.HasKey(e => e.PondId).HasName("PK__Pond__D18BF8546160F1E2");
 
             entity.ToTable("Pond");
 
-            entity.Property(e => e.PondId).HasColumnName("PondID");
+            entity.Property(e => e.PondId)
+                .HasDefaultValueSql("(newid())")
+                .HasColumnName("PondID");
             entity.Property(e => e.Depth).HasColumnName("depth");
             entity.Property(e => e.DrainCount).HasColumnName("drainCount");
             entity.Property(e => e.ImagePond).HasColumnName("imagePond");
@@ -159,17 +161,18 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Ponds)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Pond__UserId__267ABA7A");
+                .HasConstraintName("FK__Pond__UserId__45F365D3");
         });
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK___Product__2D10D14ACAF17F73");
+            entity.HasKey(e => e.ProductId).HasName("PK___Product__2D10D14A09811653");
 
             entity.ToTable("_Product");
 
-            entity.Property(e => e.ProductId).HasColumnName("productID");
+            entity.Property(e => e.ProductId)
+                .HasDefaultValueSql("(newid())")
+                .HasColumnName("productID");
             entity.Property(e => e.DatePlace)
                 .HasColumnType("datetime")
                 .HasColumnName("datePlace");
@@ -188,16 +191,18 @@ public partial class KoiCareSystemAtHomeContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Products)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK___Product__UserId__34C8D9D1");
+                .HasConstraintName("FK___Product__UserId__403A8C7D");
         });
 
         modelBuilder.Entity<SaltCalculation>(entity =>
         {
-            entity.HasKey(e => e.SaltCalculationId).HasName("PK__SaltCalc__69E0837880B8A2C6");
+            entity.HasKey(e => e.SaltCalculationId).HasName("PK__SaltCalc__69E08378609055EE");
 
             entity.ToTable("SaltCalculation");
 
-            entity.Property(e => e.SaltCalculationId).HasColumnName("salt_CalculationID");
+            entity.Property(e => e.SaltCalculationId)
+                .HasDefaultValueSql("(newid())")
+                .HasColumnName("salt_CalculationID");
             entity.Property(e => e.CalculationTime)
                 .HasColumnType("datetime")
                 .HasColumnName("calculationTime");
@@ -207,15 +212,16 @@ public partial class KoiCareSystemAtHomeContext : DbContext
             entity.HasOne(d => d.Pond).WithMany(p => p.SaltCalculations)
                 .HasForeignKey(d => d.PondId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__SaltCalcu__PondI__31EC6D26");
+                .HasConstraintName("FK__SaltCalcu__PondI__3C69FB99");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK___User__1788CC4C9F8EF44D");
+            entity.HasKey(e => e.UserId).HasName("PK___User__1788CC4C7308F1DA");
 
             entity.ToTable("_User");
 
+            entity.Property(e => e.UserId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.BirthDate)
                 .HasColumnType("datetime")
                 .HasColumnName("birthDate");
@@ -225,16 +231,25 @@ public partial class KoiCareSystemAtHomeContext : DbContext
             entity.Property(e => e.Gender)
                 .HasMaxLength(10)
                 .HasColumnName("gender");
-            entity.Property(e => e.Roled).HasMaxLength(50);
+            entity.Property(e => e.Role)
+                .HasMaxLength(50)
+                .HasColumnName("_Role");
+
+            entity.HasOne(d => d.Account).WithMany(p => p.Users)
+                .HasForeignKey(d => d.AccountId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK___User__AccountId__29572725");
         });
 
         modelBuilder.Entity<WaterParameter>(entity =>
         {
-            entity.HasKey(e => e.WaterParameterId).HasName("PK__WaterPar__74A7C6F2CA9DE3D6");
+            entity.HasKey(e => e.WaterParameterId).HasName("PK__WaterPar__5D1C0C722CB4059A");
 
             entity.ToTable("WaterParameter");
 
-            entity.Property(e => e.WaterParameterId).HasColumnName("Water_ParameterID");
+            entity.Property(e => e.WaterParameterId)
+                .HasDefaultValueSql("(newid())")
+                .HasColumnName("WaterParameterID");
             entity.Property(e => e.MeasurementTime)
                 .HasColumnType("datetime")
                 .HasColumnName("measurementTime");
@@ -249,7 +264,8 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
             entity.HasOne(d => d.Pond).WithMany(p => p.WaterParameters)
                 .HasForeignKey(d => d.PondId)
-                .HasConstraintName("FK__WaterPara__PondI__2F10007B");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__WaterPara__PondI__38996AB5");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -15,5 +15,7 @@ namespace KoiCareSystemAtHome.Services.Interfaces
         Boolean DeleteKoiFish(KoiFish koiFish);
         Task<KoiFish> GetKoiFishById(Guid Id);
         Boolean UpdateKoiFish(KoiFish koifish);
+        Task<KoiFish> InitializeKoiFish(Guid pondId);
+
     }
 }
