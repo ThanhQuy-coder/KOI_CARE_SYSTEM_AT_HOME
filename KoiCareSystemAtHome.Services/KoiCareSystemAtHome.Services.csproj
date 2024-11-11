@@ -7,7 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NUnit" Version="4.2.2" />
+    <PackageReference Include="NUnit.ConsoleRunner" Version="3.18.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+    <PackageReference Include="Selenium.Support" Version="4.26.1" />
+  </ItemGroup>
+
+<<<<<<< HEAD
+=======
+  <ItemGroup>
     <ProjectReference Include="..\KoiCareSystemAtHome.Repositories\KoiCareSystemAtHome.Repositories.csproj" />
   </ItemGroup>
 
+>>>>>>> Nhanh6(3)-BLOGANDNEWS
 </Project>
