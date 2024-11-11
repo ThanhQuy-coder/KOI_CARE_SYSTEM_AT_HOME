@@ -1,27 +1,10 @@
-<<<<<<< HEAD
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
 using KoiCareSystemAtHome.Repositories.Repositories;
 using KoiCareSystemAtHome.Services.Interfaces;
 using KoiCareSystemAtHome.Services.Services;
 using Microsoft.EntityFrameworkCore;
-=======
-using KoiCareSystemAtHome.Repositories;
-using KoiCareSystemAtHome.Repositories.Entities;
-using KoiCareSystemAtHome.Repositories.Interfaces;
-using KoiCareSystemAtHome.Services.Interfaces;
-using KoiCareSystemAtHome.Services.Services;
-using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<KoiCareSystemAtHomeContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"));
-});
-builder.Services.AddScoped<INewsService, NewsService>();
-builder.Services.AddScoped<INewsRepository, NewsRepository>();
-
->>>>>>> Nhanh6(3)-BLOGANDNEWS
 
 var builder = WebApplication.CreateBuilder(args);
 // DI
@@ -29,9 +12,10 @@ builder.Services.AddDbContext<KoiCareSystemAtHomeContext>(options =>
 {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"));
 });
-
+// DI Repository
 builder.Services.AddScoped<IKoiFishService, KoiFishService>();
 builder.Services.AddScoped<IKoiFishRepository, KoiFishRepository>();
+// DI Services
 builder.Services.AddScoped<IPondService, PondService>();
 builder.Services.AddScoped<IPondRepository, PondRepository>();
 //var app= builder.Build();

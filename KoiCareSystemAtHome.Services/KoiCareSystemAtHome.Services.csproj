@@ -13,11 +13,10 @@
     <PackageReference Include="Selenium.Support" Version="4.26.1" />
   </ItemGroup>
 
-<<<<<<< HEAD
-=======
+
+
   <ItemGroup>
     <ProjectReference Include="..\KoiCareSystemAtHome.Repositories\KoiCareSystemAtHome.Repositories.csproj" />
   </ItemGroup>
 
->>>>>>> Nhanh6(3)-BLOGANDNEWS
 </Project>
