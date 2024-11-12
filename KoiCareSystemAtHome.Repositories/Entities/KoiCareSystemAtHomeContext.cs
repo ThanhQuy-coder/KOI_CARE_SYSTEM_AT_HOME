@@ -118,7 +118,8 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
             entity.HasOne(d => d.Pond).WithMany(p => p.KoiFishes)
                 .HasForeignKey(d => d.PondId)
-                .HasConstraintName("FK__KoiFish__PondID__30F848ED");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_KoiFish_PondID");
         });
 
         modelBuilder.Entity<News>(entity =>
