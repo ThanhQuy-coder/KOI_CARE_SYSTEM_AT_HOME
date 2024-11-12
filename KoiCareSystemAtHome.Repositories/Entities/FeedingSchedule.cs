@@ -5,12 +5,10 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class FeedingSchedule
 {
-
     public Guid? FishId { get; set; }
 
 
     public Guid FeedingScheduleId { get; set; }
-
 
     public DateTime FeedingTime { get; set; }
 
@@ -19,5 +17,4 @@ public partial class FeedingSchedule
     public string FoodType { get; set; } = null!;
 
     public virtual KoiFish? Fish { get; set; }
-
 }

@@ -33,17 +33,10 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
     public virtual DbSet<WaterParameter> WaterParameters { get; set; }
 
-
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Data Source=LAPTOP-58P0M9U0;Initial Catalog=KoiCareSystemAtHome;Integrated Security=True;Trust Server Certificate=True");
-
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-
             entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5864AD078A5");
 
             entity.ToTable("Account");
@@ -65,8 +58,6 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
         modelBuilder.Entity<FeedingSchedule>(entity =>
         {
-
-
             entity.HasKey(e => e.FeedingScheduleId).HasName("PK__FeedingS__1B08C845A6AC3890");
 
             entity.ToTable("FeedingSchedule");
@@ -91,7 +82,6 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
         modelBuilder.Entity<KoiFish>(entity =>
         {
-
             entity.HasKey(e => e.FishId).HasName("PK__KoiFish__5222DA399BBE1683");
 
             entity.ToTable("KoiFish");
@@ -124,9 +114,7 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
             entity.HasOne(d => d.Pond).WithMany(p => p.KoiFishes)
                 .HasForeignKey(d => d.PondId)
-
                 .HasConstraintName("FK__KoiFish__PondID__46E78A0C");
-
         });
 
         modelBuilder.Entity<News>(entity =>
@@ -135,8 +123,6 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
 
             entity.HasIndex(e => e.Author, "UQ__News__C2E6DB67A90843D4").IsUnique();
-
-
             entity.Property(e => e.PostId)
                 .HasDefaultValueSql("(newid())")
                 .HasColumnName("postID");
@@ -154,8 +140,8 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
         modelBuilder.Entity<Pond>(entity =>
         {
-            entity.HasKey(e => e.PondId).HasName("PK__Pond__D18BF8546160F1E2");
 
+            entity.HasKey(e => e.PondId).HasName("PK__Pond__D18BF8546160F1E2");
             entity.ToTable("Pond");
 
             entity.Property(e => e.PondId)
@@ -205,7 +191,6 @@ public partial class KoiCareSystemAtHomeContext : DbContext
         modelBuilder.Entity<SaltCalculation>(entity =>
         {
             entity.HasKey(e => e.SaltCalculationId).HasName("PK__SaltCalc__69E08378609055EE");
-
             entity.ToTable("SaltCalculation");
 
             entity.Property(e => e.SaltCalculationId)
@@ -226,7 +211,6 @@ public partial class KoiCareSystemAtHomeContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("PK___User__1788CC4C7308F1DA");
-
             entity.ToTable("_User");
 
             entity.Property(e => e.UserId).HasDefaultValueSql("(newid())");
@@ -245,7 +229,6 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
             entity.HasOne(d => d.Account).WithMany(p => p.Users)
                 .HasForeignKey(d => d.AccountId)
-
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK___User__AccountId__29572725");
         });
@@ -253,7 +236,6 @@ public partial class KoiCareSystemAtHomeContext : DbContext
         modelBuilder.Entity<WaterParameter>(entity =>
         {
             entity.HasKey(e => e.WaterParameterId).HasName("PK__WaterPar__5D1C0C722CB4059A");
-
             entity.ToTable("WaterParameter");
 
             entity.Property(e => e.WaterParameterId)

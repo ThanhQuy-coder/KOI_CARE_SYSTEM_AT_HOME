@@ -1,4 +1,3 @@
-
 using KoiCareSystemAtHome.Repositories;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
@@ -20,8 +19,12 @@ builder.Services.AddScoped<IPondRepository, PondRepository>();
 builder.Services.AddScoped<IKoiFishRepository, KoiFishRepository>();
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IFeedingScheduleRepository, FeedingScheduleRepository>();
+builder.Services.AddScoped<ISaltCalculationRepository, SaltCalculationRepository>();
 
 // DI Services
+builder.Services.AddScoped<IFeedingScheduleService, FeedingScheduleService>();
+builder.Services.AddScoped<ISaltCalculationService, SaltCalculationService>();
 builder.Services.AddScoped<IWaterParameterService, WaterParameterService>();
 builder.Services.AddScoped<IPondService, PondService>();
 builder.Services.AddScoped<IKoiFishService, KoiFishService>();
@@ -32,7 +35,6 @@ builder.Services.AddScoped<IProductService, ProductService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
