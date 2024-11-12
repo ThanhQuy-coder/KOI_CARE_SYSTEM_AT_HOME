@@ -23,7 +23,7 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.AddSaltCalculation(SaltCalculation);
         }
 
-        public bool DelSaltCalculation(int Id)
+        public bool DelSaltCalculation(Guid Id)
         {
             return _repository.DelSaltCalculation(Id);
         }
@@ -38,7 +38,7 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.GetAllSaltCalculation();
         }
 
-        public Task<SaltCalculation?> GetSaltCalculationById(int? Id)
+        public Task<SaltCalculation?> GetSaltCalculationById(Guid? Id)
         {
             return _repository.GetSaltCalculationById(Id);
         }

@@ -6,24 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages
 {
     public class IndexModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly ISaltCalculationService _service;
 
-        public IndexModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public IndexModel(ISaltCalculationService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public IList<SaltCalculation> SaltCalculation { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            SaltCalculation = await _context.SaltCalculations
-                .Include(s => s.Pond).ToListAsync();
+            SaltCalculation = await _service.GetAllSaltCalculation();
         }
     }
 }

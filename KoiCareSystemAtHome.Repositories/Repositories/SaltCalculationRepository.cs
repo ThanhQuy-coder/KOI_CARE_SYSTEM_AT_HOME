@@ -28,7 +28,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool DelSaltCalculation(int Id)
+        public bool DelSaltCalculation(Guid Id)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             return await _DbContext.SaltCalculations.ToListAsync();
         }
 
-        public async Task<SaltCalculation?> GetSaltCalculationById(int? Id)
+        public async Task<SaltCalculation?> GetSaltCalculationById(Guid? Id)
         {
             return await _DbContext.SaltCalculations.Where(p => p.SaltCalculationId.Equals(Id)).FirstOrDefaultAsync();
         }

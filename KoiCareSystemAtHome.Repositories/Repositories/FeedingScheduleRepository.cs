@@ -30,7 +30,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool DelFeedingSchedule(int Id)
+        public bool DelFeedingSchedule(Guid Id)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             return await _DbContext.FeedingSchedules.ToListAsync();
         }
 
-        public async Task<FeedingSchedule?> GetFeedingScheduleById(int? Id)
+        public async Task<FeedingSchedule?> GetFeedingScheduleById(Guid? Id)
         {
             return await _DbContext.FeedingSchedules.Where(p => p.FeedingScheduleId.Equals(Id)).FirstOrDefaultAsync();
         }

@@ -10,10 +10,10 @@ namespace KoiCareSystemAtHome.Repositories.Interfaces
     public interface ISaltCalculationRepository
     {
         Task<List<SaltCalculation>> GetAllSaltCalculation();
-        Boolean DelSaltCalculation(int Id);
+        Boolean DelSaltCalculation(Guid Id);
         Boolean DelSaltCalculation(SaltCalculation SaltCalculation);
         Boolean AddSaltCalculation(SaltCalculation SaltCalculation);
         Boolean UpdateSaltCalculation(SaltCalculation SaltCalculation);
-        Task<SaltCalculation?> GetSaltCalculationById(int? Id);
+        Task<SaltCalculation?> GetSaltCalculationById(Guid? Id);
     }
 }

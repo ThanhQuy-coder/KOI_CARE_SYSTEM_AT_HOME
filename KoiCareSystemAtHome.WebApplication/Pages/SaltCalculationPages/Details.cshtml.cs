@@ -6,28 +6,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages
 {
     public class DetailsModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly ISaltCalculationService _service;
 
-        public DetailsModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public DetailsModel(ISaltCalculationService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public SaltCalculation SaltCalculation { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var saltcalculation = await _context.SaltCalculations.FirstOrDefaultAsync(m => m.SaltCalculationId == id);
+            var saltcalculation = await _service.GetSaltCalculationById(id);
             if (saltcalculation == null)
             {
                 return NotFound();

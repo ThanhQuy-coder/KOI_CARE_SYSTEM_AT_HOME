@@ -7,35 +7,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages
 {
     public class EditModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly IFeedingScheduleService _service;
 
-        public EditModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public EditModel(IFeedingScheduleService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
         public FeedingSchedule FeedingSchedule { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var feedingschedule =  await _context.FeedingSchedules.FirstOrDefaultAsync(m => m.FeedingScheduleId == id);
-            if (feedingschedule == null)
-            {
-                return NotFound();
-            }
-            FeedingSchedule = feedingschedule;
-           ViewData["FishId"] = new SelectList(_context.KoiFishes, "FishId", "BodyShape");
             return Page();
         }
 
@@ -48,30 +37,15 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages
                 return Page();
             }
 
-            _context.Attach(FeedingSchedule).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FeedingScheduleExists(FeedingSchedule.FeedingScheduleId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            bool result = await Task.Run(() => _service.UpdateFeedingSchedule(FeedingSchedule));
 
             return RedirectToPage("./Index");
         }
 
-        private bool FeedingScheduleExists(int id)
+        private async Task<bool> FeedingScheduleExists(Guid id)
         {
-            return _context.FeedingSchedules.Any(e => e.FeedingScheduleId == id);
+            var feedingSchedule = await _service.GetFeedingScheduleById(id);
+            return feedingSchedule != null;
         }
     }
 }

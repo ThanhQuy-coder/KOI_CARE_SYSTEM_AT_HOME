@@ -6,29 +6,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Repositories.Interfaces;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly ISaltCalculationService _service;
 
-        public DeleteModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public DeleteModel(ISaltCalculationService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
         public SaltCalculation SaltCalculation { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var saltcalculation = await _context.SaltCalculations.FirstOrDefaultAsync(m => m.SaltCalculationId == id);
+            var saltcalculation = await _service.GetSaltCalculationById(id);
 
             if (saltcalculation == null)
             {
@@ -41,22 +43,20 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var saltcalculation = await _context.SaltCalculations.FindAsync(id);
-            if (saltcalculation != null)
-            {
-                SaltCalculation = saltcalculation;
-                _context.SaltCalculations.Remove(SaltCalculation);
-                await _context.SaveChangesAsync();
-            }
-
+            _service.DelSaltCalculation((Guid)id);
             return RedirectToPage("./Index");
+        }
+        private async Task<bool> SaltCalculationExists(Guid id)
+        {
+            var saltCalculation = await _service.GetSaltCalculationById(id);
+            return saltCalculation != null;
         }
     }
 }

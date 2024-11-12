@@ -6,21 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages
 {
     public class CreateModel : PageModel
     {
-        private readonly KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext _context;
+        private readonly ISaltCalculationService _service;
 
-        public CreateModel(KoiCareSystemAtHome.Repositories.Entities.KoiCareSystemAtHomeContext context)
+        public CreateModel(ISaltCalculationService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["PondId"] = new SelectList(_context.Ponds, "PondId", "NamePond");
+            //ViewData["PondId"] = new SelectList(_context.Ponds, "PondId", "NamePond");
             return Page();
         }
 
@@ -35,8 +36,14 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages
                 return Page();
             }
 
-            _context.SaltCalculations.Add(SaltCalculation);
-            await _context.SaveChangesAsync();
+            var result = _service.AddSaltCalculation(SaltCalculation);
+
+            if(!result)
+            {
+                ModelState.AddModelError(string.Empty, "Error");
+                return Page();
+            }
+
 
             return RedirectToPage("./Index");
         }

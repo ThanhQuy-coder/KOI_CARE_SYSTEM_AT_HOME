@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Repositories.Interfaces;
 using KoiCareSystemAtHome.Services.Interfaces;
 
-namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
+namespace KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages
 {
     public class DeleteModel : PageModel
     {
@@ -20,9 +21,9 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
         }
 
         [BindProperty]
-        public FeedingSchedule WaterParameter { get; set; } = default!;
+        public FeedingSchedule FeedingSchedule { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
 
@@ -30,7 +31,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
                 return NotFound();
             }
 
-            var feedingSchedule = await _service.GetFeedingScheduleById((int)id);
+            var feedingSchedule = await _service.GetFeedingScheduleById((Guid)id);
 
             if (feedingSchedule == null)
             {
@@ -43,13 +44,13 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            _service.DelFeedingSchedule((int)id);
+            _service.DelFeedingSchedule((Guid)id);
             return RedirectToPage("./Index");
         }
     }
