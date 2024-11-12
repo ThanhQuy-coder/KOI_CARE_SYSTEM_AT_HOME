@@ -1,0 +1,44 @@
+﻿@page
+@model KoiCareSystemAtHome.WebApplication.Pages.UserPage.EditModel
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="User.UserId" />
+            <div class="form-group">
+                <label asp-for="User.FullName" class="control-label"></label>
+                <input asp-for="User.FullName" class="form-control" />
+                <span asp-validation-for="User.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.BirthDate" class="control-label"></label>
+                <input asp-for="User.BirthDate" class="form-control" />
+                <span asp-validation-for="User.BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Gender" class="control-label"></label>
+                <input asp-for="User.Gender" class="form-control" />
+                <span asp-validation-for="User.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Role" class="control-label"></label>
+                <input asp-for="User.Role" class="form-control" />
+                <span asp-validation-for="User.Role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

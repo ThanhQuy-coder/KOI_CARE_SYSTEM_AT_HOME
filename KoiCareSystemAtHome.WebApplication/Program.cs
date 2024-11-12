@@ -21,6 +21,8 @@ builder.Services.AddScoped<INewsRepository, NewsRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IFeedingScheduleRepository, FeedingScheduleRepository>();
 builder.Services.AddScoped<ISaltCalculationRepository, SaltCalculationRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // DI Services
 builder.Services.AddScoped<IFeedingScheduleService, FeedingScheduleService>();
@@ -30,11 +32,14 @@ builder.Services.AddScoped<IPondService, PondService>();
 builder.Services.AddScoped<IKoiFishService, KoiFishService>();
 builder.Services.AddScoped<INewsService, NewsService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
