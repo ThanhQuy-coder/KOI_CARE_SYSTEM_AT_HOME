@@ -69,8 +69,11 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
 
         public async Task<List<KoiFish>> GetAllKoiFish()
         {
-            return await _dbContext.KoiFishes.ToListAsync();
+            return await _dbContext.KoiFishes
+                .Include(k => k.Pond) // Sử dụng Include để nạp đối tượng Pond
+                .ToListAsync();
         }
+
 
         public async Task<KoiFish> GetKoiFishById(Guid Id)
         {

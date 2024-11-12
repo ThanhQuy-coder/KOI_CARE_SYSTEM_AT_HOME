@@ -11,10 +11,11 @@ namespace KoiCareSystemAtHome.Services.Interfaces
     {
         Task<List<WaterParameter>> GetAllWaterParameter();
         Boolean DelWaterParameter(Guid Id);
-        Boolean DelWaterParameter(WaterParameter WaterParameter);
-        Boolean AddWaterParameter(WaterParameter WaterParameter);
-        Boolean UppWaterParameter(WaterParameter WaterParameter);
+        Boolean DelWaterParameter(WaterParameter waterParameter);
+        Boolean AddWaterParameter(WaterParameter waterParameter);
+        Boolean UppWaterParameter(WaterParameter waterParameter);
         Task<WaterParameter> GetWaterParameterById(Guid Id);
+        Task<WaterParameter> InitializeWaterParameter(Guid pondId);
         // tuong tu
     }
 }

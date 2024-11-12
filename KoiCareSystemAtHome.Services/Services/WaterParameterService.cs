@@ -16,9 +16,9 @@ namespace KoiCareSystemAtHome.Services.Services
             _repository = repository;
         }
 
-        public bool AddWaterParameter(WaterParameter WaterParameter)
+        public bool AddWaterParameter(WaterParameter waterParameter)
         {
-            return _repository.AddWaterParameter(WaterParameter);
+            return _repository.AddWaterParameter(waterParameter);
         }
 
         public bool DelWaterParameter(Guid id)
@@ -26,9 +26,9 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.DelWaterParameter(id);
         }
 
-        public bool DelWaterParameter(WaterParameter WaterParameter)
+        public bool DelWaterParameter(WaterParameter waterParameter)
         {
-            return _repository.DelWaterParameter(WaterParameter);
+            return _repository.DelWaterParameter(waterParameter);
         }
 
         public Task<List<WaterParameter>> GetAllWaterParameter()
@@ -41,11 +41,16 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.GetWaterParameterById(id);
         }
 
-        public bool UppWaterParameter(WaterParameter WaterParameter)
+        public bool UppWaterParameter(WaterParameter waterParameter)
         {
-            return _repository.UppWaterParameter(WaterParameter);
+            return _repository.UppWaterParameter(waterParameter);
         }
-        
+        public async Task<WaterParameter> InitializeWaterParameter(Guid pondId)
+        {
+            // Khởi tạo đối tượng KoiFish với PondId được truyền vào
+            return await Task.FromResult(new WaterParameter { PondId = pondId });
+        }
+
         //        private double CalculateTemperatureScore(double temperature)
         //        {
         //            if (temperature >= 15 && temperature <= 25) return 1.0;  // tối ưu

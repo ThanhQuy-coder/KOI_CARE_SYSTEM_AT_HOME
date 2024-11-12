@@ -51,5 +51,10 @@ namespace KoiCareSystemAtHome.Services.Services
         {
             return _repository.UpdatePond(pond);
         }
+        public async Task<Pond> InitializePond(Guid userId)
+        {
+            // Khởi tạo đối tượng KoiFish với PondId được truyền vào
+            return await Task.FromResult(new Pond { UserId = userId });
+        }
     }
 }
