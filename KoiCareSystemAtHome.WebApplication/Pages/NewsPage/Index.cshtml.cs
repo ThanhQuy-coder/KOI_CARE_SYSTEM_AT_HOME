@@ -3,6 +3,7 @@ using KoiCareSystemAtHome.Repositories.Entities;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
 {
@@ -16,12 +17,28 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
         }
 
         public List<News> News { get; set; } = new();
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            News = await _newsService.GetAllNewsAsync();
+            if (!string.IsNullOrEmpty(SearchTerm))
+            {
+                // Tìm kiếm các bài viết có chứa từ khóa trong Title hoặc Content
+                News = await _newsService.SearchNewsAsync(SearchTerm);
+            }
+            else
+            {
+                // Nếu không có từ khóa tìm kiếm, hiển thị tất cả bài viết
+                News = await _newsService.GetAllNewsAsync();
+            }
+
+            return Page();
         }
     }
 }
+
+
+
 
 

@@ -70,7 +70,18 @@ namespace KoiCareSystemAtHome.Repositories
         {
             return await _context.News.FindAsync(id);
         }
+        public async Task<List<News>> SearchNewsAsync(string searchTerm)
+        {
+            return await _context.News
+                .Where(n => n.Title.Contains(searchTerm) ||
+                            n.Content.Contains(searchTerm) ||
+                            n.Author.Contains(searchTerm) ||
+                            n.PublishDate.ToString().Contains(searchTerm))
+                .ToListAsync();
+        }
+
     }
 }
+
 
 

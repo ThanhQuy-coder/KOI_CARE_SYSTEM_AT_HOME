@@ -10,6 +10,8 @@ namespace KoiCareSystemAtHome.Services.Interfaces
         bool AddNews(News news);
         bool UpdateNews(News news);
         Task<News> GetNewsByIdAsync(Guid id);
+        Task<List<News>> SearchNewsAsync(string searchTerm);
+
     }
 }
 

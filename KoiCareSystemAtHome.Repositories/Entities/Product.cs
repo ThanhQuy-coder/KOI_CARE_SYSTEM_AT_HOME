@@ -21,5 +21,5 @@ public partial class Product
 
     public DateTime DatePlace { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual User? User { get; set; }
 }

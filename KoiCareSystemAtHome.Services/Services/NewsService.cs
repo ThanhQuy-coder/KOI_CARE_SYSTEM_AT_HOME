@@ -43,6 +43,12 @@ namespace KoiCareSystemAtHome.Services.Services
         {
             return _repository.DeleteNews(news);
         }
+
+        public async Task<List<News>> SearchNewsAsync(string searchTerm)
+        {
+            return await _repository.SearchNewsAsync(searchTerm);
+
+        }
     }
 }
 
