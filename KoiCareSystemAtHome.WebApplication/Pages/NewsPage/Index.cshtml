@@ -5,9 +5,21 @@
     <a asp-page="Create">Create New</a>
 </p>
 
-<form method="get">
-    <input type="text" name="searchTerm" placeholder="Search..." />
-    <button type="submit">Search</button>
+<form method="get" asp-page="./Index">
+    <fieldset>
+        <legend>Search</legend>
+        <input type="text" name="searchTerm" placeholder="Search by Title or Content..." />
+        <button type="submit">Search</button>
+    </fieldset>
+</form>
+
+<form method="get" asp-page="./Index">
+    <fieldset>
+        <legend>Filter</legend>
+        <input type="text" name="author" placeholder="Author..." />
+        <input type="date" name="publishDate" placeholder="Publish Date..." />
+        <button type="submit">Filter</button>
+    </fieldset>
 </form>
 
 <table class="table">
@@ -53,4 +65,3 @@
         }
     </tbody>
 </table>
-

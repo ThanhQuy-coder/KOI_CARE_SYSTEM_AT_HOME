@@ -125,8 +125,6 @@ public partial class KoiCareSystemAtHomeContext : DbContext
         {
             entity.HasKey(e => e.PostId).HasName("PK__News__DD0C73BAD6DC1126");
 
-            entity.HasIndex(e => e.Author, "UQ__News__C2E6DB67F94E6BEF").IsUnique();
-
             entity.Property(e => e.PostId)
                 .HasDefaultValueSql("(newid())")
                 .HasColumnName("postID");
@@ -145,6 +143,7 @@ public partial class KoiCareSystemAtHomeContext : DbContext
         modelBuilder.Entity<Pond>(entity =>
         {
             entity.HasKey(e => e.PondId).HasName("PK__Pond__D18BF8541DC4C437");
+
             entity.ToTable("Pond");
 
             entity.Property(e => e.PondId)

@@ -20,21 +20,28 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(string searchTerm, string author, DateTime? publishDate)
         {
-            if (!string.IsNullOrEmpty(SearchTerm))
+            News = await _newsService.GetAllNewsAsync();
+
+            if (!string.IsNullOrEmpty(searchTerm))
             {
-                // Tìm kiếm các bài viết có chứa từ khóa trong Title hoặc Content
-                News = await _newsService.SearchNewsAsync(SearchTerm);
+                News = News.Where(n => n.Title.Contains(searchTerm) || n.Content.Contains(searchTerm)).ToList();
             }
-            else
+
+            if (!string.IsNullOrEmpty(author))
             {
-                // Nếu không có từ khóa tìm kiếm, hiển thị tất cả bài viết
-                News = await _newsService.GetAllNewsAsync();
+                News = News.Where(n => n.Author.Contains(author)).ToList();
+            }
+
+            if (publishDate.HasValue)
+            {
+                News = News.Where(n => n.PublishDate.Date == publishDate.Value.Date).ToList();
             }
 
             return Page();
         }
+
     }
 }
 
