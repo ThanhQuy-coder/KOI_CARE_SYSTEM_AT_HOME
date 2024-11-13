@@ -50,7 +50,14 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages
             {
                 return NotFound();
             }
-            _service.DelFeedingSchedule((Guid)id);
+
+            bool result = _service.DelFeedingSchedule((Guid)id);
+
+            if (!result)
+            {
+                return NotFound();
+            }
+
             return RedirectToPage("./Index");
         }
     }

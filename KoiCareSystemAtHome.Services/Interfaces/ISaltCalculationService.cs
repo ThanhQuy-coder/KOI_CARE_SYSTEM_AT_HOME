@@ -15,5 +15,6 @@ namespace KoiCareSystemAtHome.Services.Interfaces
         Boolean AddSaltCalculation(SaltCalculation SaltCalculation);
         Boolean UpdateSaltCalculation(SaltCalculation SaltCalculation);
         Task<SaltCalculation?> GetSaltCalculationById(Guid? Id);
+        Task<SaltCalculation> InitializeKoiFish(Guid pondId);
     }
 }

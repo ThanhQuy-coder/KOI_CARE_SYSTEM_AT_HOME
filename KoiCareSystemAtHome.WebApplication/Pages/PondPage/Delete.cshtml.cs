@@ -49,7 +49,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
                 return NotFound();
             }
 
-            bool result = _service.DeletePond((Guid)id); // Truyền `id` là string
+            bool result = _service.DeletePond((Guid)id); 
 
             if (!result)
             {

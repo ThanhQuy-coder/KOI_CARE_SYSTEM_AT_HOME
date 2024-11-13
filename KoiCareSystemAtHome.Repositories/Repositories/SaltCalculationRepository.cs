@@ -63,7 +63,9 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
 
         public async Task<List<SaltCalculation>> GetAllSaltCalculation()
         {
-            return await _DbContext.SaltCalculations.ToListAsync();
+            return await _DbContext.SaltCalculations
+                .Include(k => k.Pond) // Sử dụng Include để nạp đối tượng Pond
+                .ToListAsync();
         }
 
         public async Task<SaltCalculation?> GetSaltCalculationById(Guid? Id)

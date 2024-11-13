@@ -15,5 +15,6 @@ namespace KoiCareSystemAtHome.Services.Interfaces
         Boolean AddWaterParameter(WaterParameter WaterParameter);
         Boolean UppWaterParameter(WaterParameter WaterParameter);
         Task<WaterParameter> GetWaterParameterById(Guid Id);
+        Task<WaterParameter> InitializeWaterParameter(Guid pondId);
     }
 }

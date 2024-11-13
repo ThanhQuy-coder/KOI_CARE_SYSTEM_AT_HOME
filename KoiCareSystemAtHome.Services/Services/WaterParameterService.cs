@@ -45,7 +45,12 @@ namespace KoiCareSystemAtHome.Services.Services
         {
             return _repository.UppWaterParameter(WaterParameter);
         }
-        
+        public async Task<WaterParameter> InitializeWaterParameter(Guid pondId)
+        {
+            // Khởi tạo đối tượng KoiFish với PondId được truyền vào
+            return await Task.FromResult(new WaterParameter { PondId = pondId });
+        }
+
         //        private double CalculateTemperatureScore(double temperature)
         //        {
         //            if (temperature >= 15 && temperature <= 25) return 1.0;  // tối ưu

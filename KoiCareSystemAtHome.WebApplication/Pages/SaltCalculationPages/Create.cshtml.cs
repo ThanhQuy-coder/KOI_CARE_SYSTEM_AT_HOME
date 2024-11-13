@@ -19,28 +19,36 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages
             _service = service;
         }
 
-        public IActionResult OnGet()
-        {
-            //ViewData["PondId"] = new SelectList(_context.Ponds, "PondId", "NamePond");
-            return Page();
-        }
-
         [BindProperty]
         public SaltCalculation SaltCalculation { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+        public IActionResult OnGet(Guid pondId)
+        {
+            // Gán PondId vào Thông số muối
+            SaltCalculation = new SaltCalculation { PondId = pondId };
+            return Page();
+        }
+
+ 
+
+
         public async Task<IActionResult> OnPostAsync()
         {
+            if (SaltCalculation.PondId == Guid.Empty)
+            {
+                ModelState.AddModelError(string.Empty, "PondId is required.");
+                return Page();
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
             var result = _service.AddSaltCalculation(SaltCalculation);
-
-            if(!result)
+            if (!result)
             {
-                ModelState.AddModelError(string.Empty, "Error");
+                ModelState.AddModelError(string.Empty, "Error adding.");
                 return Page();
             }
 

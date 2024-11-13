@@ -20,17 +20,24 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages
             _service = service;
         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
-
         [BindProperty]
         public FeedingSchedule FeedingSchedule { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+        // Nhận PondId từ query string trong URL
+        public IActionResult OnGet(Guid fishId)
+        {
+            // Gán PondId vào KoiFish
+            FeedingSchedule = new FeedingSchedule { FishId = fishId };
+            return Page();
+        }
         public IActionResult OnPost()
         {
+            if (FeedingSchedule.FishId == Guid.Empty)
+            {
+                ModelState.AddModelError(string.Empty, "FishId is required.");
+                return Page();
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -39,7 +46,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages
             var result = _service.AddFeedingSchedule(FeedingSchedule);
             if (!result)
             {
-                ModelState.AddModelError(string.Empty, "Error adding WaterParameter.");
+                ModelState.AddModelError(string.Empty, "Error adding.");
                 return Page();
             }
 
