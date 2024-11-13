@@ -18,13 +18,21 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
         [BindProperty]
         public Product Product { get; set; } = default!;
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(Guid userId)
         {
+            // Gán UserId vào Pond
+            Product = new Product { UserId = userId };
             return Page();
         }
 
         public IActionResult OnPost()
         {
+            if (Product.UserId == Guid.Empty)
+            {
+                ModelState.AddModelError(string.Empty, "PondId is required.");
+                return Page();
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -33,7 +41,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
             var result = _service.AddProduct(Product);
             if (!result)
             {
-                ModelState.AddModelError(string.Empty, "Error adding Product.");
+                ModelState.AddModelError(string.Empty, "Error adding Koi Fish.");
                 return Page();
             }
 

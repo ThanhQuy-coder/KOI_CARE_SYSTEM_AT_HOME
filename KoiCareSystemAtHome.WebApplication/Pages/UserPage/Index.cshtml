@@ -19,7 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.User[0].Role)
             </th>
+            <th>Actions</th>
             <th>Danh Sách Hồ</th> <!-- Thêm cột cho nút tạo Pond -->
+            <th>Create Product</th>
             <th></th>
         </tr>
     </thead>
@@ -47,6 +49,10 @@
                     <!-- Thêm đường dẫn tạo Hồ với UserId -->
                     <a asp-page="/PondPage/Create" asp-route-userId="@item.UserId">Create Pond</a>
               </td>
+                <td>
+                    <!-- Thêm đường dẫn tạo Product với UserId -->
+                    <a asp-page="/ProductPage/Create" asp-route-userId="@item.UserId">Create Product</a>
+                </td>
         </tr>
 }
     </tbody>

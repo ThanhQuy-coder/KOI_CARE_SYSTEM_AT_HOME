@@ -72,7 +72,9 @@ public class ProductRepository : IProductRepository
 
     public async Task<List<Product>> GetAllProducts()
     {
-        return await _dbContext.Products.ToListAsync();
+        return await _dbContext.Products
+                .Include(k => k.User) // Sử dụng Include để nạp đối tượng User
+                .ToListAsync();
     }
 
     public async Task<Product> GetProductById(Guid id)
