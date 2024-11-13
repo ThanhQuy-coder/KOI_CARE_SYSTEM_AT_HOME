@@ -69,9 +69,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
 
         public async Task<List<Pond>> GetAllPond()
         {
-            return await _dbContext.Ponds
-                .Include(k => k.User) // Sử dụng Include để nạp đối tượng User
-                .ToListAsync();
+            return await _dbContext.Ponds.ToListAsync();
         }
 
         public Task<Pond> GetPonById(Guid Id)

@@ -49,15 +49,12 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
         {
             if (id == null)
             {
+            
                 return NotFound();
             }
+          
 
-            bool result = _service.DeleteKoiFish((Guid)id);
-
-            if (!result)
-            {
-                return NotFound();
-            }
+            var koifish = await _service.GetKoiFishById((Guid)id);
 
             return RedirectToPage("./Index");
         }

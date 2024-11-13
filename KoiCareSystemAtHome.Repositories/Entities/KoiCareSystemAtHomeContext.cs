@@ -33,9 +33,9 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
     public virtual DbSet<WaterParameter> WaterParameters { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-6OVLRPL;Initial Catalog=KoiCareSystemAtHome;Integrated Security=True;Trust Server Certificate=True");
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-6OVLRPL;Initial Catalog=KoiCareSystemAtHome;Integrated Security=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -81,8 +81,7 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
             entity.HasOne(d => d.Fish).WithMany(p => p.FeedingSchedules)
                 .HasForeignKey(d => d.FishId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_FeedingSchedule_KoiFish_FishId");
+                .HasConstraintName("FK__FeedingSc__fishI__34C8D9D1");
         });
 
         modelBuilder.Entity<KoiFish>(entity =>
@@ -162,8 +161,7 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Ponds)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_Pond_User");
+                .HasConstraintName("FK__Pond__UserId__2D27B809");
         });
 
         modelBuilder.Entity<Product>(entity =>
@@ -263,8 +261,7 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
             entity.HasOne(d => d.Pond).WithMany(p => p.WaterParameters)
                 .HasForeignKey(d => d.PondId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_WaterParameter_Pond_PondId");
+                .HasConstraintName("FK__WaterPara__PondI__38996AB5");
         });
 
         OnModelCreatingPartial(modelBuilder);

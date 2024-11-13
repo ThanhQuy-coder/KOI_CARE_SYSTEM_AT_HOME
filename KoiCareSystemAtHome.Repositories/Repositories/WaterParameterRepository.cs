@@ -18,33 +18,32 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             _dbContext = dbContext;
         }
 
-        public bool AddWaterParameter(WaterParameter waterParameter)
+        public bool AddWaterParameter(WaterParameter WaterParameter)
         {
             try
             {
-                _dbContext.WaterParameters.Add(waterParameter);
-                _dbContext.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Không thể thêm cá do trùng dữ liệu !: {ex.Message}");
-                return false;
-            }
-
-        }
-
-        public bool DelWaterParameter(WaterParameter waterParameter)
-        {
-            try
-            {
-                _dbContext.WaterParameters.Remove(waterParameter);
+                _dbContext.WaterParameters.Add(WaterParameter);
                 _dbContext.SaveChanges();
                 return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi, không thể xóa bằng Id ! {ex.Message}");
+                throw new NotImplementedException(ex.ToString());
+            }
+
+        }
+
+        public bool DelWaterParameter(WaterParameter WaterParameter)
+        {
+            try
+            {
+                _dbContext.WaterParameters.Remove(WaterParameter);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException(ex.ToString());
                 return false;
             }
         }
@@ -71,9 +70,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
 
         public async Task<List<WaterParameter>> GetAllWaterParameter()
         {
-            return await _dbContext.WaterParameters
-                .Include(k => k.Pond) // Sử dụng Include để nạp đối tượng Pond
-                .ToListAsync();
+            return await _dbContext.WaterParameters.ToListAsync();
         }
 
         public async Task<WaterParameter> GetWaterParameterById(Guid Id)
@@ -81,17 +78,16 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             return await _dbContext.WaterParameters.Where(p => p.WaterParameterId.Equals(Id)).FirstOrDefaultAsync();
         }
 
-        public bool UppWaterParameter(WaterParameter waterParameter)
+        public bool UppWaterParameter(WaterParameter WaterParameter)
         {
             try
             {
-                _dbContext.WaterParameters.Update(waterParameter);
+                _dbContext.WaterParameters.Update(WaterParameter);
                 _dbContext.SaveChanges();
                 return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi, không thể cập nhật: {ex.Message}");
                 return false;
             }         
         }

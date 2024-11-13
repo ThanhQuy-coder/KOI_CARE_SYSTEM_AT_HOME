@@ -20,23 +20,14 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
         }
         [BindProperty]
         public WaterParameter WaterParameter { get; set; } = default!;
-
-        // Nhận PondId từ query string trong URL
-        public IActionResult OnGet(Guid pondId)
+        public IActionResult OnGet()
         {
-            // Gán PondId vào Thông số nước
-            WaterParameter = new WaterParameter { PondId = pondId };
             return Page();
         }
 
+        // For more information, see https://aka.ms/RazorPagesCRUD.
         public IActionResult OnPost()
         {
-            if (WaterParameter.PondId == Guid.Empty)
-            {
-                ModelState.AddModelError(string.Empty, "PondId is required.");
-                return Page();
-            }
-
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -45,7 +36,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             var result = _service.AddWaterParameter(WaterParameter);
             if (!result)
             {
-                ModelState.AddModelError(string.Empty, "Error adding.");
+                ModelState.AddModelError(string.Empty, "Error adding WaterParameter.");
                 return Page();
             }
 
