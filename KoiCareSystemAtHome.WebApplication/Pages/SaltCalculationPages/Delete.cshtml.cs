@@ -30,15 +30,15 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages
                 return NotFound();
             }
 
-            var saltcalculation = await _service.GetSaltCalculationById(id);
+            var saltCalculation = await _service.GetSaltCalculationById((Guid)id);
 
-            if (saltcalculation == null)
+            if (saltCalculation == null)
             {
                 return NotFound();
             }
             else
             {
-                SaltCalculation = saltcalculation;
+                SaltCalculation = saltCalculation;
             }
             return Page();
         }
@@ -50,7 +50,12 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages
                 return NotFound();
             }
 
-            _service.DelSaltCalculation((Guid)id);
+            bool result = _service.DelSaltCalculation((Guid)id); 
+
+            if (!result)
+            {
+                return NotFound();
+            }
             return RedirectToPage("./Index");
         }
         private async Task<bool> SaltCalculationExists(Guid id)

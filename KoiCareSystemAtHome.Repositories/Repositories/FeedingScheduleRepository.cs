@@ -65,10 +65,11 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
 
         public async Task<List<FeedingSchedule>> GetAllFeedingSchedules()
         {
-            return await _DbContext.FeedingSchedules.ToListAsync();
+            return await _DbContext.FeedingSchedules
+                .Include(k => k.Fish) // Sử dụng Include để nạp đối tượng KoiFish
+                .ToListAsync();
         }
-
-        public async Task<FeedingSchedule?> GetFeedingScheduleById(Guid? Id)
+            public async Task<FeedingSchedule?> GetFeedingScheduleById(Guid? Id)
         {
             return await _DbContext.FeedingSchedules.Where(p => p.FeedingScheduleId.Equals(Id)).FirstOrDefaultAsync();
         }

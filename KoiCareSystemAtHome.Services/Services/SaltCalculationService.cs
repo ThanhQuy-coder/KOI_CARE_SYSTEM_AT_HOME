@@ -47,6 +47,11 @@ namespace KoiCareSystemAtHome.Services.Services
         {
             return _repository.UpdateSaltCalculation(SaltCalculation);
         }
+        public async Task<SaltCalculation> InitializeKoiFish(Guid pondId)
+        {
+            // Khởi tạo đối tượng KoiFish với PondId được truyền vào
+            return await Task.FromResult(new SaltCalculation { PondId = pondId });
+        }
 
     }
 }

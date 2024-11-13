@@ -44,6 +44,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.KoiFish[0].Pond)
             </th>
+            <th>Actions</th>
+            <th>FeedingSchedule</th>
             <th></th>
         </tr>
     </thead>
@@ -91,6 +93,10 @@
                 <a asp-page="./Details" asp-route-id="@item.FishId">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.FishId">Delete</a>
             </td>
+             <td>
+                    <!-- Thêm đường dẫn tạo SaltCalculation với PondId -->
+                    <a asp-page="/FeedingSchedulePages/Create" asp-route-fishId="@item.FishId">FeedingSchedule</a>
+             </td>
         </tr>
 }
     </tbody>
