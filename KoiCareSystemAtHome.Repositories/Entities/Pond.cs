@@ -11,15 +11,15 @@ public partial class Pond
 
     public string NamePond { get; set; } = null!;
 
-    public string? ImagePond { get; set; }
+    public string ImagePond { get; set; } = null!;
 
-    public double? Depth { get; set; }
+    public double Depth { get; set; }
 
-    public double? Volume { get; set; }
+    public double Volume { get; set; }
 
-    public int? DrainCount { get; set; }
+    public int DrainCount { get; set; }
 
-    public double? PumpCapacity { get; set; }
+    public double PumpCapacity { get; set; }
 
     public virtual ICollection<KoiFish> KoiFishes { get; set; } = new List<KoiFish>();
 
