@@ -42,35 +42,35 @@
             <!-- Heading -->
             <!-- Nav Item - Tables - Home -->
             <li class="nav-item">
-                <a class="nav-link" asp-page="Index">
+                <a class="nav-link" asp-page="/Index">
                     <i class="fas fa-fw fa-house"></i>
                     <span>Home</span>
                 </a>
             </li>
             <!-- Nav Item - Tables - Pond -->
             <li class="nav-item">
-                <a class="nav-link" asp-page="#">
+                <a class="nav-link" asp-page="/PondPage/Index">
                     <i class="fa-solid fa-droplet"></i>
                     <span>Pond</span>
                 </a>
             </li>
             <!-- Nav Item - Tables - Fish -->
             <li class="nav-item">
-                <a class="nav-link" asp-page="#">
+                <a class="nav-link" asp-page="/KoiFishPage/Index">
                     <i class="fa-solid fa-fish"></i>
                     <span>Koi Fish</span>
                 </a>
             </li>
             <!-- Nav Item - Tables - News -->
             <li class="nav-item">
-                <a class="nav-link" asp-page="#">
+                <a class="nav-link" asp-page="/NewsPage/Index">
                     <i class="fa-solid fa-newspaper"></i>
                     <span>News</span>
                 </a>
             </li>
             <!-- Nav Item - Tables - Product -->
             <li class="nav-item">
-                <a class="nav-link" asp-page="#">
+                <a class="nav-link" asp-page="/ProductPage/Index">
                     <i class="fa-solid fa-boxes-stacked"></i>
                     <span>Product</span>
                 </a>
@@ -78,11 +78,6 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
         </ul>
         <!-- End of Sidebar -->
 
@@ -105,7 +100,7 @@
     <!-- Page level custom scripts -->
     <script src="~/js/demo/chart-area-demo.js"></script>
     <script src="~/js/demo/chart-pie-demo.js"></script>
-
+        @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>
