@@ -55,9 +55,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NameFish)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageFish)
-            </td>
+                <td>
+                    <img src="@Url.Content("~/images/" + item.ImageFish)" alt="Koi Fish Image" width="100" />
+                </td>
+
+
             <td>
                 @Html.DisplayFor(modelItem => item.BodyShape)
             </td>

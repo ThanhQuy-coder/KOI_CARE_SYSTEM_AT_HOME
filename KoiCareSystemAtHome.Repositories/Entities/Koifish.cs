@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KoiCareSystemAtHome.Repositories.Entities;
 
@@ -34,4 +35,6 @@ public partial class KoiFish
     public virtual ICollection<FeedingSchedule> FeedingSchedules { get; set; } = new List<FeedingSchedule>();
 
     public virtual Pond? Pond { get; set; }
+   
+
 }

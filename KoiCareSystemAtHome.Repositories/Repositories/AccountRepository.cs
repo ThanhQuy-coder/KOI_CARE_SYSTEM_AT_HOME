@@ -85,5 +85,13 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
                 throw new NotImplementedException(ex.ToString());
             }
         }
+        // lấy user
+        public async Task<Account?> GetAccountByUsernameAndPassword(string username, string password)
+        {
+            return await _dbContext.Accounts
+                .Where(p => p.Username == username && p.PassWorkHash == password)
+                .FirstOrDefaultAsync();
+        }
+
     }
 }

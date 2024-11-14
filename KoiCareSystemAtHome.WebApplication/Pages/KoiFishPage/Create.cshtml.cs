@@ -15,6 +15,8 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
         {
             _service = service;
         }
+        [BindProperty]
+        public IFormFile? ImageFile { get; set; } // Nhận file ảnh
 
         [BindProperty]
         public KoiFish KoiFish { get; set; } = default!;
@@ -27,7 +29,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (KoiFish.PondId == Guid.Empty)
             {
@@ -40,6 +42,21 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
                 return Page();
             }
 
+            if (ImageFile != null)
+            {
+                // Lưu file ảnh vào thư mục "wwwroot/uploads"
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+                var filePath = Path.Combine("wwwroot/images", fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await ImageFile.CopyToAsync(fileStream);
+                }
+
+                // Lưu đường dẫn ảnh vào `KoiFish`
+                KoiFish.ImageFish = fileName;
+            }
+
             var result = _service.AddKoiFish(KoiFish);
             if (!result)
             {
@@ -49,6 +66,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
 
             return RedirectToPage("./Index");
         }
+
 
 
     }

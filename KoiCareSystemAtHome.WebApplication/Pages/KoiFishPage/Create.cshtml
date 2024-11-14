@@ -15,11 +15,13 @@
                 <input asp-for="KoiFish.NameFish" class="form-control" />
                 <span asp-validation-for="KoiFish.NameFish" class="text-danger"></span>
             </div>
+            <!-- Dùng kiểu file để nhập file thay vì string-->
             <div class="form-group">
                 <label asp-for="KoiFish.ImageFish" class="control-label"></label>
-                <input asp-for="KoiFish.ImageFish" class="form-control" />
+                <input type="file" asp-for="KoiFish.ImageFish" class="form-control" />
                 <span asp-validation-for="KoiFish.ImageFish" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="KoiFish.BodyShape" class="control-label"></label>
                 <input asp-for="KoiFish.BodyShape" class="form-control" />
