@@ -1,6 +1,7 @@
 ﻿using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
 using KoiCareSystemAtHome.Services.Interfaces;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,11 @@ namespace KoiCareSystemAtHome.Services.Services
         public bool UpdateAccount(Account account)
         {
             return _repository.UpdateAccount(account);
+        }
+
+        public bool checkAccount(string email, string password)
+        {
+            return _repository.checkAccount(email, password);
         }
     }
 }

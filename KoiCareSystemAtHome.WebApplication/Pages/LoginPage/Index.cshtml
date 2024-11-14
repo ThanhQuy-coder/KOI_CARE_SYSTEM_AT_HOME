@@ -21,20 +21,27 @@
                                     <h1 class="h4 text-white mb-4">Welcome Back!</h1>
                                     </div>
                                     <!--Đăng nhập-->
-                                    <form class="user">
+                                    <form class="user" method="post">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                         <div class="form-group">
                                             <input type="email"
                                                    class="form-control form-control-user"
                                                    id="exampleInputEmail"
                                                    aria-describedby="emailHelp"
-                                                   placeholder="Enter Email Address..." />
+                                                   placeholder="Enter Email Address..." 
+                                                   asp-for="Account.Email" required/>
+                                        <span asp-validation-for="Account.Email" class="text-danger"></span>
+
                                         </div>
                                         <div class="form-group">
                                             <input type="password"
                                                    class="form-control form-control-user"
                                                    id="exampleInputPassword"
-                                                   placeholder="Password" />
+                                                   placeholder="Password" 
+                                                   asp-for="Account.PassWordHash" required/>
+                                        <span asp-validation-for="Account.PassWordHash" class="text-danger"></span>
                                         </div>
+                                        <!--???-->
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox"
@@ -43,10 +50,10 @@
                                                 <label class="custom-control-label" for="customCheck">Remember Me</label>
                                             </div>
                                         </div>
-                                        <!--???-->
-                                        <a asp-page="/Index" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
+                                        <!--Đăng nhập-->
+                                        <div>
+                                            <input class="btn btn-primary btn-user btn-block" type="submit" value="Login Account" />
+                                        </div>
                                         <hr />
                                         <!--???-->
                                         <a asp-page="#"
@@ -62,10 +69,10 @@
                                     </form>
                                     <hr />
                                     <div class="text-center ">
-                                    <a class="small text-white" asp-page="/Login/forgotPassword">Forgot Password?</a>
+                                    <a class="small text-white" asp-page="/LoginPage/forgotPassword">Forgot Password?</a>
                                     </div>
                                 <div class="text-center ">
-                                    <a class="small text-white" asp-page="/Login/Register">Create an Account!</a>
+                                    <a class="small text-white" asp-page="/LoginPage/Register">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
@@ -76,3 +83,21 @@
         </div>
     </div>
 
+@* <script>
+    // Kiểm tra xem trang có bị tải lại hay không
+    window.addEventListener("beforeunload", function (event) {
+        // Lưu trạng thái vào localStorage để xác định khi nào trang bị tải lại
+        localStorage.setItem('pageReloaded', 'true');
+    });
+
+    // Kiểm tra khi trang tải lại
+    window.addEventListener("load", function () {
+        if (localStorage.getItem('pageReloaded') === 'true') {
+            // Hiển thị thông báo "Mật khẩu không hợp lệ"
+            alert("Tài khoản hoặc mật khẩu không hợp lệ vui lòng kiểm tra lại");
+
+            // Sau khi hiển thị thông báo, reset lại trạng thái
+            localStorage.removeItem('pageReloaded');
+        }
+    });
+</script> *@

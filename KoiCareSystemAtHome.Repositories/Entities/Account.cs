@@ -9,7 +9,7 @@ public partial class Account
 
     public string Username { get; set; } = null!;
 
-    public string PassWorkHash { get; set; } = null!;
+    public string PassWordHash { get; set; } = null!;
 
     public string Email { get; set; } = null!;
 

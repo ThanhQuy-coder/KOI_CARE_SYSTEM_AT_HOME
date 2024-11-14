@@ -1,4 +1,4 @@
-using KoiCareSystemAtHome.Repositories;
+﻿using KoiCareSystemAtHome.Repositories;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
 using KoiCareSystemAtHome.Repositories.Reponsitories;
@@ -35,7 +35,13 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
-
+// Thêm dịch vụ session vào container
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);  // Tùy chọn: Thiết lập thời gian hết hạn session
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -56,6 +62,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Kích hoạt middleware session
+app.UseSession();
 
 app.MapRazorPages();
 
