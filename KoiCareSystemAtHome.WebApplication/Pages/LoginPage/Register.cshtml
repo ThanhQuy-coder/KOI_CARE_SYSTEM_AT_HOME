@@ -1,5 +1,5 @@
 ﻿@page
-@model KoiCareSystemAtHome.WebApplication.Pages.ModelUser.RegisterModel
+@model KoiCareSystemAtHome.WebApplication.Pages.LoginPage.RegisterModel
 @{
     Layout = "_LoginLayout";
 }
@@ -25,35 +25,43 @@
                             <div class="text-center">
                                 <h1 class="h4 text-white mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" id="myForm" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                               placeholder="First Name">
+                                           placeholder="Full Name" asp-for="User.FullName" required>
+                                        <span asp-validation-for="User.FullName" class="text-danger"></span>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                               placeholder="Last Name">
+                                           placeholder="User Name" asp-for="Account.Username" required>
+                                        <span asp-validation-for="Account.Username" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                           placeholder="Email Address">
+                                       placeholder="Email Address" asp-for="Account.Email" required>
+                                        <span asp-validation-for="Account.Email" class="text-danger"></span>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" placeholder="Password">
+                                           id="exampleInputPassword" placeholder="Password" asp-for="Account.PassWordHash" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                               id="exampleRepeatPassword" placeholder="Repeat Password">
+                                               id="exampleRepeatPassword" placeholder="Repeat Password" required>
                                     </div>
                                 </div>
-                                <!--Note-->
-                                <a href="#" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
+                                <!--Thông báo lỗi nếu mật khẩu nhập lại không chính xác-->
+                                <div id="error-message" style="color: red; display: none;">
+                                    Mật khẩu không khớp, vui lòng kiểm tra lại.
+                                </div>
+                                <!--Đăng ký-->
+                                <div id="enter">
+                                    <input type="submit" value="Register Account" class="btn btn-primary btn-user btn-block" />
+                                </div>
                                 <hr>
                                 <!--Note-->
                                 <a href="#" class="btn btn-google btn-user btn-block">
@@ -66,10 +74,10 @@
                             </form>
                             <hr>
                             <div class="text-center">
-                            <a class="small text-white" asp-page="/ModelUser/forgotPassword">Forgot Password?</a>
+                            <a class="small text-white" asp-page="/LoginPage/forgotPassword">Forgot Password?</a>
                             </div>
                             <div class="text-center">
-                            <a class="small text-white" asp-page="/ModelUser/Login">Already have an account? Login!</a>
+                            <a class="small text-white" asp-page="/LoginPage/Index">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
@@ -78,3 +86,20 @@
         </div>
 
     </div>
+
+<script>
+    // Lắng nghe sự kiện khi người dùng nhấn nút submit
+    document.getElementById('myForm').addEventListener('submit', function (event) {
+        var password = document.getElementById('exampleInputPassword').value;
+        var repeatPassword = document.getElementById('exampleRepeatPassword').value;
+        var errorMessage = document.getElementById('error-message');
+
+        // Kiểm tra mật khẩu khi người dùng nhấn nút submit
+        if (password !== repeatPassword) {
+            event.preventDefault();  // Ngừng submit nếu mật khẩu không khớp
+            errorMessage.style.display = 'block'; // Hiển thị thông báo lỗi
+        } else {
+            errorMessage.style.display = 'none'; // Ẩn thông báo lỗi nếu mật khẩu khớp
+        }
+    });
+</script>

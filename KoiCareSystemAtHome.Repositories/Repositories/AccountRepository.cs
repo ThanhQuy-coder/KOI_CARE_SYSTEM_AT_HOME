@@ -30,6 +30,25 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
+        public bool checkAccount(string email, string password)
+        {
+            try
+            {
+                foreach (var account in _dbContext.Accounts)
+                {
+                    if (email == account.Email && password == account.PassWordHash)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException(ex.ToString());
+            }
+        }
+
         public bool DelAccount(Guid Id)
         {
             try

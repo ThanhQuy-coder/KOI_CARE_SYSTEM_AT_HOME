@@ -1,83 +1,53 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.PondPage.IndexModel
 
-<p>
-    <a asp-page="Create">Create New Pond</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Pond[0].NamePond)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pond[0].ImagePond)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pond[0].Depth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pond[0].Volume)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pond[0].DrainCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pond[0].PumpCapacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pond[0].User)
-            </th>
-            <th>Actions</th>
-            <th>Create_Koi_Fish</th> <!-- Thêm cột cho nút tạo Koi Fish -->
-            <th>WaterParameter</th>
-            <th>SaltCalculation</th>
-        </tr>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Pond)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NamePond)
-                </td>
-                <td>
-                    <img src="@Url.Content("~/images/" + item.ImagePond)" alt="Pond Image" width="100" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Depth)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Volume)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DrainCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PumpCapacity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.FullName)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.PondId">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.PondId">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.PondId">Delete</a>
-                </td>
-                <td>
-                    <!-- Thêm đường dẫn tạo Koi Fish với PondId -->
-                    <a asp-page="/KoiFishPage/Create" asp-route-pondId="@item.PondId">Create Koi Fish</a>
-                </td>
-                <td>
-                    <!-- Thêm đường dẫn tạo WaterParameter với PondId -->
-                    <a asp-page="/WaterParameterPages/Create" asp-route-pondId="@item.PondId">WaterParameter</a>
-                </td>
-                <td>
-                    <!-- Thêm đường dẫn tạo SaltCalculation với PondId -->
-                    <a asp-page="/SaltCalculationPages/Create" asp-route-pondId="@item.PondId">SaltCaculation</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<!-- Main Content -->
+<div class="container-fluid">
+    <h1 class="text-primary mt-4">Tạo Hồ</h1>
+    <p>
+        <a asp-page="Create" class="btn btn-success btn-sm"><i class="fa-solid fa-plus"></i> Thêm hồ mới</a>
+    </p>
+    <div class="table-responsive">
+        <table class="table table-bordered" style="margin-top: 20px;">
+            <thead class="thead-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Pond[0].NamePond)</th>
+                    <th>@Html.DisplayNameFor(model => model.Pond[0].ImagePond)</th>
+                    <th>@Html.DisplayNameFor(model => model.Pond[0].Depth)</th>
+                    <th>@Html.DisplayNameFor(model => model.Pond[0].Volume)</th>
+                    <th>@Html.DisplayNameFor(model => model.Pond[0].DrainCount)</th>
+                    <th>@Html.DisplayNameFor(model => model.Pond[0].PumpCapacity)</th>
+                    <th>@Html.DisplayNameFor(model => model.Pond[0].User)</th>
+                    <th>Actions</th>
+                    <th>Create Koi Fish</th>
+                    <th>Water Parameter</th>
+                    <th>Salt Calculation</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Pond)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.NamePond)</td>
+                        <td>
+                            <img src="@Url.Content("~/images/" + item.ImagePond)" alt="Pond Image" width="100" />
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.Depth)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Volume)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DrainCount)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PumpCapacity)</td>
+                        <td>@Html.DisplayFor(modelItem => item.User.FullName)</td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.PondId" class="btn btn-warning btn-sm">Edit</a>
+                            <a asp-page="./Details" asp-route-id="@item.PondId" class="btn btn-info btn-sm">Details</a>
+                            <a asp-page="./Delete" asp-route-id="@item.PondId" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                        <td><a asp-page="/KoiFishPage/Create" asp-route-pondId="@item.PondId" class="btn btn-primary btn-sm">Create Koi Fish</a></td>
+                        <td><a asp-page="/WaterParameterPages/Create" asp-route-pondId="@item.PondId" class="btn btn-secondary btn-sm">Water Parameter</a></td>
+                        <td><a asp-page="/SaltCalculationPages/Create" asp-route-pondId="@item.PondId" class="btn btn-secondary btn-sm">Salt Calculation</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

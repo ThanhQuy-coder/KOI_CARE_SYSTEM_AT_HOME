@@ -13,9 +13,9 @@ public partial class User
 
     public DateTime BirthDate { get; set; }
 
-    public string Gender { get; set; } = null!;
+    public string Gender { get; set; }
 
-    public string Role { get; set; } = null!;
+    public string Role { get; set; }
 
     public virtual Account? Account { get; set; }
 
