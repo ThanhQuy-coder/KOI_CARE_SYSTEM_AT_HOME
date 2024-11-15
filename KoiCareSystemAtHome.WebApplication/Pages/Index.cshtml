@@ -1,11 +1,15 @@
 ﻿@page
 @{
     ViewData["Title"] = "Dash Board";
-    bool isLoggedIn = !string.IsNullOrEmpty(HttpContext.Session.GetString("AccountId"));
+    bool isLoggedIn = !string.IsNullOrEmpty(HttpContext.Session.GetString("UserId"));
+    string UserId = HttpContext.Session.GetString("UserId");
 }
 
 
 
+@{
+    Console.WriteLine(UserId);
+}
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 

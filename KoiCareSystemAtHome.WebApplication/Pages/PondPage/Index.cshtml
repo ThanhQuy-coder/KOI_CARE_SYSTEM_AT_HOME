@@ -1,12 +1,17 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.PondPage.IndexModel
+@{
+    bool isLoggedIn = !string.IsNullOrEmpty(HttpContext.Session.GetString("UserId"));
+    string UserId = HttpContext.Session.GetString("UserId");
+}
 
 <!-- Main Content -->
 <div class="container-fluid">
     <h1 class="text-primary mt-4">Tạo Hồ</h1>
     <p>
-        <a asp-page="Create" class="btn btn-success btn-sm"><i class="fa-solid fa-plus"></i> Thêm hồ mới</a>
+        <a asp-page="Create" asp-route-userId="@UserId" class="btn btn-success btn-sm"><i class="fa-solid fa-plus"></i> Thêm hồ mới</a>
     </p>
+
     <div class="table-responsive">
         <table class="table table-bordered" style="margin-top: 20px;">
             <thead class="thead-dark">

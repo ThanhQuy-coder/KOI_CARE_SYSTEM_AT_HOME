@@ -46,5 +46,10 @@ namespace KoiCareSystemAtHome.Services.Services
         {
             return _repository.UpdateUser(user);
         }
+
+        public bool CheckUser(Guid AccountId,ref Guid UserId)
+        {
+            return (_repository.CheckUser(AccountId,ref UserId));
+        }
     }
 }

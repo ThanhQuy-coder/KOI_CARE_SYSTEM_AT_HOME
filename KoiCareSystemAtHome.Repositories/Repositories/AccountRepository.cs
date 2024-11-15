@@ -30,7 +30,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool checkAccount(string email, string password)
+        public bool checkAccount(string email, string password,ref Guid getId)
         {
             try
             {
@@ -38,6 +38,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
                 {
                     if (email == account.Email && password == account.PassWordHash)
                     {
+                        getId = account.AccountId;
                         return true;
                     }
                 }
