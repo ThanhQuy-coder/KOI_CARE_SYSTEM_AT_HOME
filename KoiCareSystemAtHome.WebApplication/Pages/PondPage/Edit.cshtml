@@ -7,11 +7,6 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Pond.UserId" class="control-label"></label>
-                <select asp-for="Pond.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                <span asp-validation-for="Pond.UserId" class="text-danger"></span>
-            </div>
             <input type="hidden" asp-for="Pond.PondId" />
             <div class="form-group">
                 <label asp-for="Pond.NamePond" class="control-label"></label>

@@ -39,7 +39,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
         {
             if (User.AccountId == Guid.Empty)
             {
-                ModelState.AddModelError(string.Empty, "AccountId is required.");
+                ModelState.AddModelError(string.Empty, "Bạn phải có tài khoản trước!.");
                 return Page();
             }
 

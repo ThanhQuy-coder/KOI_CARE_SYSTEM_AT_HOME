@@ -20,26 +20,14 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
 
         public KoiFish KoiFish { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            
-            if (id == null)
-            {
-                
-                return NotFound();
-            }
-          
-
-            var koifish = await _service.GetKoiFishById((Guid)id);
-            if (koifish == null)
+            var koiFish = await _service.GetKoiFishById(id);
+            if (koiFish == null)
             {
                 return NotFound();
             }
-            else
-            {
-                KoiFish = koifish;
-            }
-
+            KoiFish = koiFish;
             return Page();
         }
     }

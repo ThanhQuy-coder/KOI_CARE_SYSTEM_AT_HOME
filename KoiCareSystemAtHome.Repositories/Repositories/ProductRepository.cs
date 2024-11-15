@@ -79,10 +79,12 @@ public class ProductRepository : IProductRepository
 
     public async Task<Product> GetProductById(Guid id)
     {
-        return await _dbContext.Products.FirstOrDefaultAsync(p => p.ProductId.Equals(id));
+        return await _dbContext.Products
+                               .Include(k => k.User) // Bao gồm cả hồ (Pond)
+                               .FirstOrDefaultAsync(k => k.ProductId == id);
     }
 
-    
+
 
     public bool UpdateProduct(Product product)
     {

@@ -79,9 +79,11 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<Pond> GetPondById(Guid Id)
+        public async Task<Pond> GetPondById(Guid id)
         {
-            return await _dbContext.Ponds.FirstOrDefaultAsync(p => p.PondId.Equals(Id));
+            return await _dbContext.Ponds
+                                   .Include(k => k.User) // Bao gồm cả hồ (Pond)
+                                   .FirstOrDefaultAsync(k => k.PondId == id);
         }
 
         public bool UpdatePond(Pond pond)

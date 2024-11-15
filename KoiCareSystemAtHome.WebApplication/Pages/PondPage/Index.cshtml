@@ -29,7 +29,7 @@
                 @Html.DisplayNameFor(model => model.Pond[0].User)
             </th>
             <th>Actions</th>
-            <th>Create Koi Fish</th> <!-- Thêm cột cho nút tạo Koi Fish -->
+            <th>Create_Koi_Fish</th> <!-- Thêm cột cho nút tạo Koi Fish -->
             <th>WaterParameter</th>
             <th>SaltCalculation</th>
         </tr>
@@ -43,7 +43,7 @@
                     @Html.DisplayFor(modelItem => item.NamePond)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ImagePond)
+                    <img src="@Url.Content("~/images/" + item.ImagePond)" alt="Pond Image" width="100" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Depth)

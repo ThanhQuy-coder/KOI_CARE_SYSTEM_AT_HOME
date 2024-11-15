@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Services.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
 {
@@ -22,23 +19,19 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
         [BindProperty]
         public Product Product { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        // Phương thức để lấy thông tin sản phẩm hiện có theo `ProductId`
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var product = await _service.GetProductById((Guid)id);
+            var product = await _service.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
             }
-
             Product = product;
             return Page();
         }
 
+        // Phương thức để lưu thay đổi
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -46,27 +39,33 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
                 return Page();
             }
 
-            bool result = _service.UpdateProduct(Product);
+            var existingProduct = await _service.GetProductById(Product.ProductId);
+            if (existingProduct == null)
+            {
+                return NotFound();
+            }
 
+            // Cập nhật các trường cần thiết
+            existingProduct.ProductName = Product.ProductName;
+            existingProduct.Price = Product.Price;
+            existingProduct.ProductType = Product.ProductType;
+            existingProduct.DatePlace = Product.DatePlace;
+            existingProduct.Desciption = Product.Desciption;
+
+            // Cập nhật ảnh (nếu có)
+            if (!string.IsNullOrEmpty(Product.ImageProduct))
+            {
+                existingProduct.ImageProduct = Product.ImageProduct;
+            }
+
+            var result = _service.UpdateProduct(existingProduct);
             if (!result)
             {
-                if (!await ProductExists(Product.ProductId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw new Exception("Lỗi cập nhật sản phẩm.");
-                }
+                ModelState.AddModelError(string.Empty, "Error updating product.");
+                return Page();
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private async Task<bool> ProductExists(Guid id)
-        {
-            var product = await _service.GetProductById(id);
-            return product != null;
         }
     }
 }

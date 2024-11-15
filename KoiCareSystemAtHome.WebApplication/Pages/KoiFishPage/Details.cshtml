@@ -15,7 +15,8 @@
             @Html.DisplayNameFor(model => model.KoiFish.ImageFish)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.ImageFish)
+            <!-- Hiển thị ảnh nếu đường dẫn tồn tại -->
+            <img src="/images/@Model.KoiFish.ImageFish" alt="Koi Fish Image" style="max-width: 100px;" />
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.KoiFish.BodyShape)
@@ -75,7 +76,7 @@
             @Html.DisplayNameFor(model => model.KoiFish.Pond)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Pond.PondId)
+            @Html.DisplayFor(model => model.KoiFish.Pond.NamePond)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.KoiFish.FishId)

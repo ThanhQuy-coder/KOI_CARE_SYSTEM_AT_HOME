@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Services.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
 {
@@ -22,29 +19,19 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
         [BindProperty]
         public KoiFish KoiFish { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        // Phương thức để lấy thông tin cá Koi hiện có theo `FishId`
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null)
-            {
-             
-                return NotFound();
-            }
-         
-
-            var koifish = await _service.GetKoiFishById((Guid)id);
-            if (koifish == null)
+            var koiFish = await _service.GetKoiFishById(id);
+            if (koiFish == null)
             {
                 return NotFound();
             }
-
-            KoiFish = koifish;
-
-            // Nếu cần danh sách PondId cho dropdown
-            // ViewData["PondId"] = new SelectList(await _service.GetAllPonds(), "PondId", "PondId");
-
+            KoiFish = koiFish;
             return Page();
         }
 
+        // Phương thức để lưu thay đổi
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -52,27 +39,38 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
                 return Page();
             }
 
-            bool result = _service.UpdateKoiFish(KoiFish);
+            var existingKoiFish = await _service.GetKoiFishById(KoiFish.FishId);
+            if (existingKoiFish == null)
+            {
+                return NotFound();
+            }
 
+            // Cập nhật các trường cần thiết
+            existingKoiFish.NameFish = KoiFish.NameFish;
+            existingKoiFish.BodyShape = KoiFish.BodyShape;
+            existingKoiFish.AgeFish = KoiFish.AgeFish;
+            existingKoiFish.Size = KoiFish.Size;
+            existingKoiFish.WeightFish = KoiFish.WeightFish;
+            existingKoiFish.Gender = KoiFish.Gender;
+            existingKoiFish.Breed = KoiFish.Breed;
+            existingKoiFish.Origin = KoiFish.Origin;
+            existingKoiFish.Price = KoiFish.Price;
+            existingKoiFish.FishLocation = KoiFish.FishLocation;
+
+            // Cập nhật ảnh (nếu có)
+            if (!string.IsNullOrEmpty(KoiFish.ImageFish))
+            {
+                existingKoiFish.ImageFish = KoiFish.ImageFish;
+            }
+
+            var result = _service.UpdateKoiFish(existingKoiFish);
             if (!result)
             {
-                if (!await KoiFishExists(KoiFish.FishId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw new Exception("Lỗi cập nhật cá koi.");
-                }
+                ModelState.AddModelError(string.Empty, "Error updating Koi Fish.");
+                return Page();
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private async Task<bool> KoiFishExists(Guid id)
-        {
-            var koiFish = await _service.GetKoiFishById(id);
-            return koiFish != null;
         }
     }
 }

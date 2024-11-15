@@ -34,7 +34,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages
         {
             if (FeedingSchedule.FishId == Guid.Empty)
             {
-                ModelState.AddModelError(string.Empty, "FishId is required.");
+                ModelState.AddModelError(string.Empty, "Chỉ được tạo lịch cho ăn từ trang KoiFish !");
                 return Page();
             }
 

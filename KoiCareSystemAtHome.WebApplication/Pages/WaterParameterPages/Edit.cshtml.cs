@@ -27,7 +27,6 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
-
             {
                 return NotFound();
             }
@@ -44,26 +43,33 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             return Page();
         }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more information, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            bool result = _service.UppWaterParameter(WaterParameter);
+            var existingWaterParameter = await _service.GetWaterParameterById(WaterParameter.WaterParameterId);
+            if (existingWaterParameter == null)
+            {
+                return NotFound();
+            }
+
+            // Cập nhật các trường cần thiết
+            existingWaterParameter.Temperature = WaterParameter.Temperature;
+            existingWaterParameter.SaltLevel = WaterParameter.SaltLevel;
+            existingWaterParameter.PH = WaterParameter.PH;
+            existingWaterParameter.Oxygen = WaterParameter.Oxygen;
+            existingWaterParameter.Nitrie = WaterParameter.Nitrie;
+            existingWaterParameter.Nitrate = WaterParameter.Nitrate;
+            existingWaterParameter.Phospate = WaterParameter.Phospate;
+            existingWaterParameter.MeasurementTime = WaterParameter.MeasurementTime;
+
+            bool result = _service.UppWaterParameter(existingWaterParameter);
             if (!result)
             {
-                if (!await WaterParameterExists(WaterParameter.WaterParameterId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw new Exception("Loi cap nhat thong so nuoc.");
-                }
+                throw new Exception("Lỗi cập nhật thông số nước.");
             }
 
             return RedirectToPage("./Index");

@@ -55,9 +55,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NameFish)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageFish)
-            </td>
+                <td>
+                    <img src="@Url.Content("~/images/" + item.ImageFish)" alt="Koi Fish Image" width="100" />
+                </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.BodyShape)
             </td>
@@ -86,7 +87,7 @@
                 @Html.DisplayFor(modelItem => item.FishLocation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Pond.PondId)
+                @Html.DisplayFor(modelItem => item.Pond.NamePond)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.FishId">Edit</a> |

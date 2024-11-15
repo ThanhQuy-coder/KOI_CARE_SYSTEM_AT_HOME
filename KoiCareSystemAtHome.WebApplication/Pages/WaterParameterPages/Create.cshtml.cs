@@ -33,7 +33,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
         {
             if (WaterParameter.PondId == Guid.Empty)
             {
-                ModelState.AddModelError(string.Empty, "PondId is required.");
+                ModelState.AddModelError(string.Empty, "Chỉ được nhập thông số nước từ hồ !.");
                 return Page();
             }
 

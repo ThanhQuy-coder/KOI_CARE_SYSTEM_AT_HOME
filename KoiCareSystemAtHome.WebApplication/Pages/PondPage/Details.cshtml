@@ -15,7 +15,8 @@
             @Html.DisplayNameFor(model => model.Pond.ImagePond)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pond.ImagePond)
+            <!-- Hiển thị ảnh nếu đường dẫn tồn tại -->
+            <img src="/images/@Model.Pond.ImagePond" alt="Pond Image" style="max-width: 100px;" />
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Pond.Depth)
@@ -45,7 +46,7 @@
             @Html.DisplayNameFor(model => model.Pond.User)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pond.User.UserId)
+            @Html.DisplayFor(model => model.Pond.User.FullName)
         </dd>
     </dl>
 </div>

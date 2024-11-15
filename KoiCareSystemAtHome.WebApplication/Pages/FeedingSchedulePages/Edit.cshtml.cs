@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Services.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages
 {
@@ -23,13 +19,19 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages
         [BindProperty]
         public FeedingSchedule FeedingSchedule { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        // Phương thức để lấy thông tin lịch cho ăn hiện có theo `FeedingScheduleId`
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
+            var feedingSchedule = await _service.GetFeedingScheduleById(id);
+            if (feedingSchedule == null)
+            {
+                return NotFound();
+            }
+            FeedingSchedule = feedingSchedule;
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+        // Phương thức để lưu thay đổi
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -37,15 +39,25 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages
                 return Page();
             }
 
-            bool result = await Task.Run(() => _service.UpdateFeedingSchedule(FeedingSchedule));
+            var existingFeedingSchedule = await _service.GetFeedingScheduleById(FeedingSchedule.FeedingScheduleId);
+            if (existingFeedingSchedule == null)
+            {
+                return NotFound();
+            }
+
+            // Cập nhật các trường cần thiết
+            existingFeedingSchedule.FoodType = FeedingSchedule.FoodType;
+            existingFeedingSchedule.FeedingTime = FeedingSchedule.FeedingTime;
+            existingFeedingSchedule.RequiredFoodAmount = FeedingSchedule.RequiredFoodAmount;
+
+            var result = _service.UpdateFeedingSchedule(existingFeedingSchedule);
+            if (!result)
+            {
+                ModelState.AddModelError(string.Empty, "Error updating Feeding Schedule.");
+                return Page();
+            }
 
             return RedirectToPage("./Index");
-        }
-
-        private async Task<bool> FeedingScheduleExists(Guid id)
-        {
-            var feedingSchedule = await _service.GetFeedingScheduleById(id);
-            return feedingSchedule != null;
         }
     }
 }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Services.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
 {
@@ -22,24 +19,19 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
         [BindProperty]
         public Pond Pond { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        // Phương thức để lấy thông tin hồ hiện có theo `PondId`
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var pond = await _service.GetPondById((Guid)id);
+            var pond = await _service.GetPondById(id);
             if (pond == null)
             {
                 return NotFound();
             }
-
             Pond = pond;
-
             return Page();
         }
 
+        // Phương thức để lưu thay đổi
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -47,26 +39,33 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
                 return Page();
             }
 
-            bool result = _service.UpdatePond(Pond);
+            var existingPond = await _service.GetPondById(Pond.PondId);
+            if (existingPond == null)
+            {
+                return NotFound();
+            }
 
+            // Cập nhật các trường cần thiết
+            existingPond.NamePond = Pond.NamePond;
+            existingPond.Depth = Pond.Depth;
+            existingPond.Volume = Pond.Volume;
+            existingPond.DrainCount = Pond.DrainCount;
+            existingPond.PumpCapacity = Pond.PumpCapacity;
+
+            // Cập nhật ảnh (nếu có)
+            if (!string.IsNullOrEmpty(Pond.ImagePond))
+            {
+                existingPond.ImagePond = Pond.ImagePond;
+            }
+
+            var result = _service.UpdatePond(existingPond);
             if (!result)
             {
-                if (!await PondExists(Pond.PondId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw new Exception("Lỗi cập nhật hồ.");
-                }
+                ModelState.AddModelError(string.Empty, "Error updating Pond.");
+                return Page();
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private async Task<bool> PondExists(Guid pondId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

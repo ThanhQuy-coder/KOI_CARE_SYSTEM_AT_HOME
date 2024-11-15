@@ -75,10 +75,13 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
         }
 
 
-        public async Task<KoiFish> GetKoiFishById(Guid Id)
+        public async Task<KoiFish> GetKoiFishById(Guid id)
         {
-            return await _dbContext.KoiFishes.FirstOrDefaultAsync(p => p.FishId.Equals(Id));
+            return await _dbContext.KoiFishes
+                                   .Include(k => k.Pond) // Bao gồm cả hồ (Pond)
+                                   .FirstOrDefaultAsync(k => k.FishId == id);
         }
+
 
         public bool UpdateKoiFish(KoiFish koifish)
         {

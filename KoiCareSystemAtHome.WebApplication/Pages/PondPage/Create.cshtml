@@ -14,11 +14,12 @@
                 <input asp-for="Pond.NamePond" class="form-control" />
                 <span asp-validation-for="Pond.NamePond" class="text-danger"></span>
             </div>
+            <!-- Dùng kiểu file để nhập file thay vì string-->
             <div class="form-group">
                 <label asp-for="Pond.ImagePond" class="control-label"></label>
-                <input asp-for="Pond.ImagePond" class="form-control" />
+                <input type="file" asp-for="Pond.ImagePond" class="form-control" />
                 <span asp-validation-for="Pond.ImagePond" class="text-danger"></span>
-            </div>
+            </div>            
             <div class="form-group">
                 <label asp-for="Pond.Depth" class="control-label"></label>
                 <input asp-for="Pond.Depth" class="form-control" />
