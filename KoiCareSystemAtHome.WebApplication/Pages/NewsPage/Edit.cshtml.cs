@@ -1,5 +1,6 @@
-﻿using KoiCareSystemAtHome.Services.Interfaces;
-using KoiCareSystemAtHome.Repositories.Entities;
+﻿using KoiCareSystemAtHome.Repositories.Entities;
+using KoiCareSystemAtHome.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
@@ -18,9 +19,13 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
         [BindProperty]
         public News News { get; set; } = default!;
 
+        // Thêm thuộc tính để bind file ảnh từ form
+        [BindProperty]
+        public IFormFile ImageFile { get; set; }
+
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            News = (News)await _newsService.GetNewsByIdAsync(id);
+            News = await _newsService.GetNewsByIdAsync(id);
 
             if (News == null)
             {
@@ -30,16 +35,17 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
             return Page();
         }
 
-        public Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-                return Task.FromResult<IActionResult>(Page());
+                return Page();
             }
 
-             _newsService.UpdateNews(News);
+            // Gọi phương thức UpdateNews và truyền thêm tham số ImageFile
+            _newsService.UpdateNews(News, ImageFile);
 
-            return Task.FromResult<IActionResult>(RedirectToPage("./Index"));
+            return RedirectToPage("./Index");
         }
     }
 }

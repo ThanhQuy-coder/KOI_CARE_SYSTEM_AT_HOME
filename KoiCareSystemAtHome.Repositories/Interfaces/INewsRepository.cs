@@ -14,6 +14,7 @@ namespace KoiCareSystemAtHome.Repositories.Interfaces
         Task<News> GetNewsByIdAsync(Guid id);
         Task<List<News>> SearchNewsAsync(string searchTerm);
 
+
     }
 }
 

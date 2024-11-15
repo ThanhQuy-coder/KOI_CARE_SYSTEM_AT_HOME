@@ -18,8 +18,13 @@ namespace KoiCareSystemAtHome.Repositories
 
         public async Task<List<News>> GetAllNewsAsync()
         {
-            return await _context.News.ToListAsync();
+            // Kiểm tra nếu _context.News có giá trị null hoặc nếu có mục nào bị null
+            var newsList = await _context.News.ToListAsync();
+
+            // Lọc các giá trị null nếu cần
+            return newsList.Where(n => n != null).ToList();
         }
+
 
         public bool DeleteNews(Guid id)
         {

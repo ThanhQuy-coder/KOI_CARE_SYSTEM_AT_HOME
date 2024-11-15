@@ -30,6 +30,16 @@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+            <div class="form-group">
+                <label asp-for="News.ImageUrl" class="control-label"></label>
+                <input asp-for="News.ImageUrl" class="form-control" />
+                <span asp-validation-for="News.ImageUrl" class="text-danger"></span>
+            </div> 
+            <div class="form-group">
+                <label for="ImageFile">Upload Image</label>
+                <input type="file" name="ImageFile" class="form-control" />
+            </div>
+
         </form>
     </div>
 </div>
