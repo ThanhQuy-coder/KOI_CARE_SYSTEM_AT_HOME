@@ -1,42 +1,34 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages.IndexModel
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+<div class="container">
+    <h2 class="text-primary text-center mb-4"><i class="fa fa-list"></i> Danh sách Tính Toán Muối</h2>
+
+  
+
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th><i class="fa fa-salt-shaker"></i> Lượng Muối Cần Thiết (kg)</th>
+                <th><i class="fa fa-clock"></i> Thời Gian Tính Toán</th>
+                <th><i class="fa fa-water"></i> Hồ</th>
+                <th><i class="fa fa-tools"></i> Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model.SaltCalculation)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SaltCalculation[0].RequiredSaltAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SaltCalculation[0].CalculationTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SaltCalculation[0].Pond)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.SaltCalculation) {
-        <tr>
+            <td>@item.RequiredSaltAmount</td>
+            <td>@item.CalculationTime</td>
+            <td>@item.Pond?.NamePond ?? "Không có hồ liên quan"</td>
             <td>
-                @Html.DisplayFor(modelItem => item.RequiredSaltAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CalculationTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pond.NamePond)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.SaltCalculationId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.SaltCalculationId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.SaltCalculationId">Delete</a>
+                <a asp-page="./Details" asp-route-id="@item.SaltCalculationId" class="btn btn-info btn-sm"><i class="fa fa-info-circle"></i> Xem</a>
+                <a asp-page="./Edit" asp-route-id="@item.SaltCalculationId" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Sửa</a>
+                <a asp-page="./Delete" asp-route-id="@item.SaltCalculationId" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Xóa</a>
             </td>
         </tr>
-}
-    </tbody>
-</table>
+    }
+</tbody>
+    </table>
+</div>

@@ -1,35 +1,54 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages.CreateModel
 
-<h4>SaltCalculation</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <!-- Trường hidden để lưu PondId từ model SaltCalculation -->
-            <input type="hidden" asp-for="SaltCalculation.PondId" />
-            <div class="form-group">
-                <label asp-for="SaltCalculation.RequiredSaltAmount" class="control-label"></label>
-                <input asp-for="SaltCalculation.RequiredSaltAmount" class="form-control" />
-                <span asp-validation-for="SaltCalculation.RequiredSaltAmount" class="text-danger"></span>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0"><i class="fa fa-calculator"></i> Tính Lượng Muối</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <!-- Trường ẩn để lưu PondId -->
+                        <input type="hidden" asp-for="SaltCalculation.PondId" />
+
+                        <!-- Nhập số lượng muối cần thiết -->
+                        <div class="mb-3">
+                            <label asp-for="SaltCalculation.RequiredSaltAmount" class="form-label">
+                                <i class="fa fa-salt-shaker"></i> Lượng Muối Cần Thiết (kg)
+                            </label>
+                            <input asp-for="SaltCalculation.RequiredSaltAmount" class="form-control" placeholder="Nhập lượng muối cần thiết" />
+                            <span asp-validation-for="SaltCalculation.RequiredSaltAmount" class="text-danger"></span>
+                        </div>
+
+                        <!-- Thời gian tính toán -->
+                        <div class="mb-3">
+                            <label asp-for="SaltCalculation.CalculationTime" class="form-label">
+                                <i class="fa fa-clock"></i> Thời Gian Tính Toán
+                            </label>
+                            <input asp-for="SaltCalculation.CalculationTime" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="SaltCalculation.CalculationTime" class="text-danger"></span>
+                        </div>
+
+                        <!-- Nút Tạo -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> Lưu Kết Quả</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="SaltCalculation.CalculationTime" class="control-label"></label>
-                <input asp-for="SaltCalculation.CalculationTime" class="form-control" />
-                <span asp-validation-for="SaltCalculation.CalculationTime" class="text-danger"></span>
+            <div class="mt-3 text-center">
+                <a asp-page="Index" class="btn btn-secondary"><i class="fa fa-arrow-left"></i> Quay Lại Danh Sách</a>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
