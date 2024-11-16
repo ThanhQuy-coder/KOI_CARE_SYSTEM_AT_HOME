@@ -40,7 +40,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.LoginPage
             _userService.CheckUser(Account.AccountId, ref userAccountIdTemp);
             User.UserId = userAccountIdTemp;
             HttpContext.Session.SetString("UserId", User.UserId.ToString());
-            return RedirectToPage("/Index", new {User = User.UserId});
+            return RedirectToPage("/DashBoard", new {User = User.UserId});
         }
     }
 }

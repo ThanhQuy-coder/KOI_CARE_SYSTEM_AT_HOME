@@ -13,7 +13,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.LoginPage
             
             HttpContext.Session.Clear();
 
-            return RedirectToPage("/Index");
+            return RedirectToPage("/DashBoard");
         }
     }
 }
