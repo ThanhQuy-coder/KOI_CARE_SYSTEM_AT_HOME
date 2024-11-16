@@ -5,7 +5,6 @@
     string UserId = HttpContext.Session.GetString("UserId");
 }
 
-<<<<<<< HEAD
 <div class="container">
     <!-- Header với thanh tìm kiếm, tiêu đề, và nút tạo hồ -->
     <div class="row bg-info text-dark py-3 mb-4 d-flex justify-content-between align-items-center">
@@ -20,7 +19,7 @@
             <h1 class="mb-0">Danh sách Hồ</h1>
         </div>
         <div class="col-auto">
-            <a asp-page="Create" class="btn btn-success"><i class="fa fa-plus-circle"></i> Create New Pond</a>
+            <a asp-page="Create" asp-route-userId="@UserId" class="btn btn-success"><i class="fa fa-plus-circle"></i> Create New Pond</a>
         </div>
     </div>
 
@@ -81,56 +80,5 @@
                 </div>
             }
         }
-=======
-<!-- Main Content -->
-<div class="container-fluid">
-    <h1 class="text-primary mt-4">Tạo Hồ</h1>
-    <p>
-        <a asp-page="Create" asp-route-userId="@UserId" class="btn btn-success btn-sm"><i class="fa-solid fa-plus"></i> Thêm hồ mới</a>
-    </p>
-
-    <div class="table-responsive">
-        <table class="table table-bordered" style="margin-top: 20px;">
-            <thead class="thead-dark">
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].NamePond)</th>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].ImagePond)</th>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].Depth)</th>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].Volume)</th>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].DrainCount)</th>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].PumpCapacity)</th>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].User)</th>
-                    <th>Actions</th>
-                    <th>Create Koi Fish</th>
-                    <th>Water Parameter</th>
-                    <th>Salt Calculation</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Pond)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.NamePond)</td>
-                        <td>
-                            <img src="@Url.Content("~/images/" + item.ImagePond)" alt="Pond Image" width="100" />
-                        </td>
-                        <td>@Html.DisplayFor(modelItem => item.Depth)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Volume)</td>
-                        <td>@Html.DisplayFor(modelItem => item.DrainCount)</td>
-                        <td>@Html.DisplayFor(modelItem => item.PumpCapacity)</td>
-                        <td>@Html.DisplayFor(modelItem => item.User.FullName)</td>
-                        <td>
-                            <a asp-page="./Edit" asp-route-id="@item.PondId" class="btn btn-warning btn-sm">Edit</a>
-                            <a asp-page="./Details" asp-route-id="@item.PondId" class="btn btn-info btn-sm">Details</a>
-                            <a asp-page="./Delete" asp-route-id="@item.PondId" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
-                        <td><a asp-page="/KoiFishPage/Create" asp-route-pondId="@item.PondId" class="btn btn-primary btn-sm">Create Koi Fish</a></td>
-                        <td><a asp-page="/WaterParameterPages/Create" asp-route-pondId="@item.PondId" class="btn btn-secondary btn-sm">Water Parameter</a></td>
-                        <td><a asp-page="/SaltCalculationPages/Create" asp-route-pondId="@item.PondId" class="btn btn-secondary btn-sm">Salt Calculation</a></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
->>>>>>> 8915ac2023c9cd08304183bdbb982b0c5cef9242
     </div>
 </div>

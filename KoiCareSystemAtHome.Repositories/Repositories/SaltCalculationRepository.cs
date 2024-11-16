@@ -24,7 +24,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException(ex.ToString());
+                return false;
             }
         }
 

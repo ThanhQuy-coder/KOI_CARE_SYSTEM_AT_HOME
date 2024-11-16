@@ -1,31 +1,43 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.SaltCalculationPages.DetailsModel
 
-<div>
-    <h4>SaltCalculation</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SaltCalculation.RequiredSaltAmount)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SaltCalculation.RequiredSaltAmount)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SaltCalculation.CalculationTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SaltCalculation.CalculationTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SaltCalculation.Pond)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SaltCalculation.Pond.NamePond)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.SaltCalculation.SaltCalculationId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+@{
+    Layout = "_Layout"; // Use your site's layout to maintain consistency
+}
+
+<div class="container my-4">
+    <h3 class="text-center">SaltCalculation Details</h3>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4>Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.SaltCalculation.RequiredSaltAmount)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.SaltCalculation.RequiredSaltAmount)
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.SaltCalculation.CalculationTime)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.SaltCalculation.CalculationTime)
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.SaltCalculation.Pond)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.SaltCalculation.Pond.NamePond)
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer text-center">
+            <a asp-page="./Edit" asp-route-id="@Model.SaltCalculation.SaltCalculationId" class="btn btn-warning mr-2">Edit</a>
+            <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
 </div>
