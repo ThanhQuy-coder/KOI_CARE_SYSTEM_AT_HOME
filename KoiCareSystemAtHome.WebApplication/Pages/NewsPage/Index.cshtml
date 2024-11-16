@@ -1,58 +1,46 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.NewsPage.IndexModel
 
+<link rel="stylesheet" href="/css/News.css" />
+
 <p>
-    <a asp-page="Create">Create New</a>
-    <a asp-page="Index">Back</a>
+    <a asp-page="Create" class="btn btn-primary">Create New</a>
+    <a asp-page="Index" class="btn btn-secondary">Back</a>
 </p>
 
-<form method="get" asp-page="./Index">
-    <input type="text" name="searchTerm" value="@Model.SearchTerm" placeholder="Search by Title or Content..." />
-    <input type="text" name="author" value="@Request.Query["author"]" placeholder="Author..." />
-    <input type="date" name="publishDate" value="@Request.Query["publishDate"]" placeholder="Publish Date..." />
-    <button type="submit">Search</button>
+<form method="get" asp-page="./Index" class="search-form">
+    <input type="text" name="searchTerm" value="@Model.SearchTerm" placeholder="Search by Title or Content..." class="form-control search-input" />
+    <input type="text" name="author" value="@Request.Query["author"]" placeholder="Author..." class="form-control search-input" />
+    <input type="date" name="publishDate" value="@Request.Query["publishDate"]" class="form-control search-input" />
+    <button type="submit" class="btn btn-primary">Search</button>
 </form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.News[0].Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.News[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.News[0].Content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.News[0].PublishDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.News)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    <a href="@item.Content" target="_blank">@item.Content</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PublishDate)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.PostId">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.PostId">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.PostId">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<<div class="news-container">
+    @foreach (var item in Model.News)
+    {
+        <div class="news-item">
+            @if (!string.IsNullOrEmpty(item.ImageUrl))
+            {
+                <img src="@item.ImageUrl" alt="News Image" class="news-image" />
+            }
+            else
+            {
+                <!-- Nếu muốn bỏ trống hoặc thêm hình ảnh mặc định -->
+                <img src="/images/default-image.png" alt="Default Image" class="news-image" />
+            }
+            <div class="news-content">
+                <p>Ngày xuất bản: @item.PublishDate.ToShortDateString()</p>
+                <h3>@item.Title</h3>
+                <p>@item.Content</p>
+                <div class="news-actions">
+                    <a asp-page="./Edit" asp-route-id="@item.PostId" class="btn btn-edit">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.PostId" class="btn btn-details">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@item.PostId" class="btn btn-delete">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+

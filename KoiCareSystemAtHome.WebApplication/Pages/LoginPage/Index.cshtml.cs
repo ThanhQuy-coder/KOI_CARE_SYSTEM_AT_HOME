@@ -9,10 +9,12 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.LoginPage
     public class LoginModel : PageModel
     {
         private readonly IAccountService _accountService;
+        private readonly IUserService _userService;
 
         public LoginModel(IUserService userService, IAccountService accountService)
         {
             _accountService = accountService;
+            _userService = userService;
         }
         public IActionResult OnGet()
         {
@@ -21,17 +23,24 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.LoginPage
 
         [BindProperty]
         public Account Account { get; set; } = default!;
+        public User User { get; set; } = new User { UserId = Guid.Empty, FullName = "#" };
 
         public async Task<IActionResult> OnPostAsync()
         {
-            Console.WriteLine("Hello");
             //Kiểm tra
-            if (!_accountService.checkAccount(Account.Email, Account.PassWordHash))
+            Guid accountIdTemp = Account.AccountId;
+            Guid userAccountIdTemp = (Guid)User.UserId;
+            
+            if (!_accountService.checkAccount(Account.Email, Account.PassWordHash, ref accountIdTemp))
             {
                 return Page();
             }
-            HttpContext.Session.SetString("AccountId", Account.AccountId.ToString());
-            return RedirectToPage("/Index");
+            Account.AccountId = accountIdTemp;
+            //Kiểm tra user
+            _userService.CheckUser(Account.AccountId, ref userAccountIdTemp);
+            User.UserId = userAccountIdTemp;
+            HttpContext.Session.SetString("UserId", User.UserId.ToString());
+            return RedirectToPage("/DashBoard", new {User = User.UserId});
         }
     }
 }

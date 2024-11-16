@@ -1,266 +1,747 @@
 ﻿@page
+@model KoiCareSystemAtHome.WebApplication.Pages.IndexModel
+
 @{
-    ViewData["Title"] = "Dash Board";
-    bool isLoggedIn = !string.IsNullOrEmpty(HttpContext.Session.GetString("AccountId"));
+    Layout = "_HomePageLayout";
+    bool isLoggedIn = !string.IsNullOrEmpty(HttpContext.Session.GetString("UserId"));
 }
 
+<header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
+        <a href="index.html" class="logo d-flex align-items-center">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <h1 class="sitename">KOI CARE SYSTEM AT HOME</h1>
+        </a>
 
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="#hero" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a asp-page="/DashBoard">Dash Board</a></li>
+                <li class="dropdown">
+                    <a href="#"><span>Account</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <ul>
+                        @{
+                            if (!isLoggedIn)
+                            {
+                                <li><a asp-page="/LoginPage/Index">Login</a></li>
+                                <li><a asp-page="/LoginPage/Register">Sign up</a></li>
+                            }
+                            else{
+                                <li><a asp-page="/LoginPage/Logout">Log out</a></li>
+                            }
+                        }
+                        
+                        @* <li class="dropdown">
+                            <a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                            <ul>
+                                <li><a href="#">Deep Dropdown 1</a></li>
+                                <li><a href="#">Deep Dropdown 2</a></li>
+                                <li><a href="#">Deep Dropdown 3</a></li>
+                                <li><a href="#">Deep Dropdown 4</a></li>
+                                <li><a href="#">Deep Dropdown 5</a></li>
+                            </ul>
+                        </li> *@
+                        
+                    </ul>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
 
-        <!-- Main Content -->
-        <div id="content">
+    </div>
+</header>
 
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<main class="main">
 
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa-solid fa-house"></i>
-                </button>
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
 
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
+        <div id="hero-carousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
 
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                             aria-labelledby="searchDropdown">
-                            <form class="form-inline mr-auto w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                           placeholder="Search for..." aria-label="Search"
-                                           aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-
-                    <!-- Nav Item - Alerts -->
-                    <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell fa-fw"></i>
-                            <!-- Counter - Alerts -->
-                            <span class="badge badge-danger badge-counter">3+</span>
-                        </a>
-                        <!-- Dropdown - Alerts -->
-                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="alertsDropdown">
-                            <h6 class="dropdown-header">
-                                Alerts Center
-                            </h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-primary">
-                                        <i class="fas fa-file-alt text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">December 12, 2019</div>
-                                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-success">
-                                        <i class="fas fa-donate text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">December 7, 2019</div>
-                                    $290.29 has been deposited into your account!
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-warning">
-                                        <i class="fas fa-exclamation-triangle text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">December 2, 2019</div>
-                                    Spending Alert: We've noticed unusually high spending for your account.
-                                </div>
-                            </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                        </div>
-                    </li>
-
-                    <!-- Nav Item - Messages -->
-                    <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-envelope fa-fw"></i>
-                            <!-- Counter - Messages -->
-                            <span class="badge badge-danger badge-counter">7</span>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="messagesDropdown">
-                            <h6 class="dropdown-header">
-                                Message Center
-                            </h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                         alt="...">
-                                    <div class="status-indicator bg-success"></div>
-                                </div>
-                                <div class="font-weight-bold">
-                                    <div class="text-truncate">
-                                        Hi there! I am wondering if you can help me with a
-                                        problem I've been having.
-                                    </div>
-                                    <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                         alt="...">
-                                    <div class="status-indicator"></div>
-                                </div>
-                                <div>
-                                    <div class="text-truncate">
-                                        I have the photos that you ordered last month, how
-                                        would you like them sent to you?
-                                    </div>
-                                    <div class="small text-gray-500">Jae Chun · 1d</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                         alt="...">
-                                    <div class="status-indicator bg-warning"></div>
-                                </div>
-                                <div>
-                                    <div class="text-truncate">
-                                        Last month's report looks great, I am very happy with
-                                        the progress so far, keep up the good work!
-                                    </div>
-                                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                         alt="...">
-                                    <div class="status-indicator bg-success"></div>
-                                </div>
-                                <div>
-                                    <div class="text-truncate">
-                                        Am I a good boy? The reason I ask is because someone
-                                        told me that people say this to all dogs, even if they aren't good...
-                                    </div>
-                                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                        </div>
-                    </li>
-
-                    <div class="topbar-divider d-none d-sm-block"></div>
-
-                    <!-- Nav Item - User Information -->
-                @if (isLoggedIn)
-                {
-                    <!-- Thông tin người dùng khi đã đăng nhập -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Tài Khoản</span>
-                            <img class="img-profile rounded-circle" src="#" alt="Ảnh cá nhân">
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Hồ sơ
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Cài đặt
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Nhật ký hoạt động
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" asp-page="/LoginPage/Logout">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Đăng xuất
-                            </a>
-                        </div>
-                    </li>
-                }
-                else
-                {
-                    <!-- Hiển thị nút Đăng nhập và Đăng ký khi chưa đăng nhập -->
-                    <li class="nav-item">
-                        <a class="nav-link" asp-page="/LoginPage/Index">Đăng nhập</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-page="/LoginPage/Register">Đăng ký</a>
-                    </li>
-                }
-
-                </ul>
-
-            </nav>
-            <!-- End of Topbar -->
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                        <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-                    </a>
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="carousel-container">
+                    <h2 class="animate__animated animate__fadeInDown">Chào mừng đến với <span>KOI CARE SYSTEM AT HOME</span></h2>
+                    <p class="animate__animated animate__fadeInUp">Khám phá các phương pháp chăm sóc cá koi tốt nhất tại nhà. Hệ thống của chúng tôi giúp bạn duy trì môi trường sống lý tưởng cho cá koi, đảm bảo sức khỏe và sự phát triển của chúng.</p>
+                    <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Tìm hiểu thêm</a>
                 </div>
             </div>
-            <!-- /.container-fluid -->
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="carousel-container">
+                    <h2 class="animate__animated animate__fadeInDown">Chăm sóc sức khỏe cá koi</h2>
+                    <p class="animate__animated animate__fadeInUp">Hệ thống chăm sóc cá koi của chúng tôi cung cấp các lời khuyên về chất lượng nước, chế độ ăn uống và cách duy trì môi trường sống lý tưởng cho cá koi. Hãy cùng tìm hiểu cách giúp cá koi của bạn khỏe mạnh và phát triển lâu dài.</p>
+                    <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Đọc thêm</a>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <div class="carousel-container">
+                    <h2 class="animate__animated animate__fadeInDown">Môi trường sống hoàn hảo cho cá koi</h2>
+                    <p class="animate__animated animate__fadeInUp">Tạo ra một môi trường sống cân bằng và khỏe mạnh cho cá koi với hướng dẫn chi tiết của chúng tôi. Từ việc thiết lập bể cá đến các thói quen chăm sóc hàng ngày, chúng tôi sẽ hướng dẫn bạn mọi thứ cần thiết.</p>
+                    <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Tìm hiểu thêm</a>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+            <defs>
+                <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+            </defs>
+            <g class="wave1">
+                <use xlink:href="#wave-path" x="50" y="3"></use>
+            </g>
+            <g class="wave2">
+                <use xlink:href="#wave-path" x="50" y="0"></use>
+            </g>
+            <g class="wave3">
+                <use xlink:href="#wave-path" x="50" y="9"></use>
+            </g>
+        </svg>
+    </section><!-- /Hero Section -->
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Giới Thiệu</h2>
+            <p>Chúng tôi là ai</p>
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+                    <p>
+                        Hệ thống chăm sóc cá koi của chúng tôi mang đến một giải pháp toàn diện giúp bạn tạo dựng và duy trì một môi trường sống lý tưởng cho cá koi ngay tại nhà. Chúng tôi cung cấp các công cụ và hướng dẫn chi tiết giúp cá koi của bạn luôn khỏe mạnh và phát triển tốt nhất.
+                    </p>
+                    <ul>
+                        <li><i class="bi bi-check2-circle"></i> <span>Hướng dẫn thiết lập bể cá và chăm sóc cá koi từ A đến Z.</span></li>
+                        <li><i class="bi bi-check2-circle"></i> <span>Phương pháp duy trì chất lượng nước và dinh dưỡng phù hợp cho cá koi.</span></li>
+                        <li><i class="bi bi-check2-circle"></i> <span>Cung cấp các lời khuyên về sức khỏe cá koi và phòng tránh bệnh tật.</span></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <p>
+                        Với kiến thức chuyên sâu và sự đam mê đối với cá koi, chúng tôi cam kết giúp bạn xây dựng một hệ thống chăm sóc hoàn hảo cho những chú cá của mình. Từ việc lựa chọn giống cá koi phù hợp đến cách chăm sóc và duy trì sự sống của chúng, chúng tôi luôn đồng hành cùng bạn trong mọi giai đoạn.
+                    </p>
+                    <a href="#contact" class="read-more"><span>Tìm hiểu thêm</span><i class="bi bi-arrow-right"></i></a>
+                </div>
+
+            </div>
 
         </div>
-        <!-- End of Main Content -->
-    </div>
-    <!-- End of Content Wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+    </section><!-- /About Section -->
+    <!-- Features Section -->
+    <section id="features" class="features section">
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+        <div class="container">
+
+            <ul class="nav nav-tabs row d-flex" data-aos="fade-up" data-aos-delay="100">
+                <li class="nav-item col-3">
+                    <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
+                        <i class="bi bi-binoculars"></i>
+                        <h4 class="d-none d-lg-block">Giám sát chất lượng nước</h4>
+                    </a>
+                </li>
+                <li class="nav-item col-3">
+                    <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
+                        <i class="bi bi-box-seam"></i>
+                        <h4 class="d-none d-lg-block">Chế độ dinh dưỡng cho cá koi</h4>
+                    </a>
+                </li>
+                <li class="nav-item col-3">
+                    <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
+                        <i class="bi bi-brightness-high"></i>
+                        <h4 class="d-none d-lg-block">Tạo môi trường sống lý tưởng</h4>
+                    </a>
+                </li>
+
+            </ul><!-- End Tab Nav -->
+
+            <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+
+                <div class="tab-pane fade active show" id="features-tab-1">
+                    <div class="row">
+                        <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                            <h3>Giám sát chất lượng nước trong bể cá</h3>
+                            <p class="fst-italic">
+                                Việc duy trì chất lượng nước trong bể cá koi là yếu tố quan trọng để đảm bảo sức khỏe của cá. Hệ thống của chúng tôi cung cấp các công cụ giám sát chất lượng nước, giúp bạn dễ dàng kiểm tra các yếu tố như pH, nhiệt độ và mức độ oxy.
+                            </p>
+                            <ul>
+                                <li>
+                                    <i class="bi bi-check2-all"></i>
+                                    <span>Giám sát độ pH và độ cứng của nước để duy trì môi trường ổn định.</span>
+                                </li>
+                                <li><i class="bi bi-check2-all"></i> <span>Điều chỉnh nhiệt độ nước cho phù hợp với từng giai đoạn phát triển của cá.</span></li>
+                                <li><i class="bi bi-check2-all"></i> <span>Cung cấp thông tin về mức độ oxy hòa tan trong nước để đảm bảo sự sống của cá koi.</span></li>
+                            </ul>
+                            <p>
+                                Việc kiểm soát chất lượng nước là rất quan trọng để ngăn ngừa bệnh tật và bảo vệ sức khỏe của cá koi. Hệ thống của chúng tôi giúp bạn dễ dàng thực hiện điều này ngay tại nhà.
+                            </p>
+                        </div>
+                        <div class="col-lg-6 order-1 order-lg-2 text-center">
+                            <img src="assets/img/working-1.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div><!-- End Tab Content Item -->
+
+                <div class="tab-pane fade" id="features-tab-2">
+                    <div class="row">
+                        <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                            <h3>Chế độ dinh dưỡng cho cá koi</h3>
+                            <p>
+                                Dinh dưỡng hợp lý là yếu tố quan trọng giúp cá koi khỏe mạnh và phát triển tối ưu. Hệ thống chăm sóc cá koi của chúng tôi cung cấp các công thức ăn uống phù hợp với từng giai đoạn phát triển của cá koi.
+                            </p>
+                            <p class="fst-italic">
+                                Các loại thức ăn như thức ăn viên, tảo và các loại thực phẩm tươi sống sẽ giúp cá koi phát triển tốt nhất. Chúng tôi cũng cung cấp lời khuyên về cách phân bổ thức ăn để tránh lãng phí và đảm bảo cá ăn đủ dinh dưỡng.
+                            </p>
+                            <ul>
+                                <li><i class="bi bi-check2-all"></i> <span>Hướng dẫn cách chọn thức ăn phù hợp với từng loại cá koi.</span></li>
+                                <li><i class="bi bi-check2-all"></i> <span>Điều chỉnh chế độ ăn uống theo mùa và sự phát triển của cá.</span></li>
+                                <li><i class="bi bi-check2-all"></i> <span>Chế độ ăn kiêng giúp duy trì cân nặng và sức khỏe của cá koi.</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 order-1 order-lg-2 text-center">
+                            <img src="assets/img/working-2.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div><!-- End Tab Content Item -->
+
+                <div class="tab-pane fade" id="features-tab-3">
+                    <div class="row">
+                        <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                            <h3>Tạo môi trường sống lý tưởng cho cá koi</h3>
+                            <p>
+                                Việc tạo ra môi trường sống phù hợp giúp cá koi phát triển khỏe mạnh. Chúng tôi cung cấp các hướng dẫn về cách thiết lập bể cá, bao gồm việc lựa chọn vật liệu, trang trí và các yếu tố cần thiết để tạo môi trường sống tối ưu cho cá.
+                            </p>
+                            <ul>
+                                <li><i class="bi bi-check2-all"></i> <span>Thiết kế bể cá hợp lý để cá koi có đủ không gian và môi trường sống thoải mái.</span></li>
+                                <li><i class="bi bi-check2-all"></i> <span>Cung cấp các giải pháp để duy trì hệ thống lọc nước hiệu quả.</span></li>
+                                <li><i class="bi bi-check2-all"></i> <span>Hướng dẫn về việc sử dụng đáy bể, cây cỏ và các vật liệu trang trí phù hợp.</span></li>
+                            </ul>
+                            <p class="fst-italic">
+                                Hệ thống của chúng tôi sẽ giúp bạn tạo ra một không gian sống lý tưởng cho cá koi của bạn, từ đó giúp chúng phát triển khỏe mạnh và lâu dài.
+                            </p>
+                        </div>
+                        <div class="col-lg-6 order-1 order-lg-2 text-center">
+                            <img src="assets/img/working-3.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div><!-- End Tab Content Item -->
+
+
+
             </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+
+        </div>
+
+    </section><!-- /Features Section -->
+    <!-- Services Section -->
+    <section id="services" class="services section">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Dịch Vụ Của Chúng Tôi</h2>
+            <p>Chúng tôi mang đến những gì cho việc chăm sóc cá koi của bạn</p>
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-droplet" style="color: #0dcaf0;"></i>
+                        </div>
+                        <a href="service-details.html" class="stretched-link">
+                            <h3>Theo Dõi Chất Lượng Nước</h3>
+                        </a>
+                        <p>Chúng tôi theo dõi chất lượng nước để đảm bảo điều kiện lý tưởng cho cá koi của bạn. Giám sát các chỉ số như pH, độ oxy và nhiệt độ nước.</p>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-patch-check" style="color: #fd7e14;"></i>
+                        </div>
+                        <a href="service-details.html" class="stretched-link">
+                            <h3>Tư Vấn Dinh Dưỡng Cho Cá Koi</h3>
+                        </a>
+                        <p>Cung cấp chế độ ăn uống tốt nhất cho cá koi qua các lịch ăn uống và lựa chọn thực phẩm phù hợp, giúp cá khỏe mạnh và phát triển tốt.</p>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-house-door" style="color: #20c997;"></i>
+                        </div>
+                        <a href="service-details.html" class="stretched-link">
+                            <h3>Thiết Lập Môi Trường Sống Lý Tưởng</h3>
+                        </a>
+                        <p>Chúng tôi hỗ trợ bạn thiết lập một môi trường sống lý tưởng cho cá koi. Từ các hệ thống lọc nước đến các đặc điểm trang trí, giúp cá koi của bạn sống trong một không gian an toàn và thoải mái.</p>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-thermometer-sun" style="color: #df1529;"></i>
+                        </div>
+                        <a href="service-details.html" class="stretched-link">
+                            <h3>Kiểm Soát Nhiệt Độ Nước</h3>
+                        </a>
+                        <p>Kiểm soát nhiệt độ là yếu tố quan trọng để đảm bảo sức khỏe của cá koi. Chúng tôi giúp bạn quản lý và giám sát nhiệt độ nước, giúp cá koi luôn ở trong phạm vi nhiệt độ lý tưởng.</p>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-shield-lock" style="color: #6610f2;"></i>
+                        </div>
+                        <a href="service-details.html" class="stretched-link">
+                            <h3>Chăm Sóc Sức Khỏe & Phòng Ngừa Bệnh Tật</h3>
+                        </a>
+                        <p>Chúng tôi cung cấp các lời khuyên và hệ thống giám sát để phòng ngừa các bệnh phổ biến của cá koi, giúp cá koi của bạn luôn khỏe mạnh và phát triển tốt.</p>
+                    </div>
+                </div><!-- End Service Item -->
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-item position-relative">
+                        <div class="icon">
+                            <i class="bi bi-calendar-event" style="color: #f3268c;"></i>
+                        </div>
+                        <a href="service-details.html" class="stretched-link">
+                            <h3>Bảo Dưỡng & Theo Dõi Định Kỳ</h3>
+                        </a>
+                        <p>Chăm sóc định kỳ là rất quan trọng. Chúng tôi cung cấp các lịch bảo dưỡng định kỳ cho hồ cá koi, đảm bảo mọi thứ từ chất lượng nước đến hệ thống lọc luôn trong tình trạng tốt nhất.</p>
+                    </div>
+                </div><!-- End Service Item -->
+
+            </div>
+
+        </div>
+
+    </section><!-- End Services Section -->
+
+    <!-- Faq Section -->
+    <section id="faq" class="faq section">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Câu Hỏi Thường Gặp</h2>
+            <p>Những câu hỏi thường gặp về chăm sóc cá Koi</p>
+        </div><!-- End Section Title -->
+
+        <div class="container" data-aos="fade-up">
+            <div class="row">
+                <div class="col-12">
+                    <div class="custom-accordion" id="accordion-faq">
+                        <div class="accordion-item">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-faq-1">
+                                    Làm thế nào để tải về và đăng ký ứng dụng chăm sóc cá Koi?
+                                </button>
+                            </h2>
+
+                            <div id="collapse-faq-1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion-faq">
+                                <div class="accordion-body">
+                                    Hiện tại chúng tôi chưa thiết kế một ứng dụng nào tương tự ngoài ở trên website, chúng tôi sẽ cố gắng hoàn thiện trong tương lai
+                                </div>
+                            </div>
+                        </div>
+                        <!-- .accordion-item -->
+
+                        <div class="accordion-item">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-faq-2">
+                                    Làm thế nào để tạo tài khoản?
+                                </button>
+                            </h2>
+                            <div id="collapse-faq-2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-faq">
+                                <div class="accordion-body">
+                                    Để tạo tài khoản bạn chỉ cần click chuột vào phần "Đăng ký" ở góc phải trên cùng của màn hình
+                                </div>
+                            </div>
+                        </div>
+                        <!-- .accordion-item -->
+
+                        <div class="accordion-item">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-faq-3">
+                                    Làm thế nào để đảm bảo chất lượng nước trong ao cá Koi?
+                                </button>
+                            </h2>
+
+                            <div id="collapse-faq-3" class="collapse" aria-labelledby="headingThree" data-parent="#accordion-faq">
+                                <div class="accordion-body">
+                                    Để đảm bảo chất lượng nước trong ao cá Koi, bạn cần kiểm tra và duy trì các chỉ số như độ pH, độ cứng của nước, amoniac, nitrit, nitrat và nhiệt độ nước. Bên cạnh đó, thay nước định kỳ và sử dụng hệ thống lọc nước hiệu quả là rất quan trọng.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- .accordion-item -->
+
+                    </div>
+                </div>
             </div>
         </div>
+    </section><!-- /Faq Section -->
+    <!-- Team Section -->
+    <section id="team" class="team section">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Team</h2>
+            <p>Our Hardworking Team</p>
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-member">
+                        <div class="member-img">
+                            <img src="~/images/Quy1.png" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Huỳnh Thanh Quý</h4>
+                            <span>Trưởng nhóm</span>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-member">
+                        <div class="member-img">
+                            <img src="~/images/Quy2.png" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter-x"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Nguyễn Hoàng Thanh Quý</h4>
+                            <span>Thành viên</span>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+                    <div class="team-member">
+                        <div class="member-img">
+                            <img src="~/images/Binh.png" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter-x"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Dương Ngọc Bình</h4>
+                            <span>Thành viên</span>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+                    <div class="team-member">
+                        <div class="member-img">
+                            <img src="~/images/Nhat.jpg" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter-x"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Trần Nguyễn Như Nhật</h4>
+                            <span>Thành viên</span>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+                    <div class="team-member">
+                        <div class="member-img">
+                            <img src="~/images/Duyen.png" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter-x"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Trần Thị Kim Duyên</h4>
+                            <span>Thành viên</span>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+                    <div class="team-member">
+                        <div class="member-img">
+                            <img src="~/images/Kiet.png" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter-x"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Nguyễn Phạm Gia Kiệt</h4>
+                            <span>Thành viên</span>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+                    <div class="team-member">
+                        <div class="member-img">
+                            <img src="~/images/Null.jpg" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter-x"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Nguyễn Lê Minh Quân</h4>
+                            <span>Thành viên</span>
+                        </div>
+                    </div>
+                </div><!-- End Team Member -->
+            </div>
+        </div>
+
     </div>
-</div>
+
+    </section><!-- /Team Section -->
+    <!-- Recent Posts Section -->
+    <section id="recent-posts" class="recent-posts section">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Recent Posts</h2>
+            <p>Recent Blog Posts<br></p>
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <article>
+
+                        <div class="post-img">
+                            <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+                        </div>
+
+                        <p class="post-category">Politics</p>
+
+                        <h2 class="title">
+                            <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
+                        </h2>
+
+                        <div class="d-flex align-items-center">
+                            <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+                            <div class="post-meta">
+                                <p class="post-author">Maria Doe</p>
+                                <p class="post-date">
+                                    <time datetime="2022-01-01">Jan 1, 2022</time>
+                                </p>
+                            </div>
+                        </div>
+
+                    </article>
+                </div><!-- End post list item -->
+
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <article>
+
+                        <div class="post-img">
+                            <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
+                        </div>
+
+                        <p class="post-category">Sports</p>
+
+                        <h2 class="title">
+                            <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
+                        </h2>
+
+                        <div class="d-flex align-items-center">
+                            <img src="assets/img/blog/blog-author-2.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+                            <div class="post-meta">
+                                <p class="post-author">Allisa Mayer</p>
+                                <p class="post-date">
+                                    <time datetime="2022-01-01">Jun 5, 2022</time>
+                                </p>
+                            </div>
+                        </div>
+
+                    </article>
+                </div><!-- End post list item -->
+
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <article>
+
+                        <div class="post-img">
+                            <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
+                        </div>
+
+                        <p class="post-category">Entertainment</p>
+
+                        <h2 class="title">
+                            <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
+                        </h2>
+
+                        <div class="d-flex align-items-center">
+                            <img src="assets/img/blog/blog-author-3.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+                            <div class="post-meta">
+                                <p class="post-author">Mark Dower</p>
+                                <p class="post-date">
+                                    <time datetime="2022-01-01">Jun 22, 2022</time>
+                                </p>
+                            </div>
+                        </div>
+
+                    </article>
+                </div><!-- End post list item -->
+
+            </div><!-- End recent posts list -->
+
+        </div>
+
+    </section><!-- /Recent Posts Section -->
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Liên hệ</h2>
+            <p>Liên hệ chúng tôi</p>
+        </div><!-- End Section Title -->
+
+        <div class="container" data-aos="fade" data-aos-delay="100">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-4">
+                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                        <i class="bi bi-geo-alt flex-shrink-0"></i>
+                        <div>
+                            <h3>Address</h3>
+                            <p>70 Đ. Tô Ký, Tân Chánh Hiệp, Quận 12, Hồ Chí Minh</p>
+                        </div>
+                    </div><!-- End Info Item -->
+
+                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+                        <i class="bi bi-telephone flex-shrink-0"></i>
+                        <div>
+                            <h3>Call Us</h3>
+                            <p>+84667734508</p>
+                        </div>
+                    </div><!-- End Info Item -->
+
+                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+                        <i class="bi bi-envelope flex-shrink-0"></i>
+                        <div>
+                            <h3>Email Us</h3>
+                            <p>Bug@ut.edu.vn</p>
+                        </div>
+                    </div><!-- End Info Item -->
+
+                </div>
+
+                <div class="col-lg-8">
+                    <form method="post" action="" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+                        <div class="row gy-4">
+
+                            <div class="col-md-6">
+                                <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                            </div>
+
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                            </div>
+
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                            </div>
+
+                            <div class="col-md-12">
+                                <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                            </div>
+
+                            <div class="col-md-12 text-center">
+                                <button type="submit">Send Message</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+
+                </div><!-- End Contact Form -->
+
+            </div>
+
+        </div>
+
+    </section><!-- /Contact Section -->
+
+</main>
+
+<footer id="footer" class="footer dark-background">
+    <div class="container">
+        <h3 class="sitename">KOI CARE SYSTEM AT HOME</h3>
+        <p>Chúng tôi cung cấp dịch vụ chăm sóc koi chuyên nghiệp. Đảm bảo chất lượng và sự phát triển tốt nhất cho thú cưng của bạn.</p>
+        <div class="social-links d-flex justify-content-center">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-skype"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+        </div>
+    </div>
+</footer>
+
+
+
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Preloader -->
+<div id="preloader"></div>

@@ -1,3 +1,4 @@
+﻿using KoiCareSystemAtHome.Repositories.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -12,8 +13,8 @@ public class IndexModel : PageModel
         _logger = logger;
     }
 
-    public void OnGet()
+    public void OnGet(string UserId)
     {
-
+        
     }
 }

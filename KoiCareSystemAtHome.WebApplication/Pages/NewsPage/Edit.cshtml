@@ -5,29 +5,39 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="News.PostId" />
+
             <div class="form-group">
                 <label asp-for="News.Author" class="control-label"></label>
                 <input asp-for="News.Author" class="form-control" />
                 <span asp-validation-for="News.Author" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="News.Title" class="control-label"></label>
                 <input asp-for="News.Title" class="form-control" />
                 <span asp-validation-for="News.Title" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="News.Content" class="control-label"></label>
                 <input asp-for="News.Content" class="form-control" />
                 <span asp-validation-for="News.Content" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="News.PublishDate" class="control-label"></label>
                 <input asp-for="News.PublishDate" class="form-control" />
                 <span asp-validation-for="News.PublishDate" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label for="ImageFile">Upload Image</label>
+                <input type="file" name="ImageFile" class="form-control" />
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -40,5 +50,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

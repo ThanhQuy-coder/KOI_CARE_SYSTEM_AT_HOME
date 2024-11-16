@@ -52,7 +52,7 @@
                                         </div>
                                         <!--Đăng nhập-->
                                         <div>
-                                            <input class="btn btn-primary btn-user btn-block" type="submit" value="Login Account" />
+                                            <input class="btn btn-primary btn-user btn-block" type="submit" value="Login Account"/>
                                         </div>
                                         <hr />
                                         <!--???-->
@@ -82,22 +82,3 @@
             </div>
         </div>
     </div>
-
-<script>
-    // Kiểm tra xem trang có bị tải lại hay không
-    window.addEventListener("beforeunload", function (event) {
-        // Lưu trạng thái vào localStorage để xác định khi nào trang bị tải lại
-        localStorage.setItem('pageReloaded', 'true');
-    });
-
-    // Kiểm tra khi trang tải lại
-    window.addEventListener("load", function () {
-        if (localStorage.getItem('pageReloaded') === 'true') {
-            // Hiển thị thông báo "Mật khẩu không hợp lệ"
-            alert("Tài khoản hoặc mật khẩu không hợp lệ vui lòng kiểm tra lại");
-
-            // Sau khi hiển thị thông báo, reset lại trạng thái
-            localStorage.removeItem('pageReloaded');
-        }
-    });
-</script>

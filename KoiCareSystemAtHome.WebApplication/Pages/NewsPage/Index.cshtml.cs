@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
 {
@@ -22,29 +23,43 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
 
         public async Task<IActionResult> OnGetAsync(string searchTerm, string author, DateTime? publishDate)
         {
-            News = await _newsService.GetAllNewsAsync();
+            var newsList = await _newsService.GetAllNewsAsync();
 
-            if (!string.IsNullOrEmpty(searchTerm))
+            // Đảm bảo rằng danh sách không bị null
+            if (newsList != null)
             {
-                News = News.Where(n => n.Title.Contains(searchTerm) || n.Content.Contains(searchTerm)).ToList();
+                // Loại bỏ các mục null trong danh sách nếu có
+                News = newsList.Where(n => n != null).ToList();
+
+                // Thực hiện tìm kiếm nếu có từ khóa
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    News = News.Where(n =>
+                        (n.Title != null && n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) ||
+                        (n.Content != null && n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                    ).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(author))
+                {
+                    News = News.Where(n => n.Author != null && n.Author.Contains(author, StringComparison.OrdinalIgnoreCase)).ToList();
+                }
+
+                if (publishDate.HasValue)
+                {
+                    News = News.Where(n => n.PublishDate.Date == publishDate.Value.Date).ToList();
+                }
             }
-
-            if (!string.IsNullOrEmpty(author))
+            else
             {
-                News = News.Where(n => n.Author.Contains(author)).ToList();
-            }
-
-            if (publishDate.HasValue)
-            {
-                News = News.Where(n => n.PublishDate.Date == publishDate.Value.Date).ToList();
+                // Nếu danh sách bị null, khởi tạo một danh sách trống
+                News = new List<News>();
             }
 
             return Page();
         }
-
     }
 }
-
 
 
 

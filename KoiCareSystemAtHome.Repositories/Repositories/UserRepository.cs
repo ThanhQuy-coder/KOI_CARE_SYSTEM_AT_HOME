@@ -1,6 +1,7 @@
 ﻿using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,6 +87,19 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             {
                 throw new NotImplementedException(ex.ToString());
             }
+        }
+
+        public bool CheckUser(Guid AccountId,ref Guid UserId)
+        {
+            foreach (var user in _dbContext.Users)
+            {
+                if(AccountId == user.AccountId)
+                {
+                    UserId = user.UserId;
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

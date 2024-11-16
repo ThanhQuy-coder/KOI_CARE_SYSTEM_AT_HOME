@@ -15,5 +15,7 @@ namespace KoiCareSystemAtHome.Services.Interfaces
         Boolean AddUser(User user);
         Boolean UpdateUser(User user);
         Task<User?> GetUserById(Guid? Id);
+
+        Boolean CheckUser(Guid AccountId,ref Guid UserId);
     }
 }

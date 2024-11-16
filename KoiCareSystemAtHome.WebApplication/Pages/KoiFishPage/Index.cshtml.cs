@@ -31,6 +31,20 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
 
         public async Task<IActionResult> OnGetAsync()
         {
+            // Lấy UserId từ Session
+            var userId = HttpContext.Session.GetString("UserId");
+
+            // Kiểm tra nếu không có UserId trong Session (nghĩa là chưa đăng nhập)
+            if (string.IsNullOrEmpty(userId))
+            {
+                // Chuyển hướng người dùng về trang đăng nhập
+                return RedirectToPage("/LoginPage/Index");
+            }
+
+            // Nếu có UserId, tiếp tục xử lý
+            // Truyền UserId vào ViewData để có thể sử dụng trong Razor Page nếu cần
+            ViewData["UserId"] = userId;
+
             KoiFish = await _service.GetAllKoiFish();
 
             // Tìm kiếm theo tên cá hoặc giá
@@ -51,6 +65,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
             {
                 KoiFish = KoiFish.Where(kf => kf.Pond.NamePond.Contains(PondName, StringComparison.OrdinalIgnoreCase)).ToList();
             }
+
 
             return Page();
         }

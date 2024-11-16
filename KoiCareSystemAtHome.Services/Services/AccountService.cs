@@ -46,9 +46,9 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.UpdateAccount(account);
         }
 
-        public bool checkAccount(string email, string password)
+        public bool checkAccount(string email, string password,ref Guid getId)
         {
-            return _repository.checkAccount(email, password);
+            return _repository.checkAccount(email, password,ref getId);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage.IndexModel
 
+
 <div class="container">
     <!-- Header với thanh tìm kiếm, tiêu đề, và nút tạo mới -->
     <div class="row bg-info text-dark py-3 mb-4 d-flex justify-content-between align-items-center">
@@ -17,6 +18,12 @@
             <a asp-page="Create" class="btn btn-success"><i class="fa fa-plus-circle"></i> Create Koi Fish</a>
         </div>
     </div>
+
+@{
+    bool isLoggedIn = !string.IsNullOrEmpty(HttpContext.Session.GetString("UserId"));
+    string UserId = HttpContext.Session.GetString("UserId");
+}
+
 
     <!-- Danh sách cá Koi dưới dạng thẻ -->
     <div class="row">

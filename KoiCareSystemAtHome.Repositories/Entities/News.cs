@@ -14,4 +14,7 @@ public partial class News
     public string Content { get; set; } = null!;
 
     public DateTime PublishDate { get; set; }
+
+    public string? ImageUrl { get; set; }
+   
 }

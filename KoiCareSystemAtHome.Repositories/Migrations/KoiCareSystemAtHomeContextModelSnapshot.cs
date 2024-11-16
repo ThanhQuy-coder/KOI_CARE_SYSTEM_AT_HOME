@@ -36,6 +36,10 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("email");
 
+                    b.Property<string>("PassWordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PassWorkHash")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -48,12 +52,12 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("AccountId")
-                        .HasName("PK__Account__349DA586BD287530");
+                        .HasName("PK__Account__349DA586BFFA8EDE");
 
-                    b.HasIndex(new[] { "Username" }, "UQ__Account__536C85E498ADDC16")
+                    b.HasIndex(new[] { "Username" }, "UQ__Account__536C85E4E411DF1D")
                         .IsUnique();
 
-                    b.HasIndex(new[] { "Email" }, "UQ__Account__AB6E6164E9B079EA")
+                    b.HasIndex(new[] { "Email" }, "UQ__Account__AB6E61647D497C94")
                         .IsUnique();
 
                     b.ToTable("Account", (string)null);
@@ -86,7 +90,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                         .HasColumnName("requiredFoodAmount");
 
                     b.HasKey("FeedingScheduleId")
-                        .HasName("PK__FeedingS__1B08C845646F4CF3");
+                        .HasName("PK__FeedingS__1B08C84542D06A71");
 
                     b.HasIndex("FishId");
 
@@ -161,7 +165,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                         .HasColumnName("weightFish");
 
                     b.HasKey("FishId")
-                        .HasName("PK__KoiFish__5222DA39EDB1C1CB");
+                        .HasName("PK__KoiFish__5222DA391BAAB9AE");
 
                     b.HasIndex("PondId");
 
@@ -178,14 +182,17 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
 
                     b.Property<string>("Author")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("author");
 
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("ntext")
                         .HasColumnName("content");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("PublishDate")
                         .HasColumnType("datetime")
@@ -196,7 +203,10 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                         .HasColumnName("title");
 
                     b.HasKey("PostId")
-                        .HasName("PK__News__DD0C73BA141E91D1");
+                        .HasName("PK__News__DD0C73BA884B0BE7");
+
+                    b.HasIndex(new[] { "Author" }, "UQ__News__C2E6DB671928440D")
+                        .IsUnique();
 
                     b.ToTable("News");
                 });
@@ -209,37 +219,36 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                         .HasColumnName("PondID")
                         .HasDefaultValueSql("(newid())");
 
-                    b.Property<double>("Depth")
+                    b.Property<double?>("Depth")
                         .HasColumnType("float")
                         .HasColumnName("depth");
 
-                    b.Property<int>("DrainCount")
+                    b.Property<int?>("DrainCount")
                         .HasColumnType("int")
                         .HasColumnName("drainCount");
 
                     b.Property<string>("ImagePond")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("imagePond");
 
                     b.Property<string>("NamePond")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
-                    b.Property<double>("PumpCapacity")
+                    b.Property<double?>("PumpCapacity")
                         .HasColumnType("float")
                         .HasColumnName("pumpCapacity");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Volume")
+                    b.Property<double?>("Volume")
                         .HasColumnType("float")
                         .HasColumnName("volume");
 
                     b.HasKey("PondId")
-                        .HasName("PK__Pond__D18BF854BF5D6EE2");
+                        .HasName("PK__Pond__D18BF8541C4B2D40");
 
                     b.HasIndex("UserId");
 
@@ -288,7 +297,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ProductId")
-                        .HasName("PK___Product__2D10D14A9E48844F");
+                        .HasName("PK___Product__2D10D14AF3D98433");
 
                     b.HasIndex("UserId");
 
@@ -316,7 +325,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                         .HasColumnName("requiredSaltAmount");
 
                     b.HasKey("SaltCalculationId")
-                        .HasName("PK__SaltCalc__69E08378212B7F83");
+                        .HasName("PK__SaltCalc__69E0837868F56082");
 
                     b.HasIndex("PondId");
 
@@ -356,7 +365,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                         .HasColumnName("_Role");
 
                     b.HasKey("UserId")
-                        .HasName("PK___User__1788CC4C0FA9730F");
+                        .HasName("PK___User__1788CC4C688C32AF");
 
                     b.HasIndex("AccountId");
 
@@ -408,7 +417,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                         .HasColumnName("temperature");
 
                     b.HasKey("WaterParameterId")
-                        .HasName("PK__WaterPar__5D1C0C72B31FBE7E");
+                        .HasName("PK__WaterPar__5D1C0C728A04E1A9");
 
                     b.HasIndex("PondId");
 
@@ -420,8 +429,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                     b.HasOne("KoiCareSystemAtHome.Repositories.Entities.KoiFish", "Fish")
                         .WithMany("FeedingSchedules")
                         .HasForeignKey("FishId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("FK_FeedingSchedule_KoiFish_FishId");
+                        .HasConstraintName("FK__FeedingSc__fishI__47DBAE45");
 
                     b.Navigation("Fish");
                 });
@@ -431,8 +439,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                     b.HasOne("KoiCareSystemAtHome.Repositories.Entities.Pond", "Pond")
                         .WithMany("KoiFishes")
                         .HasForeignKey("PondId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("FK_KoiFish_PondID");
+                        .HasConstraintName("FK__KoiFish__PondID__440B1D61");
 
                     b.Navigation("Pond");
                 });
@@ -442,8 +449,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                     b.HasOne("KoiCareSystemAtHome.Repositories.Entities.User", "User")
                         .WithMany("Ponds")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("FK_Pond_User");
+                        .HasConstraintName("FK__Pond__UserId__403A8C7D");
 
                     b.Navigation("User");
                 });
@@ -453,8 +459,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                     b.HasOne("KoiCareSystemAtHome.Repositories.Entities.User", "User")
                         .WithMany("Products")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("FK_Product_User_UserId");
+                        .HasConstraintName("FK___Product__UserId__534D60F1");
 
                     b.Navigation("User");
                 });
@@ -464,8 +469,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                     b.HasOne("KoiCareSystemAtHome.Repositories.Entities.Pond", "Pond")
                         .WithMany("SaltCalculations")
                         .HasForeignKey("PondId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("FK_SaltCalculation_Pond_PondId");
+                        .HasConstraintName("FK__SaltCalcu__PondI__4F7CD00D");
 
                     b.Navigation("Pond");
                 });
@@ -475,7 +479,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                     b.HasOne("KoiCareSystemAtHome.Repositories.Entities.Account", "Account")
                         .WithMany("Users")
                         .HasForeignKey("AccountId")
-                        .HasConstraintName("FK___User__AccountId__29572725");
+                        .HasConstraintName("FK___User__AccountId__3C69FB99");
 
                     b.Navigation("Account");
                 });
@@ -485,8 +489,7 @@ namespace KoiCareSystemAtHome.Repositories.Migrations
                     b.HasOne("KoiCareSystemAtHome.Repositories.Entities.Pond", "Pond")
                         .WithMany("WaterParameters")
                         .HasForeignKey("PondId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .HasConstraintName("FK_WaterParameter_Pond_PondId");
+                        .HasConstraintName("FK__WaterPara__PondI__4BAC3F29");
 
                     b.Navigation("Pond");
                 });

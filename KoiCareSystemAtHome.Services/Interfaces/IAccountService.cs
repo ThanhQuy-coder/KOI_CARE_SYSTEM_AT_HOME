@@ -15,6 +15,6 @@ namespace KoiCareSystemAtHome.Services.Interfaces
         Boolean AddAccount(Account account);
         Boolean UpdateAccount(Account account);
         Task<Account?> GetAccountById(Guid? Id);
-        Boolean checkAccount(string email, string password);
+        Boolean checkAccount(string email, string password,ref Guid getId);
     }
 }

@@ -1,0 +1,74 @@
+﻿/* Container cho toàn bộ danh sách tin tức */
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+    justify-content: space-between;
+    padding: 20px; /* Padding cho container để tạo khoảng cách với viền ngoài */
+}
+
+/* Các mục tin tức */
+.news-item {
+    background-color: #ffffff; /* Màu nền trắng cho từng mục tin tức */
+    border-radius: 8px; /* Bo tròn các góc */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng đổ bóng */
+    overflow: hidden; /* Đảm bảo nội dung không tràn ra ngoài */
+    width: calc(33% - 20px); /* Mỗi mục chiếm 1/3 container với khoảng cách giữa các mục */
+    transition: transform 0.3s; /* Hiệu ứng chuyển động khi hover */
+}
+
+    /* Hình ảnh trong mỗi mục tin tức */
+    .news-item img {
+        width: 100%; /* Chiếm toàn bộ chiều rộng của mục tin tức */
+        height: 200px; /* Chiều cao cố định */
+        object-fit: cover; /* Đảm bảo ảnh vừa khít mà không bị biến dạng */
+    }
+
+/* Nội dung tin tức */
+.news-content {
+    padding: 15px; /* Khoảng cách giữa nội dung và viền mục tin tức */
+}
+
+    /* Tiêu đề tin tức */
+    .news-content h3 {
+        font-size: 1.2rem;
+        margin: 10px 0; /* Khoảng cách trên và dưới */
+    }
+
+    /* Thông tin bổ sung như ngày xuất bản và nội dung */
+    .news-content p {
+        color: #555; /* Màu xám cho nội dung để dễ nhìn hơn */
+        margin-bottom: 10px;
+    }
+
+    /* Các liên kết như Edit, Details, Delete */
+    .news-content a {
+        display: inline-block;
+        margin-top: 10px;
+        color: #007bff; /* Màu xanh cho liên kết */
+        text-decoration: none; /* Xóa gạch chân mặc định */
+        font-weight: bold;
+        margin-right: 10px; /* Khoảng cách giữa các liên kết */
+    }
+
+        .news-content a:hover {
+            text-decoration: underline; /* Gạch chân khi hover để làm nổi bật */
+        }
+
+/* Hiệu ứng khi hover vào mục tin tức */
+.news-item:hover {
+    transform: scale(1.05); /* Tăng kích thước lên 5% */
+}
+
+/* Responsive cho các thiết bị có màn hình nhỏ hơn */
+@media (max-width: 992px) {
+    .news-item {
+        width: calc(50% - 20px); /* Chiếm 1/2 container trên màn hình vừa */
+    }
+}
+
+@media (max-width: 576px) {
+    .news-item {
+        width: 100%; /* Chiếm toàn bộ container trên màn hình nhỏ */
+    }
+}

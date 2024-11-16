@@ -47,9 +47,16 @@
                     <span>Home</span>
                 </a>
             </li>
+            <!-- Nav Item - Tables - Home -->
+            <li class="nav-item">
+                <a class="nav-link" asp-page="/DashBoard">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Dash Board</span>
+                </a>
+            </li>
             <!-- Nav Item - Tables - Pond -->
             <li class="nav-item">
-                <a class="nav-link" asp-page="/PondPage/Index">
+                <a class="nav-link" asp-page="/PondPage/Index" asp-route-UserId="@ViewData["UserId"]">
                     <i class="fa-solid fa-droplet"></i>
                     <span>Pond</span>
                 </a>
