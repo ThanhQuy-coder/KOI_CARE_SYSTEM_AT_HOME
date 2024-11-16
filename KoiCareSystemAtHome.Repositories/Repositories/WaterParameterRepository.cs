@@ -95,6 +95,5 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
                 return false;
             }
         }
-        // dinh nghia ham tinh toan
     }
 }
