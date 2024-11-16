@@ -1,78 +1,105 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages.IndexModel
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.WaterParameter[0].Temperature)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WaterParameter[0].SaltLevel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WaterParameter[0].PH)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WaterParameter[0].Oxygen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WaterParameter[0].Nitrie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WaterParameter[0].Nitrate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WaterParameter[0].Phospate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WaterParameter[0].MeasurementTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WaterParameter[0].Pond)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.WaterParameter) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Temperature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SaltLevel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PH)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Oxygen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nitrie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nitrate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phospate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MeasurementTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pond.NamePond)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.WaterParameterId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.WaterParameterId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.WaterParameterId">Delete</a>
-            </td>
-        </tr>
+<div class="container">
+    <!-- Header với tiêu đề và nút tạo mới -->
+    <div class="row bg-info text-dark py-3 mb-4 d-flex justify-content-between align-items-center">
+        <div class="col text-center">
+            <h1 class="mb-0">Danh sách Thông số nước</h1>
+        </div>
+        <div class="col-auto d-flex align-items-center">
+            <!-- Biểu tượng chuông cảnh báo -->
+            <div class="position-relative mr-3">
+                <button type="button" class="btn btn-warning" id="alertBell" data-toggle="collapse" data-target="#alertBox" aria-expanded="false" aria-controls="alertBox">
+                    <i class="fa fa-bell"></i>
+                    <span class="badge badge-danger">@((TempData["WarningMessages"] != null && !string.IsNullOrEmpty(TempData["WarningMessages"].ToString())) ? "!" : "")</span>
+                </button>
+                <!-- Hộp cảnh báo (sẽ hiển thị khi nhấn vào chuông) -->
+                <div class="collapse position-absolute mt-2" id="alertBox" style="width: 300px; right: 0; z-index: 1050;">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <strong>Cảnh báo:</strong>
+                        </div>
+                        <div class="card-body">
+                            @if (TempData["WarningMessages"] != null && !string.IsNullOrEmpty(TempData["WarningMessages"].ToString()))
+                            {
+                                <ul>
+                                    @{
+                                        var messages = TempData["WarningMessages"].ToString().Split(";");
+                                        TempData.Keep("WarningMessages"); // Giữ lại cho các lần truy cập sau nếu cần
+                                    }
+                                    @foreach (var message in messages)
+                                    {
+                                        <li>@message</li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p>Không có cảnh báo.</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Hiển thị thông báo thành công -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            <strong>@TempData["SuccessMessage"]</strong>
+        </div>
+        TempData.Keep("SuccessMessage");
+    }
+
+    <!-- Danh sách Thông số nước dưới dạng thẻ -->
+    <div class="row">
+        @foreach (var item in Model.WaterParameter)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Hồ: @item.Pond.NamePond</h5>
+
+                        <!-- Thông tin về thông số nước -->
+                        <p class="card-text"><i class="fa fa-thermometer-half text-muted"></i> Nhiệt độ: @item.Temperature °C</p>
+                        <p class="card-text"><i class="fa fa-water text-muted"></i> Mức muối: @item.SaltLevel %</p>
+                        <p class="card-text"><i class="fa fa-vial text-muted"></i> pH: @item.PH</p>
+                        <p class="card-text"><i class="fa fa-wind text-muted"></i> Oxy: @item.Oxygen mg/L</p>
+                        <p class="card-text"><i class="fa fa-dna text-muted"></i> Nitrit: @item.Nitrie mg/L</p>
+                        <p class="card-text"><i class="fa fa-dna text-muted"></i> Nitrat: @item.Nitrate mg/L</p>
+                        <p class="card-text"><i class="fa fa-leaf text-muted"></i> Phosphat: @item.Phospate mg/L</p>
+                        <p class="card-text"><i class="fa fa-clock text-muted"></i> Thời gian đo: @item.MeasurementTime.ToShortDateString()</p>
+
+                        <!-- Nút Xem Chi Tiết lớn -->
+                        <a asp-page="./Details" asp-route-id="@item.WaterParameterId" class="btn btn-primary btn-block mb-2">
+                            <i class="fa fa-eye"></i> Xem chi tiết
+                        </a>
+
+                        <!-- Nút Edit và Delete nhỏ với biểu tượng -->
+                        <div class="d-flex justify-content-between">
+                            <a asp-page="./Edit" asp-route-id="@item.WaterParameterId" class="btn btn-warning flex-fill mx-1">
+                                <i class="fa fa-edit"></i> Edit
+                            </a>
+                            <a asp-page="./Delete" asp-route-id="@item.WaterParameterId" class="btn btn-danger flex-fill mx-1">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Kích hoạt Tooltip và Collapse của Bootstrap -->
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 }
-    </tbody>
-</table>

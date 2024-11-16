@@ -49,7 +49,7 @@ namespace KoiCareSystemAtHome.Services.Services
 
         public bool CheckUser(Guid AccountId,ref Guid UserId)
         {
-            return (_repository.CheckUser(AccountId,ref UserId));
+            return (_repository.CheckUser(AccountId, ref UserId));
         }
     }
 }
