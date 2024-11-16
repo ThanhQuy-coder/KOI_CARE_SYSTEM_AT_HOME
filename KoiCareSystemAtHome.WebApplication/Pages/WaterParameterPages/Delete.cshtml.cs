@@ -50,6 +50,8 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
                 return NotFound();
             }
             _service.DelWaterParameter((Guid)id);
+            TempData.Remove("WarningMessages");
+            TempData.Remove("SuccessMessage");
             return RedirectToPage("./Index");
         }
     }

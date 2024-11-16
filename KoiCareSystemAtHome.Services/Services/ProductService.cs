@@ -60,6 +60,5 @@ namespace KoiCareSystemAtHome.Services.Services
             return await _repository.SearchProductAsync(searchTerm);
 
         }
-
     }
 }

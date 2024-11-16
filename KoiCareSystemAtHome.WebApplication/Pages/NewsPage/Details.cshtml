@@ -5,6 +5,7 @@
     /* Định nghĩa CSS cho chi tiết tin tức */
     .details-container {
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         padding: 20px;
         gap: 30px;
@@ -18,22 +19,32 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-        .news-details h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
+    .news-details h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+    }
 
-        .news-details .author,
-        .news-details .publish-date {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
+    .news-details img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
 
-        .news-details .content {
-            font-size: 18px;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
+    .news-details .author,
+    .news-details .publish-date {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #666;
+    }
+
+    .news-details .content {
+        font-size: 18px;
+        margin-top: 20px;
+        line-height: 1.6;
+        color: #444;
+    }
 
     /* Định nghĩa CSS cho Other News */
     .other-news {
@@ -44,11 +55,12 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-        .other-news h4 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+    .other-news h4 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #333;
+    }
 
     .other-news-container {
         display: flex;
@@ -63,16 +75,17 @@
         box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
     }
 
-        .other-news-item h5 {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
+    .other-news-item h5 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #333;
+    }
 
-        .other-news-item p {
-            font-size: 14px;
-            margin-bottom: 10px;
-            color: #555;
-        }
+    .other-news-item p {
+        font-size: 14px;
+        margin-bottom: 10px;
+        color: #555;
+    }
 
     .btn-link {
         color: #007bff;
@@ -80,19 +93,19 @@
         font-weight: bold;
     }
 
-        .btn-link:hover {
-            text-decoration: underline;
-        }
+    .btn-link:hover {
+        text-decoration: underline;
+    }
 </style>
 
 <div class="details-container">
     <div class="news-details">
         <h2>@Model.News.Title</h2>
-        <img src="~/images/OIP.jpg" alt="Description of the image" />
+        <img src="@Model.News.ImageUrl" alt="@Model.News.Title" />
 
         <p class="author"><strong>Author:</strong> @Model.News.Author</p>
-        <p class="content">@Model.News.Content</p>
         <p class="publish-date"><strong>Publish Date:</strong> @Model.News.PublishDate.ToString("dd/MM/yyyy hh:mm tt")</p>
+        <p class="content">@Model.News.Content</p>
     </div>
 
     <div class="other-news">
@@ -109,4 +122,3 @@
         </div>
     </div>
 </div>
-
