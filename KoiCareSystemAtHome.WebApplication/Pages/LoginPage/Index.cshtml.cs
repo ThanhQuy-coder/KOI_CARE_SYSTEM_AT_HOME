@@ -31,7 +31,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.LoginPage
             Guid accountIdTemp = Account.AccountId;
             Guid userAccountIdTemp = (Guid)User.UserId;
             
-            if (!_accountService.checkAccount(Account.Email, Account.PassWordHash, ref accountIdTemp))
+            if (!_accountService.checkAccount(Account.Email, Account.PassWorkHash, ref accountIdTemp))
             {
                 return Page();
             }

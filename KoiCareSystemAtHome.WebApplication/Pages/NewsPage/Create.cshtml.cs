@@ -47,7 +47,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.NewsPage
             if (ImageFile != null)
             {
                 var fileName = Path.GetFileName(ImageFile.FileName);
-                var filePath = Path.Combine("wwwroot/uploads", fileName);
+                var filePath = Path.Combine("wwwroot/images", fileName);
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {

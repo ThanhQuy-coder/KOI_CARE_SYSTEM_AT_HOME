@@ -1,53 +1,72 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.NewsPage.CreateModel
 
-<h4>News</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="News.Author" class="control-label"></label>
-                <input asp-for="News.Author" class="form-control" />
-                <span asp-validation-for="News.Author" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="News.Title" class="control-label"></label>
-                <input asp-for="News.Title" class="form-control" />
-                <span asp-validation-for="News.Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="News.Content" class="control-label"></label>
-                <input asp-for="News.Content" class="form-control" />
-                <span asp-validation-for="News.Content" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="News.PublishDate" class="control-label"></label>
-                <input asp-for="News.PublishDate" class="form-control" />
-                <span asp-validation-for="News.PublishDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-            <div class="form-group">
-                <label asp-for="News.ImageUrl" class="control-label"></label>
-                <input asp-for="News.ImageUrl" class="form-control" />
-                <span asp-validation-for="News.ImageUrl" class="text-danger"></span>
-            </div> 
-            <div class="form-group">
-                <label for="ImageFile">Upload Image</label>
-                <input type="file" name="ImageFile" class="form-control" />
-            </div>
+<link rel="stylesheet" href="/css/News.css" />
 
-        </form>
-    </div>
-</div>
+<div class="create-news-container">
+    <h2>Create a New News Item</h2>
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="News.Author">Author</label>
+            <input asp-for="News.Author" class="form-control" placeholder="Enter author's name" />
+            <span asp-validation-for="News.Author" class="text-danger"></span>
+        </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
+        <div class="form-group">
+            <label asp-for="News.Title">Title</label>
+            <input asp-for="News.Title" class="form-control" placeholder="Enter news title" />
+            <span asp-validation-for="News.Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="News.Content">Content</label>
+            <textarea asp-for="News.Content" class="form-control" rows="5" placeholder="Enter news content"></textarea>
+            <span asp-validation-for="News.Content" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="News.PublishDate">Publish Date</label>
+            <input asp-for="News.PublishDate" type="date" class="form-control" />
+            <span asp-validation-for="News.PublishDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Upload Image</label>
+            <input type="file" name="ImageFile" class="form-control-file" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+    </form>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }
+
+<style>
+    .create-news-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .btn {
+        margin-top: 15px;
+    }
+
+    .btn-primary {
+        margin-right: 10px;
+    }
+</style>

@@ -14,4 +14,8 @@ public partial class Account
     public string Email { get; set; } = null!;
 
     public virtual ICollection<User> Users { get; set; } = new List<User>();
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
 }

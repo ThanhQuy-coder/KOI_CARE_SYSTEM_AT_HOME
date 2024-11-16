@@ -13,7 +13,7 @@ public partial class User
 
     public DateTime BirthDate { get; set; }
 
-    public string Gender { get; set; }
+    public string Gender { get; set; } 
 
     public string Role { get; set; }
 
