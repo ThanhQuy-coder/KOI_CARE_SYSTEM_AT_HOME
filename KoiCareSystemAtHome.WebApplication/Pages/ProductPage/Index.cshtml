@@ -6,6 +6,46 @@
 }
 
 <div class="container">
+    <!-- Hiển thị thông báo -->
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Message"]
+        </div>
+    }
+
+    <h2 class="text-primary">Giỏ hàng</h2>
+    <div>
+        @if (Model.GetOrders().Count > 0)
+        {
+            <ul class="list-group">
+                @foreach (var item in Model.GetOrders())
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>@item</span>
+                        <form method="post" asp-page-handler="RemoveFromCart">
+                            <input type="hidden" name="productName" value="@item" />
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i> Xóa
+                            </button>
+                        </form>
+                    </li>
+                }
+            </ul>
+            <!-- Nút Thanh toán -->
+            <form method="post" asp-page-handler="Checkout" class="text-center mt-3">
+                <button type="submit" class="btn btn-success btn-sm px-4 py-2">
+                    <i class="fa fa-credit-card"></i> Thanh toán
+                </button>
+            </form>
+        }
+        else
+        {
+            <p class="text-muted">Giỏ hàng trống.</p>
+        }
+    </div>
+
+
     <!-- Header -->
     <div class="row bg-info text-dark py-3 mb-4 d-flex justify-content-between align-items-center">
         <div class="col-auto">
@@ -22,7 +62,7 @@
         </div>
     </div>
 
-    <!-- Danh sách sản phẩm dưới dạng thẻ -->
+    <!-- Danh sách sản phẩm -->
     <div class="row">
         @foreach (var item in Model.Product)
         {
@@ -34,13 +74,21 @@
                         <p class="card-text"><i class="fa fa-dollar-sign text-muted"></i> Giá: @item.Price đ</p>
                         <p class="card-text"><i class="fa fa-box text-muted"></i> Loại: @item.ProductType</p>
 
-                        <!-- Nút Xem Chi Tiết lớn -->
+                        <!-- Nút Xem Chi Tiết -->
                         <a asp-page="./Details" asp-route-id="@item.ProductId" class="btn btn-primary btn-block mb-2">
                             <i class="fa fa-eye"></i> Xem chi tiết
                         </a>
 
-                        <!-- Nút Edit và Delete nhỏ -->
-                        <div class="d-flex justify-content-between">
+                        <!-- Nút Thêm vào giỏ hàng -->
+                        <form method="post" asp-page-handler="AddToCart">
+                            <input type="hidden" name="productName" value="@item.ProductName" />
+                            <button type="submit" class="btn btn-success btn-block">
+                                <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                            </button>
+                        </form>
+
+                        <!-- Nút Edit và Delete -->
+                        <div class="d-flex justify-content-between mt-2">
                             <a asp-page="./Edit" asp-route-id="@item.ProductId" class="btn btn-warning flex-fill mx-1">
                                 <i class="fa fa-edit"></i> Edit
                             </a>

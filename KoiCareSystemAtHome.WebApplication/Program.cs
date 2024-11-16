@@ -44,6 +44,10 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+// Add Session
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -58,7 +62,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// Bật Session trong pipeline
+app.UseSession();
+
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
