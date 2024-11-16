@@ -4,10 +4,7 @@
     bool isLoggedIn = !string.IsNullOrEmpty(HttpContext.Session.GetString("UserId"));
     string UserId = HttpContext.Session.GetString("UserId");
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 037635acdac0c24171cdaae421f89007e791438d
 <div class="container">
     <!-- Hiển thị thông báo -->
     @if (TempData["Message"] != null)
@@ -17,45 +14,15 @@
         </div>
     }
 
-    <h2 class="text-primary">Giỏ hàng</h2>
-    <div>
-        @if (Model.GetOrders().Count > 0)
-        {
-            <ul class="list-group">
-                @foreach (var item in Model.GetOrders())
-                {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>@item</span>
-                        <form method="post" asp-page-handler="RemoveFromCart">
-                            <input type="hidden" name="productName" value="@item" />
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash"></i> Xóa
-                            </button>
-                        </form>
-                    </li>
-                }
-            </ul>
-            <!-- Nút Thanh toán -->
-            <form method="post" asp-page-handler="Checkout" class="text-center mt-3">
-                <button type="submit" class="btn btn-success btn-sm px-4 py-2">
-                    <i class="fa fa-credit-card"></i> Thanh toán
-                </button>
-            </form>
-        }
-        else
-        {
-            <p class="text-muted">Giỏ hàng trống.</p>
-        }
-    </div>
-
-
     <!-- Header -->
     <div class="row bg-info text-dark py-3 mb-4 d-flex justify-content-between align-items-center">
         <div class="col-auto">
             <form method="get" class="form-inline d-flex">
                 <input type="text" asp-for="SearchTerm" placeholder="Tìm kiếm sản phẩm" class="form-control mr-2" />
+                <input type="text" asp-for="ProductType" placeholder="Loại sản phẩm" class="form-control mr-2" />
                 <button type="submit" class="btn btn-primary ml-2"><i class="fa fa-search"></i> Tìm kiếm</button>
             </form>
+
         </div>
         <div class="col text-center">
             <h1 class="mb-0">Danh sách Sản Phẩm</h1>
@@ -67,45 +34,84 @@
 
     <!-- Danh sách sản phẩm -->
     <div class="row">
-        @foreach (var item in Model.Product)
+        @if (Model.Product.Count == 0)
         {
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm">
-                    <img class="card-img-top" src="@Url.Content("~/images/" + item.ImageProduct)" alt="Product Image" style="height: 200px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">@item.ProductName</h5>
-                        <p class="card-text"><i class="fa fa-dollar-sign text-muted"></i> Giá: @item.Price đ</p>
-                        <p class="card-text"><i class="fa fa-box text-muted"></i> Loại: @item.ProductType</p>
+            <div class="col-12 text-center">
+                <p class="text-muted">Không tìm thấy sản phẩm nào phù hợp.</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var item in Model.Product)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img class="card-img-top" src="@Url.Content("~/images/" + item.ImageProduct)" alt="Product Image" style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@item.ProductName</h5>
+                            <p class="card-text"><i class="fa fa-dollar-sign text-muted"></i> Giá: @item.Price đ</p>
+                            <p class="card-text"><i class="fa fa-box text-muted"></i> Loại: @item.ProductType</p>
 
-                        <!-- Nút Xem Chi Tiết -->
-                        <a asp-page="./Details" asp-route-id="@item.ProductId" class="btn btn-primary btn-block mb-2">
-                            <i class="fa fa-eye"></i> Xem chi tiết
-                        </a>
-
-                        <!-- Nút Thêm vào giỏ hàng -->
-                        <form method="post" asp-page-handler="AddToCart">
-                            <input type="hidden" name="productName" value="@item.ProductName" />
-                            <button type="submit" class="btn btn-success btn-block">
-                                <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
-                            </button>
-                        </form>
-
-                        <!-- Nút Edit và Delete -->
-                        <div class="d-flex justify-content-between mt-2">
-                            <a asp-page="./Edit" asp-route-id="@item.ProductId" class="btn btn-warning flex-fill mx-1">
-                                <i class="fa fa-edit"></i> Edit
+                            <!-- Nút Xem Chi Tiết -->
+                            <a asp-page="./Details" asp-route-id="@item.ProductId" class="btn btn-primary btn-block mb-2">
+                                <i class="fa fa-eye"></i> Xem chi tiết
                             </a>
-                            <a asp-page="./Delete" asp-route-id="@item.ProductId" class="btn btn-danger flex-fill mx-1">
-                                <i class="fa fa-trash"></i> Delete
-                            </a>
+
+                            <!-- Nút Thêm vào giỏ hàng -->
+                            <form method="post" asp-page-handler="AddToCart">
+                                <input type="hidden" name="productName" value="@item.ProductName" />
+                                <button type="submit" class="btn btn-success btn-block">
+                                    <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                </button>
+                            </form>
+
+                            <!-- Nút Edit và Delete -->
+                            <div class="d-flex justify-content-between mt-2">
+                                <a asp-page="./Edit" asp-route-id="@item.ProductId" class="btn btn-warning flex-fill mx-1">
+                                    <i class="fa fa-edit"></i> Edit
+                                </a>
+                                <a asp-page="./Delete" asp-route-id="@item.ProductId" class="btn btn-danger flex-fill mx-1">
+                                    <i class="fa fa-trash"></i> Delete
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         }
     </div>
-<<<<<<< HEAD
+
+    <!-- Giỏ hàng -->
+    <div class="mt-5">
+        <h2 class="text-primary">Giỏ hàng</h2>
+        <div>
+            @if (Model.GetOrders().Count > 0)
+            {
+                <ul class="list-group">
+                    @foreach (var item in Model.GetOrders())
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@item</span>
+                            <form method="post" asp-page-handler="RemoveFromCart">
+                                <input type="hidden" name="productName" value="@item" />
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i> Xóa
+                                </button>
+                            </form>
+                        </li>
+                    }
+                </ul>
+                <!-- Nút Thanh toán -->
+                <form method="post" asp-page-handler="Checkout" class="text-center mt-3">
+                    <button type="submit" class="btn btn-success btn-sm px-4 py-2">
+                        <i class="fa fa-credit-card"></i> Thanh toán
+                    </button>
+                </form>
+            }
+            else
+            {
+                <p class="text-muted">Giỏ hàng trống.</p>
+            }
+        </div>
+    </div>
 </div>
-=======
-</div>
->>>>>>> 037635acdac0c24171cdaae421f89007e791438d
