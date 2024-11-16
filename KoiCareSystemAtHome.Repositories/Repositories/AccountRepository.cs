@@ -36,7 +36,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             {
                 foreach (var account in _dbContext.Accounts)
                 {
-                    if (email == account.Email && password == account.PassWorkHash)
+                    if (email == account.Email && password == account.PassWordHash)
                     {
                         getId = account.AccountId;
                         return true;
