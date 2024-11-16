@@ -1,92 +1,39 @@
 ﻿@page
-@model KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage.DetailsModel
+@model KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages.DetailsModel
 
-<div>
-    <h4>KoiFish</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.NameFish)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.NameFish)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.ImageFish)
-        </dt>
-        <dd class="col-sm-10">
-            <!-- Hiển thị ảnh nếu đường dẫn tồn tại -->
-            <img src="/images/@Model.KoiFish.ImageFish" alt="Koi Fish Image" style="max-width: 100px;" />
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.BodyShape)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.BodyShape)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.AgeFish)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.AgeFish)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.Size)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Size)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.WeightFish)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.WeightFish)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.Gender)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Gender)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.Breed)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Breed)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.Origin)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Origin)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.FishLocation)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.FishLocation)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.Pond)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Pond.NamePond)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.FishId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.FishId)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.KoiFish.FishId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+<div class="container my-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-info text-white text-center">
+            <h3 class="mb-0">Chi tiết Lịch Trình Cho Ăn</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <dl class="row">
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-clock"></i> Thời gian:</dt>
+                        <dd class="col-sm-8 font-weight-bold">@Html.DisplayFor(model => model.FeedingSchedule.FeedingTime)</dd>
+
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-utensils"></i> Lượng thức ăn:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.RequiredFoodAmount) g</dd>
+
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-seedling"></i> Loại thức ăn:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.FoodType)</dd>
+
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-fish"></i> Cá liên quan:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.Fish.NameFish)</dd>
+
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-water"></i> Hồ:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.Fish.Pond.NamePond)</dd>
+
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-fingerprint"></i> Mã Lịch Trình:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.FeedingScheduleId)</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <a asp-page="./Edit" asp-route-id="@Model.FeedingSchedule.FeedingScheduleId" class="btn btn-warning me-2"><i class="fa fa-edit"></i> Chỉnh Sửa</a>
+            <a asp-page="./Index" class="btn btn-secondary"><i class="fa fa-arrow-left"></i> Quay Lại</a>
+        </div>
+    </div>
 </div>

@@ -1,104 +1,60 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage.IndexModel
 
+<div class="container">
+    <!-- Header với thanh tìm kiếm, tiêu đề, và nút tạo mới -->
+    <div class="row bg-info text-dark py-3 mb-4 d-flex justify-content-between align-items-center">
+        <div class="col-auto">
+            <form method="get" class="form-inline d-flex">
+                <input type="text" asp-for="SearchTerm" placeholder="Tìm kiếm cá Koi" class="form-control mr-2" />
+                <button type="submit" class="btn btn-primary ml-2"><i class="fa fa-search"></i> Tìm kiếm</button>
+            </form>
+        </div>
+        <div class="col text-center">
+            <h1 class="mb-0">Danh sách Cá Koi</h1>
+        </div>
+        <div class="col-auto">
+            <a asp-page="Create" class="btn btn-success"><i class="fa fa-plus-circle"></i> Create Koi Fish</a>
+        </div>
+    </div>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].NameFish)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].ImageFish)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].BodyShape)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].AgeFish)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].Size)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].WeightFish)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].Gender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].Breed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].Origin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].FishLocation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KoiFish[0].Pond)
-            </th>
-            <th>Actions</th>
-            <th>FeedingSchedule</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.KoiFish) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameFish)
-            </td>
-                <td>
-                    <img src="@Url.Content("~/images/" + item.ImageFish)" alt="Koi Fish Image" width="100" />
-                </td>
+    <!-- Danh sách cá Koi dưới dạng thẻ -->
+    <div class="row">
+        @foreach (var item in Model.KoiFish)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img class="card-img-top" src="@Url.Content("~/images/" + item.ImageFish)" alt="Cá Koi" style="height: 200px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@item.NameFish</h5>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.BodyShape)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AgeFish)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WeightFish)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Breed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Origin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FishLocation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pond.NamePond)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.FishId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.FishId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.FishId">Delete</a>
-            </td>
-             <td>
-                    <!-- Thêm đường dẫn tạo SaltCalculation với PondId -->
-                    <a asp-page="/FeedingSchedulePages/Create" asp-route-fishId="@item.FishId">FeedingSchedule</a>
-             </td>
-        </tr>
-}
-    </tbody>
-</table>
+                        <!-- Thông tin cá Koi với biểu tượng -->
+                        <p class="card-text"><i class="fa fa-dollar-sign text-muted"></i> Giá: @item.Price đ</p>
+                        <p class="card-text"><i class="fa fa-dna text-muted"></i> Giống: @item.Breed </p>
+                        <p class="card-text"><i class="fa fa-water text-muted"></i> Hồ: @item.Pond.NamePond</p>
+
+                        <!-- Nút Xem Chi Tiết lớn -->
+                        <a asp-page="./Details" asp-route-id="@item.FishId" class="btn btn-primary btn-block mb-2">
+                            <i class="fa fa-eye"></i> Xem chi tiết
+                        </a>
+
+                        <!-- Nút Edit và Delete nhỏ với biểu tượng -->
+                        <div class="d-flex justify-content-between mb-2">
+                            <a asp-page="./Edit" asp-route-id="@item.FishId" class="btn btn-warning flex-fill mx-1">
+                                <i class="fa fa-edit"></i> Edit
+                            </a>
+                            <a asp-page="./Delete" asp-route-id="@item.FishId" class="btn btn-danger flex-fill mx-1">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>
+                        </div>
+
+                        <!-- Nút Lịch trình cho ăn -->
+                        <a asp-page="/FeedingSchedulePages/Create" asp-route-fishId="@item.FishId" class="btn btn-secondary btn-block">
+                            <i class="fa fa-utensils"></i> Lịch trình cho ăn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

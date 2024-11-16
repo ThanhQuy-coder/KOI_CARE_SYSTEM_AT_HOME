@@ -44,6 +44,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
 
             if (ImageFile != null)
             {
+
                 // Lưu file ảnh vào thư mục "wwwroot/uploads"
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
                 var filePath = Path.Combine("wwwroot/images", fileName);

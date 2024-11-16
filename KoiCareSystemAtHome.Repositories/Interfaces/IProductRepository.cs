@@ -20,5 +20,7 @@ namespace KoiCareSystemAtHome.Repositories.Interfaces
         Task<Product> GetProductById(Guid id);  // Lấy sản phẩm theo ID
 
         bool UpdateProduct(Product product);  // Cập nhật sản phẩm
+
+        Task<List<Product>> SearchProductAsync(string searchTerm);
     }
 }

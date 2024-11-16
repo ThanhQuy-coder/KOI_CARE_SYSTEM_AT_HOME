@@ -15,6 +15,8 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
         {
             _service = service;
         }
+        [BindProperty]
+        public IFormFile? ImageFile { get; set; } // Nhận file ảnh
 
         [BindProperty]
         public KoiFish KoiFish { get; set; } = default!;
@@ -57,10 +59,20 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
             existingKoiFish.Price = KoiFish.Price;
             existingKoiFish.FishLocation = KoiFish.FishLocation;
 
-            // Cập nhật ảnh (nếu có)
-            if (!string.IsNullOrEmpty(KoiFish.ImageFish))
+            // Kiểm tra nếu có tệp ảnh mới được chọn
+            if (ImageFile != null)
             {
-                existingKoiFish.ImageFish = KoiFish.ImageFish;
+                // Lưu file ảnh vào thư mục "wwwroot/images"
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+                var filePath = Path.Combine("wwwroot/images", fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await ImageFile.CopyToAsync(fileStream);
+                }
+
+                // Cập nhật đường dẫn ảnh mới
+                existingKoiFish.ImageFish = fileName;
             }
 
             var result = _service.UpdateKoiFish(existingKoiFish);
@@ -72,5 +84,6 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
 
             return RedirectToPage("./Index");
         }
+
     }
 }

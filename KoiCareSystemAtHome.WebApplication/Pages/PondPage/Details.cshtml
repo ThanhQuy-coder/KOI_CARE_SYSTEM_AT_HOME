@@ -1,56 +1,46 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.PondPage.DetailsModel
 
-<div>
-    <h4>Pond</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pond.NamePond)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pond.NamePond)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pond.ImagePond)
-        </dt>
-        <dd class="col-sm-10">
-            <!-- Hiển thị ảnh nếu đường dẫn tồn tại -->
-            <img src="/images/@Model.Pond.ImagePond" alt="Pond Image" style="max-width: 100px;" />
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pond.Depth)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pond.Depth)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pond.Volume)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pond.Volume)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pond.DrainCount)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pond.DrainCount)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pond.PumpCapacity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pond.PumpCapacity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pond.User)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pond.User.FullName)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Pond.PondId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+<div class="container my-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-info text-white text-center">
+            <h3 class="mb-0">Chi tiết Hồ</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 text-center mb-4">
+                    <!-- Ảnh hồ lớn hơn, căn giữa -->
+                    <img src="/images/@Model.Pond.ImagePond" alt="Pond Image" class="img-fluid rounded" style="max-width: 100%; height: auto; object-fit: cover;">
+                </div>
+                <div class="col-md-8">
+                    <dl class="row">
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-tag"></i> Tên Hồ:</dt>
+                        <dd class="col-sm-8 font-weight-bold">@Html.DisplayFor(model => model.Pond.NamePond)</dd>
+
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-arrows-alt-v"></i> Độ Sâu:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Pond.Depth) m</dd>
+
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-cube"></i> Thể Tích:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Pond.Volume) m³</dd>
+
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-tint"></i> Số lượng ống thoát:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Pond.DrainCount)</dd>
+
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-cogs"></i> Công Suất Máy Bơm:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Pond.PumpCapacity) L/h</dd>
+
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-user"></i> Người Dùng:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Pond.User.FullName)</dd>
+
+                        <dt class="col-sm-4 text-muted"><i class="fa fa-fingerprint"></i> Mã Hồ:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Pond.PondId)</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <a asp-page="./Edit" asp-route-id="@Model.Pond.PondId" class="btn btn-warning me-2"><i class="fa fa-edit"></i> Chỉnh Sửa</a>
+            <a asp-page="./Index" class="btn btn-secondary"><i class="fa fa-arrow-left"></i> Quay Lại</a>
+        </div>
+    </div>
 </div>

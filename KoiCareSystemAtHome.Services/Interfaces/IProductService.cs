@@ -22,6 +22,7 @@ namespace KoiCareSystemAtHome.Services.Interfaces
 
         bool UpdateProduct(Product product);  // Cập nhật sản phẩm
         Task<Product> InitializeProduct(Guid UserId);
+        Task<List<Product>> SearchProductAsync(string searchTerm);
 
 
     }

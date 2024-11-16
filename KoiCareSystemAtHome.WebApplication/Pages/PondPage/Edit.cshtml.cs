@@ -15,7 +15,8 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
         {
             _service = service;
         }
-
+        [BindProperty]
+        public IFormFile? ImageFile { get; set; } // Nhận file ảnh
         [BindProperty]
         public Pond Pond { get; set; } = default!;
 

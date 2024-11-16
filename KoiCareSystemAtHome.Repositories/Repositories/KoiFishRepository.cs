@@ -97,5 +97,15 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
                 return false;
             }
         }
+        public async Task<List<KoiFish>> SearchKoiFishAsync(string searchTerm)
+        {
+            return await _dbContext.KoiFishes
+                .Where(n => n.NameFish.Contains(searchTerm) || // Kiểm tra với NameFish
+                            n.Price.ToString().Contains(searchTerm) || // Chuyển đổi Price (double) sang chuỗi
+                            n.Breed.Contains(searchTerm) || // Kiểm tra với Breed
+                            n.Pond.NamePond.Contains(searchTerm)) // Kiểm tra với NamePond
+                .ToListAsync();
+        }
+
     }
 }

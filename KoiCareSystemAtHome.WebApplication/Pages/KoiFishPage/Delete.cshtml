@@ -1,88 +1,72 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage.DeleteModel
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>KoiFish</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.NameFish)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.NameFish)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.ImageFish)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.ImageFish)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.BodyShape)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.BodyShape)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.AgeFish)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.AgeFish)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.Size)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Size)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.WeightFish)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.WeightFish)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.Gender)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Gender)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.Breed)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Breed)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.Origin)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Origin)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.FishLocation)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.FishLocation)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.KoiFish.Pond)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.KoiFish.Pond.PondId)
-        </dd>
-    </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="KoiFish.FishId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
+<div class="container">
+    <h2 class="text-danger text-center mb-4"><i class="fa fa-exclamation-triangle"></i> Xác nhận Xóa Cá Koi</h2>
+    <p class="text-center">Bạn có chắc chắn muốn xóa cá Koi này? Xóa cá Koi sẽ xóa tất cả lịch trình cho ăn liên quan !</p>
+
+    <div class="card mx-auto shadow-sm" style="max-width: 600px;">
+        <div class="card-body">
+            <dl class="row">
+
+                <!-- Tên Cá -->
+                <dt class="col-sm-4"><i class="fa fa-tag"></i> Tên Cá</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.NameFish)</dd>
+
+                <!-- Ảnh Cá -->
+                <dt class="col-sm-4"><i class="fa fa-image"></i> Ảnh Cá</dt>
+                <dd class="col-sm-8">
+                    <img src="/images/@Model.KoiFish.ImageFish" alt="Koi Fish Image" style="max-width: 100px;" />
+                </dd>
+
+                <!-- Dáng -->
+                <dt class="col-sm-4"><i class="fa fa-stream"></i> Dáng</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.BodyShape)</dd>
+
+                <!-- Tuổi -->
+                <dt class="col-sm-4"><i class="fa fa-birthday-cake"></i> Tuổi</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.AgeFish)</dd>
+
+                <!-- Kích thước -->
+                <dt class="col-sm-4"><i class="fa fa-arrows-alt-h"></i> Kích thước</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.Size)</dd>
+
+                <!-- Cân nặng -->
+                <dt class="col-sm-4"><i class="fa fa-weight-hanging"></i> Cân nặng</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.WeightFish)</dd>
+
+                <!-- Giới tính -->
+                <dt class="col-sm-4"><i class="fa fa-venus-mars"></i> Giới tính</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.Gender)</dd>
+
+                <!-- Giống -->
+                <dt class="col-sm-4"><i class="fa fa-dna"></i> Giống</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.Breed)</dd>
+
+                <!-- Xuất xứ -->
+                <dt class="col-sm-4"><i class="fa fa-globe"></i> Xuất xứ</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.Origin)</dd>
+
+                <!-- Giá -->
+                <dt class="col-sm-4"><i class="fa fa-dollar-sign"></i> Giá</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.Price)</dd>
+
+                <!-- Vị trí -->
+                <dt class="col-sm-4"><i class="fa fa-map-marker-alt"></i> Vị trí</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.FishLocation)</dd>
+
+                <!-- Hồ -->
+                <dt class="col-sm-4"><i class="fa fa-water"></i> Hồ</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.Pond.NamePond)</dd>
+
+            </dl>
+
+            <!-- Nút Xác nhận Xóa -->
+            <form method="post" class="text-center mt-4">
+                <input type="hidden" asp-for="KoiFish.FishId" />
+                <input type="submit" value="Xóa" class="btn btn-danger btn-lg" /> |
+                <a asp-page="./Index" class="btn btn-secondary btn-lg">Quay lại</a>
+            </form>
+        </div>
+    </div>
 </div>

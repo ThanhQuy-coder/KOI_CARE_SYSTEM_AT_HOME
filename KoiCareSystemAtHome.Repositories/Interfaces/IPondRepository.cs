@@ -16,5 +16,6 @@ namespace KoiCareSystemAtHome.Repositories.Interfaces
         Task<Pond> GetPonById(Guid Id);
         Boolean UpdatePond(Pond pond);
         Task<Pond> GetPondById(Guid id);
+        Task<List<Pond>> SearchPondAsync(string searchTerm);
     }
 }

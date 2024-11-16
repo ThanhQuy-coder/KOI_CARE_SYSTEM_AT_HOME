@@ -15,6 +15,6 @@ namespace KoiCareSystemAtHome.Services.Interfaces
         Boolean AddFeedingSchedule(FeedingSchedule FeedingSchedule);
         Boolean UpdateFeedingSchedule(FeedingSchedule FeedingSchedule);
         Task<FeedingSchedule?> GetFeedingScheduleById(Guid? Id);
-        Task<FeedingSchedule> InitializeKoiFish(Guid fishId);
+        Task<FeedingSchedule> InitializeFeedingSchedule(Guid fishId);
     }
 }

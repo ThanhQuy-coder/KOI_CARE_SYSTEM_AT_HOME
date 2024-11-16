@@ -18,11 +18,32 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
             _service = service;
         }
 
-        public IList<Product> Product { get; set; } = default!;
+        public List<Product> Product { get; set; } = new();
 
-        public async Task OnGetAsync()
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string ProductType { get; set; }
+
+        public async Task<IActionResult> OnGetAsync()
         {
             Product = await _service.GetAllProducts();
+
+            // Tìm kiếm theo tên cá hoặc giá
+            if (!string.IsNullOrEmpty(SearchTerm))
+            {
+                Product = Product.Where(p => p.ProductName.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+                                               p.Price.ToString().Contains(SearchTerm)).ToList();
+            }
+
+            // Tìm kiếm theo loại sản phẩm
+            if (!string.IsNullOrEmpty(ProductType))
+            {
+                Product = Product.Where(p => p.ProductType.Contains(ProductType, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            return Page();
         }
     }
 }

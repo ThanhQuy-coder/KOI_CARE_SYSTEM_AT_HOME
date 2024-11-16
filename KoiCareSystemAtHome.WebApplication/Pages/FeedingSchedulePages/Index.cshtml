@@ -1,48 +1,36 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages.IndexModel
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FeedingSchedule[0].FeedingTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FeedingSchedule[0].RequiredFoodAmount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FeedingSchedule[0].FoodType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FeedingSchedule[0].Fish)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.FeedingSchedule) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FeedingTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RequiredFoodAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FoodType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fish.NameFish)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.FeedingScheduleId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.FeedingScheduleId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.FeedingScheduleId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container">
+    <h2 class="text-primary text-center mb-4"><i class="fa fa-list"></i> Danh sách Lịch Trình Cho Ăn</h2>
+
+    <a asp-page="./Create" class="btn btn-success mb-4"><i class="fa fa-plus"></i> Thêm Lịch Trình Mới</a>
+
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th><i class="fa fa-clock"></i> Thời gian</th>
+                <th><i class="fa fa-utensils"></i> Lượng thức ăn</th>
+                <th><i class="fa fa-seedling"></i> Loại thức ăn</th>
+                <th><i class="fa fa-fish"></i> Cá</th>
+                <th><i class="fa fa-tools"></i> Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.FeedingSchedule)
+            {
+                <tr>
+                    <td>@item.FeedingTime</td>
+                    <td>@item.RequiredFoodAmount</td>
+                    <td>@item.FoodType</td>
+                    <td>@item.Fish.NameFish</td>
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.FeedingScheduleId" class="btn btn-info btn-sm"><i class="fa fa-info-circle"></i> Xem</a>
+                        <a asp-page="./Edit" asp-route-id="@item.FeedingScheduleId" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Sửa</a>
+                        <a asp-page="./Delete" asp-route-id="@item.FeedingScheduleId" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

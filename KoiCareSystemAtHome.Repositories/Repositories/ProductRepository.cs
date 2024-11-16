@@ -100,7 +100,14 @@ public class ProductRepository : IProductRepository
             return false;
         }
     }
-
+    public async Task<List<Product>> SearchProductAsync(string searchTerm)
+    {
+        return await _dbContext.Products
+            .Where(n => n.ProductType.Contains(searchTerm) || // Kiểm tra với NameFish
+                        n.Price.ToString().Contains(searchTerm) || // Chuyển đổi Price (double) sang chuỗi
+                        n.ProductName.Contains(searchTerm)) // Kiểm tra với Breed
+            .ToListAsync();
+    }
 
 
 }

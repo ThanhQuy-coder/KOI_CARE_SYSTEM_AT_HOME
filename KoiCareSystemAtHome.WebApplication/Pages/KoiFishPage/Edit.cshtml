@@ -1,79 +1,113 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage.EditModel
 
-<h4>KoiFish</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="KoiFish.FishId" />
-            <div class="form-group">
-                <label asp-for="KoiFish.NameFish" class="control-label"></label>
-                <input asp-for="KoiFish.NameFish" class="form-control" />
-                <span asp-validation-for="KoiFish.NameFish" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KoiFish.ImageFish" class="control-label"></label>
-                <input asp-for="KoiFish.ImageFish" class="form-control" />
-                <span asp-validation-for="KoiFish.ImageFish" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KoiFish.BodyShape" class="control-label"></label>
-                <input asp-for="KoiFish.BodyShape" class="form-control" />
-                <span asp-validation-for="KoiFish.BodyShape" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KoiFish.AgeFish" class="control-label"></label>
-                <input asp-for="KoiFish.AgeFish" class="form-control" />
-                <span asp-validation-for="KoiFish.AgeFish" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KoiFish.Size" class="control-label"></label>
-                <input asp-for="KoiFish.Size" class="form-control" />
-                <span asp-validation-for="KoiFish.Size" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KoiFish.WeightFish" class="control-label"></label>
-                <input asp-for="KoiFish.WeightFish" class="form-control" />
-                <span asp-validation-for="KoiFish.WeightFish" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KoiFish.Gender" class="control-label"></label>
-                <input asp-for="KoiFish.Gender" class="form-control" />
-                <span asp-validation-for="KoiFish.Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KoiFish.Breed" class="control-label"></label>
-                <input asp-for="KoiFish.Breed" class="form-control" />
-                <span asp-validation-for="KoiFish.Breed" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KoiFish.Origin" class="control-label"></label>
-                <input asp-for="KoiFish.Origin" class="form-control" />
-                <span asp-validation-for="KoiFish.Origin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KoiFish.Price" class="control-label"></label>
-                <input asp-for="KoiFish.Price" class="form-control" />
-                <span asp-validation-for="KoiFish.Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KoiFish.FishLocation" class="control-label"></label>
-                <input asp-for="KoiFish.FishLocation" class="form-control" />
-                <span asp-validation-for="KoiFish.FishLocation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <div class="card shadow-lg">
+        <div class="card-header bg-warning text-dark text-center">
+            <h3 class="mb-0"><i class="fa fa-edit"></i> Chỉnh Sửa Koi Fish</h3>
+        </div>
+        <div class="col-md-6 mx-auto">
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="KoiFish.FishId" />
+                <input type="hidden" asp-for="KoiFish.ImageFish" /> <!-- Ẩn input để giữ giá trị ảnh cũ -->
+                <!-- Tên Cá -->
+                <div class="form-group">
+                    <label asp-for="KoiFish.NameFish" class="control-label"><i class="fa fa-tag"></i> Tên Cá</label>
+                    <input asp-for="KoiFish.NameFish" class="form-control" placeholder="Nhập tên cá" />
+                    <span asp-validation-for="KoiFish.NameFish" class="text-danger"></span>
+                </div>
+
+                <!-- Ảnh Cá -->
+                <div class="form-group">
+                    <label class="control-label"><i class="fa fa-image"></i> Ảnh hiện tại</label>
+                    @if (!string.IsNullOrEmpty(Model.KoiFish.ImageFish))
+                    {
+                        <div class="mb-2">
+                            <img src="/images/@Model.KoiFish.ImageFish" alt="Koi Fish Image" style="max-width: 200px;" />
+                            <p><small>Ảnh hiện tại: @Model.KoiFish.ImageFish</small></p>
+                        </div>
+                    }
+                    <label asp-for="ImageFile" class="control-label"><i class="fa fa-upload"></i> Chọn ảnh mới (nếu có)</label>
+                    <input type="file" asp-for="ImageFile" class="form-control" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+
+                <!-- Dáng -->
+                <div class="form-group">
+                    <label asp-for="KoiFish.BodyShape" class="control-label"><i class="fa fa-stream"></i> Dáng</label>
+                    <input asp-for="KoiFish.BodyShape" class="form-control" placeholder="Nhập dáng cá" />
+                    <span asp-validation-for="KoiFish.BodyShape" class="text-danger"></span>
+                </div>
+
+                <!-- Tuổi -->
+                <div class="form-group">
+                    <label asp-for="KoiFish.AgeFish" class="control-label"><i class="fa fa-birthday-cake"></i> Tuổi</label>
+                    <input asp-for="KoiFish.AgeFish" class="form-control" placeholder="Nhập tuổi cá" />
+                    <span asp-validation-for="KoiFish.AgeFish" class="text-danger"></span>
+                </div>
+
+                <!-- Kích thước -->
+                <div class="form-group">
+                    <label asp-for="KoiFish.Size" class="control-label"><i class="fa fa-arrows-alt-h"></i> Kích thước</label>
+                    <input asp-for="KoiFish.Size" class="form-control" placeholder="Nhập kích thước (cm)" />
+                    <span asp-validation-for="KoiFish.Size" class="text-danger"></span>
+                </div>
+
+                <!-- Cân nặng -->
+                <div class="form-group">
+                    <label asp-for="KoiFish.WeightFish" class="control-label"><i class="fa fa-weight-hanging"></i> Cân nặng</label>
+                    <input asp-for="KoiFish.WeightFish" class="form-control" placeholder="Nhập cân nặng (kg)" />
+                    <span asp-validation-for="KoiFish.WeightFish" class="text-danger"></span>
+                </div>
+
+                <!-- Giới tính -->
+                <div class="form-group">
+                    <label asp-for="KoiFish.Gender" class="control-label"><i class="fa fa-venus-mars"></i> Giới tính</label>
+                    <input asp-for="KoiFish.Gender" class="form-control" placeholder="Nhập giới tính" />
+                    <span asp-validation-for="KoiFish.Gender" class="text-danger"></span>
+                </div>
+
+                <!-- Giống -->
+                <div class="form-group">
+                    <label asp-for="KoiFish.Breed" class="control-label"><i class="fa fa-dna"></i> Giống</label>
+                    <input asp-for="KoiFish.Breed" class="form-control" placeholder="Nhập giống cá" />
+                    <span asp-validation-for="KoiFish.Breed" class="text-danger"></span>
+                </div>
+
+                <!-- Xuất xứ -->
+                <div class="form-group">
+                    <label asp-for="KoiFish.Origin" class="control-label"><i class="fa fa-globe"></i> Xuất xứ</label>
+                    <input asp-for="KoiFish.Origin" class="form-control" placeholder="Nhập xuất xứ" />
+                    <span asp-validation-for="KoiFish.Origin" class="text-danger"></span>
+                </div>
+
+                <!-- Giá -->
+                <div class="form-group">
+                    <label asp-for="KoiFish.Price" class="control-label"><i class="fa fa-dollar-sign"></i> Giá</label>
+                    <input asp-for="KoiFish.Price" class="form-control" placeholder="Nhập giá" />
+                    <span asp-validation-for="KoiFish.Price" class="text-danger"></span>
+                </div>
+
+                <!-- Vị trí -->
+                <div class="form-group">
+                    <label asp-for="KoiFish.FishLocation" class="control-label"><i class="fa fa-map-marker-alt"></i> Vị trí</label>
+                    <input asp-for="KoiFish.FishLocation" class="form-control" placeholder="Nhập vị trí của cá" />
+                    <span asp-validation-for="KoiFish.FishLocation" class="text-danger"></span>
+                </div>
+
+                <!-- Nút Lưu -->
+                <div class="form-group text-center">
+                    <input type="submit" value="Save" class="btn btn-primary btn-lg mt-3" />
+                    <a asp-page="./Index" class="btn btn-secondary btn-lg mt-3">Back to List</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

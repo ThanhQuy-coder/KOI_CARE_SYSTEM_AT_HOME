@@ -1,53 +1,80 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.PondPage.IndexModel
 
-<!-- Main Content -->
-<div class="container-fluid">
-    <h1 class="text-primary mt-4">Tạo Hồ</h1>
-    <p>
-        <a asp-page="Create" class="btn btn-success btn-sm"><i class="fa-solid fa-plus"></i> Thêm hồ mới</a>
-    </p>
-    <div class="table-responsive">
-        <table class="table table-bordered" style="margin-top: 20px;">
-            <thead class="thead-dark">
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].NamePond)</th>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].ImagePond)</th>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].Depth)</th>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].Volume)</th>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].DrainCount)</th>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].PumpCapacity)</th>
-                    <th>@Html.DisplayNameFor(model => model.Pond[0].User)</th>
-                    <th>Actions</th>
-                    <th>Create Koi Fish</th>
-                    <th>Water Parameter</th>
-                    <th>Salt Calculation</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Pond)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.NamePond)</td>
-                        <td>
-                            <img src="@Url.Content("~/images/" + item.ImagePond)" alt="Pond Image" width="100" />
-                        </td>
-                        <td>@Html.DisplayFor(modelItem => item.Depth)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Volume)</td>
-                        <td>@Html.DisplayFor(modelItem => item.DrainCount)</td>
-                        <td>@Html.DisplayFor(modelItem => item.PumpCapacity)</td>
-                        <td>@Html.DisplayFor(modelItem => item.User.FullName)</td>
-                        <td>
-                            <a asp-page="./Edit" asp-route-id="@item.PondId" class="btn btn-warning btn-sm">Edit</a>
-                            <a asp-page="./Details" asp-route-id="@item.PondId" class="btn btn-info btn-sm">Details</a>
-                            <a asp-page="./Delete" asp-route-id="@item.PondId" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
-                        <td><a asp-page="/KoiFishPage/Create" asp-route-pondId="@item.PondId" class="btn btn-primary btn-sm">Create Koi Fish</a></td>
-                        <td><a asp-page="/WaterParameterPages/Create" asp-route-pondId="@item.PondId" class="btn btn-secondary btn-sm">Water Parameter</a></td>
-                        <td><a asp-page="/SaltCalculationPages/Create" asp-route-pondId="@item.PondId" class="btn btn-secondary btn-sm">Salt Calculation</a></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+<div class="container">
+    <!-- Header với thanh tìm kiếm, tiêu đề, và nút tạo hồ -->
+    <div class="row bg-info text-dark py-3 mb-4 d-flex justify-content-between align-items-center">
+        <div class="col-auto">
+            <!-- Thanh tìm kiếm -->
+            <form method="get" class="form-inline d-flex">
+                <input type="text" name="searchTerm" placeholder="Tìm kiếm hồ hoặc chủ hồ" class="form-control mr-2" value="@Request.Query["searchTerm"]" />
+                <button type="submit" class="btn btn-primary ml-2"><i class="fa fa-search"></i> Tìm kiếm</button>
+            </form>
+        </div>
+        <div class="col text-center">
+            <h1 class="mb-0">Danh sách Hồ</h1>
+        </div>
+        <div class="col-auto">
+            <a asp-page="Create" class="btn btn-success"><i class="fa fa-plus-circle"></i> Create New Pond</a>
+        </div>
+    </div>
+
+    <!-- Danh sách hồ dưới dạng thẻ -->
+    <div class="row">
+        @if (Model.Pond.Count == 0)
+        {
+            <div class="col-12 text-center">
+                <p class="text-muted">Không tìm thấy hồ nào phù hợp.</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var item in Model.Pond)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img class="card-img-top" src="@Url.Content("~/images/" + item.ImagePond)" alt="Pond Image" style="height: 200px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@item.NamePond</h5>
+
+                            <!-- Thông tin hồ với biểu tượng -->
+                            <p class="card-text"><i class="fa fa-arrows-alt-v text-muted"></i> Độ Sâu: @item.Depth m</p>
+                            <p class="card-text"><i class="fa fa-cube text-muted"></i> Thể Tích: @item.Volume m³</p>
+                            <p class="card-text"><i class="fa fa-user text-muted"></i> Chủ Hồ: @item.User.FullName</p>
+
+                            <!-- Nút Xem Chi Tiết lớn -->
+                            <a asp-page="./Details" asp-route-id="@item.PondId" class="btn btn-primary btn-block mb-2">
+                                <i class="fa fa-eye"></i> Xem chi tiết
+                            </a>
+
+                            <!-- Nút Edit và Delete nhỏ với biểu tượng -->
+                            <div class="d-flex justify-content-between mb-2">
+                                <a asp-page="./Edit" asp-route-id="@item.PondId" class="btn btn-warning flex-fill mx-1">
+                                    <i class="fa fa-edit"></i> Edit
+                                </a>
+                                <a asp-page="./Delete" asp-route-id="@item.PondId" class="btn btn-danger flex-fill mx-1">
+                                    <i class="fa fa-trash"></i> Delete
+                                </a>
+                            </div>
+
+                            <!-- Nút Tạo Koi Fish -->
+                            <a asp-page="/KoiFishPage/Create" asp-route-pondId="@item.PondId" class="btn btn-success btn-block mb-2">
+                                <i class="fa fa-fish"></i> Tạo Cá Koi
+                            </a>
+
+                            <!-- Nút Tính Thông Số Nước -->
+                            <a asp-page="/WaterParameterPages/Create" asp-route-pondId="@item.PondId" class="btn btn-info btn-block mb-2">
+                                <i class="fa fa-tint"></i> Tính thông số nước
+                            </a>
+
+                            <!-- Nút Tính Lượng Muối -->
+                            <a asp-page="/SaltCalculationPages/Create" asp-route-pondId="@item.PondId" class="btn btn-secondary btn-block">
+                                <i class="fa fa-balance-scale"></i> Tính lượng muối
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
     </div>
 </div>

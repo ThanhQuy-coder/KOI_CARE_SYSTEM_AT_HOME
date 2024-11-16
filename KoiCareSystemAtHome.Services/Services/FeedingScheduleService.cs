@@ -48,7 +48,7 @@ namespace KoiCareSystemAtHome.Services.Services
         {
             return _repository.UpdateFeedingSchedule(FeedingSchedule);
         }
-        public async Task<FeedingSchedule> InitializeKoiFish(Guid fishId)
+        public async Task<FeedingSchedule> InitializeFeedingSchedule(Guid fishId)
         {
             // Khởi tạo đối tượng KoiFish với PondId được truyền vào
             return await Task.FromResult(new FeedingSchedule { FishId = fishId });

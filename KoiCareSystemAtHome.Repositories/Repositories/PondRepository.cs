@@ -100,5 +100,12 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
                 return false;
             }
         }
+        public async Task<List<Pond>> SearchPondAsync(string searchTerm)
+        {
+            return await _dbContext.Ponds
+                .Where(n => n.NamePond.Contains(searchTerm) || // Kiểm tra với NamePond
+                            n.User.FullName.Contains(searchTerm)) // Kiểm tra với UserName
+                .ToListAsync();
+        }
     }
 }

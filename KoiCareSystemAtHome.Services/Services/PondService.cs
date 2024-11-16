@@ -56,5 +56,11 @@ namespace KoiCareSystemAtHome.Services.Services
             // Khởi tạo đối tượng KoiFish với PondId được truyền vào
             return await Task.FromResult(new Pond { UserId = userId });
         }
+        // trả về hàm tìm kiếm ở repository
+        public async Task<List<Pond>> SearchPondAsync(string searchTerm)
+        {
+            return await _repository.SearchPondAsync(searchTerm);
+
+        }
     }
 }
