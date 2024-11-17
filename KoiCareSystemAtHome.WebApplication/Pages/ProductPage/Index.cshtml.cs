@@ -56,7 +56,10 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
             // Tìm kiếm theo loại sản phẩm
             if (!string.IsNullOrEmpty(ProductType))
             {
-                Product = Product.Where(p => p.ProductType.Contains(ProductType, StringComparison.OrdinalIgnoreCase)).ToList();
+                Product = Product.Where(p =>
+                    !string.IsNullOrEmpty(p.ProductType) && // Loại bỏ các giá trị null
+                    p.ProductType.Trim().ToLower().Contains(ProductType.Trim().ToLower())
+                ).ToList();
             }
 
             return Page();
@@ -151,13 +154,15 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
             }
 
             // Xử lý thanh toán (giả lập)
-            // Ví dụ: chuyển danh sách đơn hàng vào cơ sở dữ liệu hoặc gửi email xác nhận.
             TempData["Message"] = $"Thanh toán thành công! Tổng số sản phẩm: {orders.Count}";
 
             // Xóa giỏ hàng sau khi thanh toán
             HttpContext.Session.Remove("OrderList");
 
-            return RedirectToPage("./Index");
+            // Chuyển hướng sang trang hiển thị mã QR
+            return RedirectToPage("./Qr");
         }
+
+
     }
 }

@@ -1,7 +1,6 @@
 ﻿@page
 @model KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage.IndexModel
 
-
 <div class="container">
     <!-- Header với thanh tìm kiếm, tiêu đề, và nút tạo mới -->
     <div class="row bg-info text-dark py-3 mb-4 d-flex justify-content-between align-items-center">
@@ -14,14 +13,20 @@
         <div class="col text-center">
             <h1 class="mb-0">Danh sách Cá Koi</h1>
         </div>
-        
     </div>
 
-@{
-    bool isLoggedIn = !string.IsNullOrEmpty(HttpContext.Session.GetString("UserId"));
-    string UserId = HttpContext.Session.GetString("UserId");
-}
+    @{
+        bool isLoggedIn = !string.IsNullOrEmpty(HttpContext.Session.GetString("UserId"));
+        string UserId = HttpContext.Session.GetString("UserId");
+    }
 
+    <!-- Kiểm tra nếu không có kết quả -->
+    @if (Model.KoiFish.Count == 0)
+    {
+        <div class="alert alert-warning text-center w-100">
+            <strong>Không tìm thấy kết quả phù hợp!</strong>
+        </div>
+    }
 
     <!-- Danh sách cá Koi dưới dạng thẻ -->
     <div class="row">

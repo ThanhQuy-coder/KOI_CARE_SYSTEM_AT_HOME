@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Services.Interfaces;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
@@ -15,6 +16,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
         {
             _service = service;
         }
+
         [BindProperty]
         public IFormFile? ImageFile { get; set; } // Nhận file ảnh
 
@@ -62,10 +64,11 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
             // Kiểm tra nếu có tệp ảnh mới được chọn
             if (ImageFile != null)
             {
-                // Lưu file ảnh vào thư mục "wwwroot/images"
+                // Tạo tên file ảnh duy nhất
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
                 var filePath = Path.Combine("wwwroot/images", fileName);
 
+                // Lưu file ảnh vào thư mục "wwwroot/images"
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     await ImageFile.CopyToAsync(fileStream);
@@ -75,6 +78,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
                 existingKoiFish.ImageFish = fileName;
             }
 
+            // Cập nhật cá Koi vào cơ sở dữ liệu
             var result = _service.UpdateKoiFish(existingKoiFish);
             if (!result)
             {
