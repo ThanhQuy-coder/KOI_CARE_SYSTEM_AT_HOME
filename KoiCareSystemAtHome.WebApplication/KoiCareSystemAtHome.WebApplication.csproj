@@ -4,6 +4,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>3001452d-a5ec-446a-8de5-af9eadcd360d</UserSecretsId>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="Models\**" />
