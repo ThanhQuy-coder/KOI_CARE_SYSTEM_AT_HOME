@@ -16,7 +16,7 @@
                 <!-- Ảnh Sản Phẩm -->
                 <dt class="col-sm-4 text-muted"><i class="fa fa-image"></i> Ảnh Sản Phẩm:</dt>
                 <dd class="col-sm-8">
-                    <img src="/images/@Model.Product.ImageProduct" alt="Product Image" style="max-width: 150px;" class="img-thumbnail" />
+                    <img src="/images/@Model.Product.ImageUrl" alt="Product Image" style="max-width: 150px;" class="img-thumbnail" />
                 </dd>
 
                 <!-- Giá -->
@@ -25,7 +25,7 @@
 
                 <!-- Mô tả -->
                 <dt class="col-sm-4 text-muted"><i class="fa fa-align-left"></i> Mô tả:</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Product.Desciption)</dd>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Product.Description)</dd>
 
                 <!-- Loại Sản Phẩm -->
                 <dt class="col-sm-4 text-muted"><i class="fa fa-box"></i> Loại Sản Phẩm:</dt>
@@ -33,7 +33,7 @@
 
                 <!-- Ngày Đặt -->
                 <dt class="col-sm-4 text-muted"><i class="fa fa-calendar"></i> Ngày Đặt:</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Product.DatePlace)</dd>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Product.CreatedDate)</dd>
 
                 <!-- Người Tạo -->
                 <dt class="col-sm-4 text-muted"><i class="fa fa-user"></i> Người Tạo:</dt>

@@ -5,25 +5,25 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class WaterParameter
 {
-    public Guid? PondId { get; set; }
+    public Guid ParameterId { get; set; }
 
-    public Guid WaterParameterId { get; set; }
+    public Guid PondId { get; set; }
 
-    public double Temperature { get; set; }
+    public decimal Temperature { get; set; }
 
-    public double SaltLevel { get; set; }
+    public decimal SaltLevel { get; set; }
 
-    public double PH { get; set; }
+    public decimal Ph { get; set; }
 
-    public double Oxygen { get; set; }
+    public decimal Oxygen { get; set; }
 
-    public double Nitrie { get; set; }
+    public decimal Nitrite { get; set; }
 
-    public double Nitrate { get; set; }
+    public decimal Nitrate { get; set; }
 
-    public double Phospate { get; set; }
+    public decimal Phosphate { get; set; }
 
     public DateTime MeasurementTime { get; set; }
 
-    public virtual Pond? Pond { get; set; }
+    public virtual Pond Pond { get; set; } = null!;
 }

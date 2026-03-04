@@ -66,7 +66,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
                     }
 
                     // Lưu đường dẫn ảnh vào Product
-                    Product.ImageProduct = fileName;
+                    Product.ImageUrl = fileName;
                 }
                 catch (Exception ex)
                 {

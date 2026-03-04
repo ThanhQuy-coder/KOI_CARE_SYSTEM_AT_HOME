@@ -31,13 +31,13 @@
                     @Html.DisplayNameFor(model => model.SaltCalculation.Pond)
                 </dt>
                 <dd class="col-sm-9">
-                    @Html.DisplayFor(model => model.SaltCalculation.Pond.NamePond)
+                    @Html.DisplayFor(model => model.SaltCalculation.Pond.PondName)
                 </dd>
             </dl>
         </div>
         <div class="card-footer text-center">
             <form method="post">
-                <input type="hidden" asp-for="SaltCalculation.SaltCalculationId" />
+                <input type="hidden" asp-for="SaltCalculation.CalculationId" />
                 <button type="submit" class="btn btn-danger mr-2">Delete</button>
                 <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
             </form>

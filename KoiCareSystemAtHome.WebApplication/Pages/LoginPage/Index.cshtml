@@ -4,76 +4,75 @@
     Layout = "_LoginLayout";
 }
 
-    <div class="container">
-        <!-- Outer Row -->
-        <div class="row justify-content-center" >
-            <div class="col-xl-10 col-lg-12 col-md-9" >
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0" style="background-image: url('/images/7792008.jpg'); background-size: cover; background-position: center;">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <!--NOTE-->
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image">
-                            </div>
-                            <div class="col-lg-6" style="background-color: rgba(0, 0, 0, 0.5)">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                    <h1 class="h4 text-white mb-4">Welcome Back!</h1>
-                                    </div>
-                                    <!--Đăng nhập-->
-                                    <form class="user" method="post">
-                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                        <div class="form-group">
-                                            <input type="email"
-                                                   class="form-control form-control-user"
-                                                   id="exampleInputEmail"
-                                                   aria-describedby="emailHelp"
-                                                   placeholder="Enter Email Address..." 
-                                                   asp-for="Account.Email" required/>
-                                        <span asp-validation-for="Account.Email" class="text-danger"></span>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="mb-4 mt-5">
+                <a href="/" class="text-white text-decoration-none">
+                    <i class="fas fa-arrow-left fa-sm"></i> Back to Home
+                </a>
+            </div>
 
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password"
-                                                   class="form-control form-control-user"
-                                                   id="exampleInputPassword"
-                                                   placeholder="Password"
-                                               asp-for="Account.PassWordHash" required />
-                                        <span asp-validation-for="Account.PassWordHash" class="text-danger"></span>
-                                        </div>
-                                        <!--???-->
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox"
-                                                       class="custom-control-input"
-                                                       id="customCheck" />
-                                                <label class="custom-control-label" for="customCheck">Remember Me</label>
-                                            </div>
-                                        </div>
-                                        <!--Đăng nhập-->
-                                        <div>
-                                            <input class="btn btn-primary btn-user btn-block" type="submit" value="Login Account"/>
-                                        </div>
-                                        <hr />
-                                        <!--???-->
-                                        <a asp-page="#"
-                                           class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <!--???-->
-                                        <a asp-page="#"
-                                           class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with
-                                            Facebook
-                                        </a>
-                                    </form>
-                                    <hr />
-                                    <div class="text-center ">
-                                    <a class="small text-white" asp-page="/LoginPage/forgotPassword">Forgot Password?</a>
+            <div class="card o-hidden border-0 shadow-lg mb-5" style="border-radius: 15px;">
+                <div class="card-body p-0" style="background-image: url('/images/7792008.jpg'); background-size: cover; background-position: center;">
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block"></div>
+
+                        <div class="col-lg-6" style="background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); min-height: 550px;">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h3 text-white font-weight-bold mb-2">Welcome Back!</h1>
+                                    <p class="text-white-50 mb-4">Please enter your details to login</p>
+                                </div>
+
+                                <form class="user" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                                    <div class="form-group">
+                                        <input type="email"
+                                               class="form-control form-control-user shadow-sm"
+                                               placeholder="Enter Email Address..."
+                                               asp-for="Account.Email" required />
+                                        <span asp-validation-for="Account.Email" class="text-danger small"></span>
                                     </div>
-                                <div class="text-center ">
-                                    <a class="small text-white" asp-page="/LoginPage/Register">Create an Account!</a>
+
+                                    <div class="form-group">
+                                        <input type="password"
+                                               class="form-control form-control-user shadow-sm"
+                                               placeholder="Password"
+                                               asp-for="Account.PasswordHash" required />
+                                        <span asp-validation-for="Account.PasswordHash" class="text-danger small"></span>
                                     </div>
+
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck" />
+                                            <label class="custom-control-label text-white-50" for="customCheck">Remember Me</label>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-user btn-block font-weight-bold shadow">
+                                        Login Account
+                                    </button>
+
+                                    <hr class="border-light opacity-20" />
+
+                                    <a asp-page="#" class="btn btn-google btn-user btn-block mb-2">
+                                        <i class="fab fa-google fa-fw"></i> Login with Google
+                                    </a>
+                                    <a asp-page="#" class="btn btn-facebook btn-user btn-block">
+                                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                    </a>
+                                </form>
+
+                                <hr class="border-light opacity-20" />
+
+                                <div class="text-center">
+                                    <a class="small text-info" asp-page="/LoginPage/forgotPassword">Forgot Password?</a>
+                                </div>
+                                <div class="text-center">
+                                    <span class="small text-white-50">Don't have an account?</span>
+                                    <a class="small text-info font-weight-bold" asp-page="/LoginPage/Register"> Create an Account!</a>
                                 </div>
                             </div>
                         </div>
@@ -82,3 +81,27 @@
             </div>
         </div>
     </div>
+</div>
+
+<style>
+    /* Tinh chỉnh để giao diện mượt hơn */
+    .form-control-user {
+        border-radius: 10px !important;
+        padding: 1.5rem 1rem !important;
+    }
+
+    .btn-user {
+        border-radius: 10px !important;
+        padding: 0.75rem !important;
+        transition: all 0.3s;
+    }
+
+        .btn-user:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+        }
+    /* Làm mờ đường kẻ HR */
+    hr {
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+</style>

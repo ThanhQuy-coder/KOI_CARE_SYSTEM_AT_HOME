@@ -21,11 +21,11 @@
         <tr>
             <td>@item.RequiredSaltAmount</td>
             <td>@item.CalculationTime</td>
-            <td>@item.Pond?.NamePond ?? "Không có hồ liên quan"</td>
+            <td>@item.Pond?.PondName ?? "Không có hồ liên quan"</td>
             <td>
-                <a asp-page="./Details" asp-route-id="@item.SaltCalculationId" class="btn btn-info btn-sm"><i class="fa fa-info-circle"></i> Xem</a>
-                <a asp-page="./Edit" asp-route-id="@item.SaltCalculationId" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Sửa</a>
-                <a asp-page="./Delete" asp-route-id="@item.SaltCalculationId" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Xóa</a>
+                <a asp-page="./Details" asp-route-id="@item.CalculationId" class="btn btn-info btn-sm"><i class="fa fa-info-circle"></i> Xem</a>
+                <a asp-page="./Edit" asp-route-id="@item.CalculationId" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Sửa</a>
+                <a asp-page="./Delete" asp-route-id="@item.CalculationId" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Xóa</a>
             </td>
         </tr>
     }

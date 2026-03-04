@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-md-4 text-center mb-4">
                     <!-- Ảnh sản phẩm lớn hơn, căn giữa -->
-                    <img src="/images/@Model.Product.ImageProduct" alt="Product Image" class="img-fluid rounded" style="max-width: 100%; height: auto; object-fit: cover;">
+                    <img src="/images/@Model.Product.ImageUrl" alt="Product Image" class="img-fluid rounded" style="max-width: 100%; height: auto; object-fit: cover;">
                 </div>
                 <div class="col-md-8">
                     <dl class="row">
@@ -21,13 +21,13 @@
                         <dd class="col-sm-8">@Html.DisplayFor(model => model.Product.Price) đ</dd>
 
                         <dt class="col-sm-4 text-muted"><i class="fa fa-align-left"></i> Mô tả:</dt>
-                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Product.Desciption)</dd>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Product.Description)</dd>
 
                         <dt class="col-sm-4 text-muted"><i class="fa fa-box"></i> Loại Sản Phẩm:</dt>
                         <dd class="col-sm-8">@Html.DisplayFor(model => model.Product.ProductType)</dd>
 
                         <dt class="col-sm-4 text-muted"><i class="fa fa-calendar"></i> Ngày Đặt:</dt>
-                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Product.DatePlace)</dd>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Product.CreatedDate)</dd>
 
                         <dt class="col-sm-4 text-muted"><i class="fa fa-user"></i> Người Tạo:</dt>
                         <dd class="col-sm-8">@Html.DisplayFor(model => model.Product.User.FullName)</dd>

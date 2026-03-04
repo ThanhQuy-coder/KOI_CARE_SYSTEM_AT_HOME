@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.10.35013.160
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11520.95 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KoiCareSystemAtHome.Services", "KoiCareSystemAtHome.Services\KoiCareSystemAtHome.Services.csproj", "{548BB146-0A8D-4419-ADBB-656F4300FB88}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KoiCareSystemAtHome.Repositories", "KoiCareSystemAtHome.Repositories\KoiCareSystemAtHome.Repositories.csproj", "{26A72B22-B834-48D1-BE64-5E826B768916}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KoiCareSystemAtHome.WebApplication", "KoiCareSystemAtHome.WebApplication\KoiCareSystemAtHome.WebApplication.csproj", "{1ED9BE4C-09D9-4D24-870C-59D4B3860AA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F76C1010-9679-4C42-BB78-6F784A9D0F6F}"
+	ProjectSection(SolutionItems) = preProject
+		Database\KoiCareSystemAtHome.sql = Database\KoiCareSystemAtHome.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

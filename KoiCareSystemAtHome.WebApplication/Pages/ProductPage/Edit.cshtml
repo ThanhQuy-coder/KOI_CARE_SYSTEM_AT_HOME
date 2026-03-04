@@ -10,7 +10,7 @@
             <form method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                 <input type="hidden" asp-for="Product.ProductId" />
-                <input type="hidden" asp-for="Product.ImageProduct" /> <!-- Ẩn input để giữ giá trị ảnh cũ -->
+                <input type="hidden" asp-for="Product.ImageUrl" /> <!-- Ẩn input để giữ giá trị ảnh cũ -->
                 <!-- Tên Sản Phẩm -->
                 <div class="form-group">
                     <label asp-for="Product.ProductName" class="control-label"><i class="fa fa-tag"></i> Tên Sản Phẩm</label>
@@ -21,11 +21,11 @@
                 <!-- Ảnh Sản Phẩm -->
                 <div class="form-group">
                     <label class="control-label"><i class="fa fa-image"></i> Ảnh hiện tại</label>
-                    @if (!string.IsNullOrEmpty(Model.Product.ImageProduct))
+                    @if (!string.IsNullOrEmpty(Model.Product.ImageUrl))
                     {
                         <div class="mb-2">
-                            <img src="/images/@Model.Product.ImageProduct" alt="Product Image" style="max-width: 200px;" />
-                            <p><small>Ảnh hiện tại: @Model.Product.ImageProduct</small></p>
+                            <img src="/images/@Model.Product.ImageUrl" alt="Product Image" style="max-width: 200px;" />
+                            <p><small>Ảnh hiện tại: @Model.Product.ImageUrl</small></p>
                         </div>
                     }
                     <label asp-for="ImageFile" class="control-label"><i class="fa fa-upload"></i> Chọn ảnh mới (nếu có)</label>
@@ -42,9 +42,9 @@
 
                 <!-- Mô tả -->
                 <div class="form-group">
-                    <label asp-for="Product.Desciption" class="control-label"><i class="fa fa-align-left"></i> Mô tả</label>
-                    <textarea asp-for="Product.Desciption" class="form-control" rows="4" placeholder="Nhập mô tả"></textarea>
-                    <span asp-validation-for="Product.Desciption" class="text-danger"></span>
+                    <label asp-for="Product.Description" class="control-label"><i class="fa fa-align-left"></i> Mô tả</label>
+                    <textarea asp-for="Product.Description" class="form-control" rows="4" placeholder="Nhập mô tả"></textarea>
+                    <span asp-validation-for="Product.Description" class="text-danger"></span>
                 </div>
 
                 <!-- Loại Sản Phẩm -->
@@ -56,9 +56,9 @@
 
                 <!-- Ngày Đặt -->
                 <div class="form-group">
-                    <label asp-for="Product.DatePlace" class="control-label"><i class="fa fa-calendar"></i> Ngày Đặt</label>
-                    <input asp-for="Product.DatePlace" class="form-control" placeholder="Nhập ngày đặt" />
-                    <span asp-validation-for="Product.DatePlace" class="text-danger"></span>
+                    <label asp-for="Product.CreatedDate" class="control-label"><i class="fa fa-calendar"></i> Ngày Đặt</label>
+                    <input asp-for="Product.CreatedDate" class="form-control" placeholder="Nhập ngày đặt" />
+                    <span asp-validation-for="Product.CreatedDate" class="text-danger"></span>
                 </div>
 
                 <!-- Nút Lưu -->

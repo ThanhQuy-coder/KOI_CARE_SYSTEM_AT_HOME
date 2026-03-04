@@ -12,7 +12,8 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
     public class AccountRepository : IAccountRepository
     {
         private readonly KoiCareSystemAtHomeContext _dbContext;
-        public AccountRepository(KoiCareSystemAtHomeContext dbContext) {
+        public AccountRepository(KoiCareSystemAtHomeContext dbContext)
+        {
             _dbContext = dbContext;
         }
 
@@ -30,13 +31,13 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool checkAccount(string email, string password,ref Guid getId)
+        public bool checkAccount(string email, string password, ref Guid getId)
         {
             try
             {
                 foreach (var account in _dbContext.Accounts)
                 {
-                    if (email == account.Email && password == account.PassWordHash)
+                    if (email == account.Email && password == account.PasswordHash)
                     {
                         getId = account.AccountId;
                         return true;
@@ -54,7 +55,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
         {
             try
             {
-                var objDel = _dbContext.Accounts.Where(p=>p.AccountId.Equals(Id)).FirstOrDefault();
+                var objDel = _dbContext.Accounts.Where(p => p.AccountId.Equals(Id)).FirstOrDefault();
                 if (objDel != null)
                 {
                     _dbContext.Accounts.Remove(objDel);

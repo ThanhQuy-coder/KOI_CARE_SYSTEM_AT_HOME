@@ -31,12 +31,12 @@
                     @Html.DisplayNameFor(model => model.SaltCalculation.Pond)
                 </dt>
                 <dd class="col-sm-9">
-                    @Html.DisplayFor(model => model.SaltCalculation.Pond.NamePond)
+                    @Html.DisplayFor(model => model.SaltCalculation.Pond.PondName)
                 </dd>
             </dl>
         </div>
         <div class="card-footer text-center">
-            <a asp-page="./Edit" asp-route-id="@Model.SaltCalculation.SaltCalculationId" class="btn btn-warning mr-2">Edit</a>
+            <a asp-page="./Edit" asp-route-id="@Model.SaltCalculation.CalculationId" class="btn btn-warning mr-2">Edit</a>
             <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
         </div>
     </div>

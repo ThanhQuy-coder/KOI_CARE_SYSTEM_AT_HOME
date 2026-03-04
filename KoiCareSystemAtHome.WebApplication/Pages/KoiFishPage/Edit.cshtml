@@ -10,22 +10,22 @@
             <form method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                 <input type="hidden" asp-for="KoiFish.FishId" />
-                <input type="hidden" asp-for="KoiFish.ImageFish" /> <!-- Ẩn input để giữ giá trị ảnh cũ -->
+                <input type="hidden" asp-for="KoiFish.ImageUrl" /> <!-- Ẩn input để giữ giá trị ảnh cũ -->
                 <!-- Tên Cá -->
                 <div class="form-group">
-                    <label asp-for="KoiFish.NameFish" class="control-label"><i class="fa fa-tag"></i> Tên Cá</label>
-                    <input asp-for="KoiFish.NameFish" class="form-control" placeholder="Nhập tên cá" />
-                    <span asp-validation-for="KoiFish.NameFish" class="text-danger"></span>
+                    <label asp-for="KoiFish.FishName" class="control-label"><i class="fa fa-tag"></i> Tên Cá</label>
+                    <input asp-for="KoiFish.FishName" class="form-control" placeholder="Nhập tên cá" />
+                    <span asp-validation-for="KoiFish.FishName" class="text-danger"></span>
                 </div>
 
                 <!-- Ảnh Cá -->
                 <div class="form-group">
                     <label class="control-label"><i class="fa fa-image"></i> Ảnh hiện tại</label>
-                    @if (!string.IsNullOrEmpty(Model.KoiFish.ImageFish))
+                    @if (!string.IsNullOrEmpty(Model.KoiFish.ImageUrl))
                     {
                         <div class="mb-2">
-                            <img src="/images/@Model.KoiFish.ImageFish" alt="Koi Fish Image" style="max-width: 200px;" />
-                            <p><small>Ảnh hiện tại: @Model.KoiFish.ImageFish</small></p>
+                            <img src="/images/@Model.KoiFish.ImageUrl" alt="Koi Fish Image" style="max-width: 200px;" />
+                            <p><small>Ảnh hiện tại: @Model.KoiFish.ImageUrl</small></p>
                         </div>
                     }
                     <label asp-for="ImageFile" class="control-label"><i class="fa fa-upload"></i> Chọn ảnh mới (nếu có)</label>
@@ -42,9 +42,9 @@
 
                 <!-- Tuổi -->
                 <div class="form-group">
-                    <label asp-for="KoiFish.AgeFish" class="control-label"><i class="fa fa-birthday-cake"></i> Tuổi</label>
-                    <input asp-for="KoiFish.AgeFish" class="form-control" placeholder="Nhập tuổi cá" />
-                    <span asp-validation-for="KoiFish.AgeFish" class="text-danger"></span>
+                    <label asp-for="KoiFish.Age" class="control-label"><i class="fa fa-birthday-cake"></i> Tuổi</label>
+                    <input asp-for="KoiFish.Age" class="form-control" placeholder="Nhập tuổi cá" />
+                    <span asp-validation-for="KoiFish.Age" class="text-danger"></span>
                 </div>
 
                 <!-- Kích thước -->
@@ -56,9 +56,9 @@
 
                 <!-- Cân nặng -->
                 <div class="form-group">
-                    <label asp-for="KoiFish.WeightFish" class="control-label"><i class="fa fa-weight-hanging"></i> Cân nặng</label>
-                    <input asp-for="KoiFish.WeightFish" class="form-control" placeholder="Nhập cân nặng (kg)" />
-                    <span asp-validation-for="KoiFish.WeightFish" class="text-danger"></span>
+                    <label asp-for="KoiFish.Weight" class="control-label"><i class="fa fa-weight-hanging"></i> Cân nặng</label>
+                    <input asp-for="KoiFish.Weight" class="form-control" placeholder="Nhập cân nặng (kg)" />
+                    <span asp-validation-for="KoiFish.Weight" class="text-danger"></span>
                 </div>
 
                 <!-- Giới tính -->

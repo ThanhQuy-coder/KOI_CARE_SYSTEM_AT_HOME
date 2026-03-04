@@ -4,102 +4,148 @@
     Layout = "_LoginLayout";
 }
 
-    <div class="container">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0" style="background-image: url('/images/7792008.jpg'); background-size: cover; background-position: center;">
-                <!-- Nested Row within Card Body -->
+            <div class="mb-4 mt-5">
+                <a href="javascript:history.back()" class="text-white text-decoration-none">
+                    <i class="fas fa-arrow-left fa-sm"></i> Go Back
+                </a>
+            </div>
+
+            <div class="card o-hidden border-0 shadow-lg mb-5" style="border-radius: 15px;">
+                <div class="card-body p-0" style="background-image: url('/images/7792008.jpg'); background-size: cover; background-position: center;">
                     <div class="row">
-                            <div class="col-lg-5 d-none d-lg-block bg-register-image" style="background-color:rgb(153, 255, 255);">
-                            <div class="text-center" style="font-family: 'Open Sans'">
-                                <h2 style="font-size: 40px; color: orange">
+                        <div class="col-lg-5 d-none d-lg-flex align-items-center" style="background-color: rgba(255, 255, 255, 0.85);">
+                            <div class="p-5 text-center">
+                                <h2 class="font-weight-bold" style="font-size: 38px; color: #e67e22;">
                                     Cùng chúng tôi
                                 </h2>
-                                <p style="font-size: 30px">
-                                    Tạo một tài khoản của riêng bạn để quản lí cá koi của bạn một cách dễ dàng!
+                                <p class="text-dark mt-3" style="font-size: 1.2rem; line-height: 1.6;">
+                                    Tạo một tài khoản của riêng bạn để quản lý cá Koi một cách dễ dàng và chuyên nghiệp nhất!
                                 </p>
+                                <div class="mt-4">
+                                    <i class="fas fa-fish fa-4x" style="color: #e67e22; opacity: 0.6;"></i>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-7" style="background-color: rgba(0, 0, 0, 0.7)">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-white mb-4">Create an Account!</h1>
-                            </div>
-                            <form class="user" id="myForm" method="post">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                           placeholder="Full Name" asp-for="User.FullName" required>
-                                        <span asp-validation-for="User.FullName" class="text-danger"></span>
+
+                        <div class="col-lg-7" style="background-color: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px);">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h3 text-white font-weight-bold mb-4">Create an Account!</h1>
+                                </div>
+
+                                <form class="user" id="myForm" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user shadow-sm"
+                                                   placeholder="Full Name" asp-for="User.FullName" required>
+                                            <span asp-validation-for="User.FullName" class="text-danger small"></span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control form-control-user shadow-sm"
+                                                   placeholder="User Name" asp-for="Account.Username" required>
+                                            <span asp-validation-for="Account.Username" class="text-danger small"></span>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                           placeholder="User Name" asp-for="Account.Username" required>
-                                        <span asp-validation-for="Account.Username" class="text-danger"></span>
+
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user shadow-sm"
+                                               placeholder="Email Address" asp-for="Account.Email" required>
+                                        <span asp-validation-for="Account.Email" class="text-danger small"></span>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                       placeholder="Email Address" asp-for="Account.Email" required>
-                                        <span asp-validation-for="Account.Email" class="text-danger"></span>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                           id="exampleInputPassword" placeholder="Password" asp-for="Account.PassWordHash" required>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="password" class="form-control form-control-user shadow-sm"
+                                                   id="exampleInputPassword" placeholder="Password" asp-for="Account.PasswordHash" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="password" class="form-control form-control-user shadow-sm"
+                                                   id="exampleRepeatPassword" placeholder="Repeat Password" required>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                               id="exampleRepeatPassword" placeholder="Repeat Password" required>
+
+                                    <div id="error-message" class="alert alert-danger small py-2" style="display: none; border-radius: 10px;">
+                                        <i class="fas fa-exclamation-circle mr-1"></i> Mật khẩu không khớp, vui lòng kiểm tra lại.
                                     </div>
+
+                                    <button type="submit" class="btn btn-primary btn-user btn-block font-weight-bold shadow-sm">
+                                        Register Account
+                                    </button>
+
+                                    <hr class="border-light opacity-20">
+
+                                    <a href="#" class="btn btn-google btn-user btn-block mb-2">
+                                        <i class="fab fa-google fa-fw"></i> Register with Google
+                                    </a>
+                                    <a href="#" class="btn btn-facebook btn-user btn-block">
+                                        <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                    </a>
+                                </form>
+
+                                <hr class="border-light opacity-20">
+
+                                <div class="text-center">
+                                    <a class="small text-info" asp-page="/LoginPage/forgotPassword">Forgot Password?</a>
                                 </div>
-                                <!--Thông báo lỗi nếu mật khẩu nhập lại không chính xác-->
-                                <div id="error-message" style="color: red; display: none;">
-                                    Mật khẩu không khớp, vui lòng kiểm tra lại.
+                                <div class="text-center mt-1">
+                                    <span class="small text-white-50">Already have an account?</span>
+                                    <a class="small text-info font-weight-bold" asp-page="/LoginPage/Index"> Login!</a>
                                 </div>
-                                <!--Đăng ký-->
-                                <div id="enter">
-                                    <input type="submit" value="Register Account" class="btn btn-primary btn-user btn-block" />
-                                </div>
-                                <hr>
-                                <!--Note-->
-                                <a href="#" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <!--Note-->
-                                <a href="#" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
-                            </form>
-                            <hr>
-                            <div class="text-center">
-                            <a class="small text-white" asp-page="/LoginPage/forgotPassword">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                            <a class="small text-white" asp-page="/LoginPage/Index">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+</div>
+
+<style>
+    .form-control-user {
+        border-radius: 10px !important;
+        padding: 1.5rem 1rem !important;
+        border: 1px solid transparent;
+    }
+
+        .form-control-user:focus {
+            border: 1px solid #e67e22 !important;
+        }
+
+    .btn-user {
+        border-radius: 10px !important;
+        padding: 0.75rem !important;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+        .btn-user:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4) !important;
+        }
+
+    hr {
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+</style>
 
 <script>
-    // Lắng nghe sự kiện khi người dùng nhấn nút submit
     document.getElementById('myForm').addEventListener('submit', function (event) {
         var password = document.getElementById('exampleInputPassword').value;
         var repeatPassword = document.getElementById('exampleRepeatPassword').value;
         var errorMessage = document.getElementById('error-message');
 
-        // Kiểm tra mật khẩu khi người dùng nhấn nút submit
         if (password !== repeatPassword) {
-            event.preventDefault();  // Ngừng submit nếu mật khẩu không khớp
-            errorMessage.style.display = 'block'; // Hiển thị thông báo lỗi
+            event.preventDefault();
+            errorMessage.style.display = 'block';
+            // Rung nhẹ ô nhập liệu để cảnh báo
+            document.getElementById('exampleRepeatPassword').classList.add('is-invalid');
         } else {
-            errorMessage.style.display = 'none'; // Ẩn thông báo lỗi nếu mật khẩu khớp
+            errorMessage.style.display = 'none';
         }
     });
 </script>

@@ -23,7 +23,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.LoginPage
 
         [BindProperty]
         public Account Account { get; set; } = default!;
-        public User User { get; set; } = new User { UserId = Guid.Empty, FullName = "#" };
+        public UserProfile User { get; set; } = new UserProfile { UserId = Guid.Empty, FullName = "#" };
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -31,7 +31,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.LoginPage
             Guid accountIdTemp = Account.AccountId;
             Guid userAccountIdTemp = (Guid)User.UserId;
             
-            if (!_accountService.checkAccount(Account.Email, Account.PassWordHash, ref accountIdTemp))
+            if (!_accountService.checkAccount(Account.Email, Account.PasswordHash, ref accountIdTemp))
             {
                 return Page();
             }

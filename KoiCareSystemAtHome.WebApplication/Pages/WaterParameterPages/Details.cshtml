@@ -23,20 +23,20 @@
             <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.SaltLevel)</dt>
             <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.SaltLevel)</dd>
 
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.PH)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.PH)</dd>
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Ph)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Ph)</dd>
 
             <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Oxygen)</dt>
             <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Oxygen)</dd>
 
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Nitrie)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Nitrie)</dd>
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Nitrite)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Nitrite)</dd>
 
             <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Nitrate)</dt>
             <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Nitrate)</dd>
 
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Phospate)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Phospate)</dd>
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Phosphate)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Phosphate)</dd>
 
             <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.MeasurementTime)</dt>
             <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.MeasurementTime)</dd>
@@ -45,7 +45,7 @@
 
     <!-- Nút Edit và Back to List -->
     <div class="text-center mt-4">
-        <a asp-page="./Edit" asp-route-id="@Model.WaterParameter.WaterParameterId" class="btn btn-primary mr-2"><i class="fa fa-edit"></i> Edit</a>
+        <a asp-page="./Edit" asp-route-id="@Model.WaterParameter.ParameterId" class="btn btn-primary mr-2"><i class="fa fa-edit"></i> Edit</a>
         <a asp-page="./Index" class="btn btn-secondary"><i class="fa fa-arrow-left"></i> Back to List</a>
     </div>
 </div>

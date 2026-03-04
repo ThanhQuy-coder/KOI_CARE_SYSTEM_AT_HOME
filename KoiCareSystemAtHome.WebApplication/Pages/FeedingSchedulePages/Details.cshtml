@@ -22,17 +22,17 @@
 
                 <!-- Cá liên quan -->
                 <dt class="col-sm-4"><i class="fa fa-fish"></i> Cá</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.Fish.NameFish)</dd>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.Fish.FishName)</dd>
 
                 <!-- Hồ -->
                 <dt class="col-sm-4"><i class="fa fa-water"></i> Hồ</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.Fish.Pond.NamePond)</dd>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.Fish.Pond.PondName)</dd>
 
             </dl>
 
             <!-- Nút Điều hướng -->
             <div class="text-center mt-4">
-                <a asp-page="./Edit" asp-route-id="@Model.FeedingSchedule.FeedingScheduleId" class="btn btn-primary btn-lg">Chỉnh sửa</a>
+                <a asp-page="./Edit" asp-route-id="@Model.FeedingSchedule.ScheduleId" class="btn btn-primary btn-lg">Chỉnh sửa</a>
                 <a asp-page="./Index" class="btn btn-secondary btn-lg">Quay lại</a>
             </div>
         </div>

@@ -25,7 +25,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.LoginPage
         }
 
         [BindProperty]
-        public User User { get; set; } = default!;
+        public UserProfile User { get; set; } = default!;
         [BindProperty]
         public Account Account { get; set; } = default!;
 
@@ -45,7 +45,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.LoginPage
             }
 
             User.AccountId = Account.AccountId;
-            User.BirthDate = DateTime.Now;
+            User.BirthDate = null;
             User.Gender = "null";
             User.Role = "null";
 

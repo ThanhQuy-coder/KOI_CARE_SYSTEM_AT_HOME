@@ -5,33 +5,33 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class KoiFish
 {
-    public Guid? PondId { get; set; }
-
     public Guid FishId { get; set; }
 
-    public string NameFish { get; set; } = null!;
+    public Guid PondId { get; set; }
 
-    public string ImageFish { get; set; } = null!;
+    public string FishName { get; set; } = null!;
 
-    public string BodyShape { get; set; } = null!;
+    public string? ImageUrl { get; set; }
 
-    public int AgeFish { get; set; }
+    public string? BodyShape { get; set; }
 
-    public double Size { get; set; }
+    public int? Age { get; set; }
 
-    public double WeightFish { get; set; }
+    public decimal Size { get; set; }
 
-    public string Gender { get; set; } = null!;
+    public decimal Weight { get; set; }
 
-    public string Breed { get; set; } = null!;
+    public string? Gender { get; set; }
 
-    public string Origin { get; set; } = null!;
+    public string? Breed { get; set; }
 
-    public double Price { get; set; }
+    public string? Origin { get; set; }
 
-    public int FishLocation { get; set; }
+    public decimal? Price { get; set; }
+
+    public string? FishLocation { get; set; }
 
     public virtual ICollection<FeedingSchedule> FeedingSchedules { get; set; } = new List<FeedingSchedule>();
 
-    public virtual Pond? Pond { get; set; }
+    public virtual Pond Pond { get; set; } = null!;
 }

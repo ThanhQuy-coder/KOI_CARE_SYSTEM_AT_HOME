@@ -12,9 +12,9 @@ namespace KoiCareSystemAtHome.Repositories.Reponsitories;
 public class ProductRepository : IProductRepository
 {
     private readonly KoiCareSystemAtHomeContext _dbContext;
-    public ProductRepository(KoiCareSystemAtHomeContext dbContext) 
+    public ProductRepository(KoiCareSystemAtHomeContext dbContext)
     {
-       _dbContext = dbContext;
+        _dbContext = dbContext;
     }
 
 
@@ -28,7 +28,7 @@ public class ProductRepository : IProductRepository
         }
         catch (Exception ex)
         {
-           
+
             return false;
         }
     }
@@ -103,7 +103,7 @@ public class ProductRepository : IProductRepository
     public async Task<List<Product>> SearchProductAsync(string searchTerm)
     {
         return await _dbContext.Products
-            .Where(n => n.ProductType.Contains(searchTerm) || // Kiểm tra với NameFish
+            .Where(n => n.ProductType.Contains(searchTerm) || // Kiểm tra với FishName
                         n.Price.ToString().Contains(searchTerm) || // Chuyển đổi Price (double) sang chuỗi
                         n.ProductName.Contains(searchTerm)) // Kiểm tra với Breed
             .ToListAsync();

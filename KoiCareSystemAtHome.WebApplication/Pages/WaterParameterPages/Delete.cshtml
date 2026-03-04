@@ -24,20 +24,20 @@
             <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.SaltLevel)</dt>
             <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.SaltLevel)</dd>
 
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.PH)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.PH)</dd>
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Ph)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Ph)</dd>
 
             <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Oxygen)</dt>
             <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Oxygen)</dd>
 
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Nitrie)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Nitrie)</dd>
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Nitrite)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Nitrite)</dd>
 
             <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Nitrate)</dt>
             <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Nitrate)</dd>
 
-            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Phospate)</dt>
-            <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Phospate)</dd>
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.Phosphate)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.Phosphate)</dd>
 
             <dt class="col-sm-4">@Html.DisplayNameFor(model => model.WaterParameter.MeasurementTime)</dt>
             <dd class="col-sm-8">@Html.DisplayFor(model => model.WaterParameter.MeasurementTime)</dd>
@@ -47,7 +47,7 @@
 
     <!-- Form xóa với nút xác nhận và nút quay lại -->
     <form method="post" class="d-flex justify-content-center">
-        <input type="hidden" asp-for="WaterParameter.WaterParameterId" />
+        <input type="hidden" asp-for="WaterParameter.ParameterId" />
         <input type="submit" value="Delete" class="btn btn-danger mr-3" />
         <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
     </form>

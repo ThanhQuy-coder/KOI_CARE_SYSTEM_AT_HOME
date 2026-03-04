@@ -34,14 +34,14 @@
         {
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
-                    <img class="card-img-top" src="@Url.Content("~/images/" + item.ImageFish)" alt="Cá Koi" style="height: 200px; object-fit: cover;">
+                    <img class="card-img-top" src="@Url.Content("~/images/" + item.ImageUrl)" alt="Cá Koi" style="height: 200px; object-fit: cover;">
                     <div class="card-body text-center">
-                        <h5 class="card-title">@item.NameFish</h5>
+                        <h5 class="card-title">@item.FishName</h5>
 
                         <!-- Thông tin cá Koi với biểu tượng -->
                         <p class="card-text"><i class="fa fa-dollar-sign text-muted"></i> Giá: @item.Price đ</p>
                         <p class="card-text"><i class="fa fa-dna text-muted"></i> Giống: @item.Breed </p>
-                        <p class="card-text"><i class="fa fa-water text-muted"></i> Hồ: @item.Pond.NamePond</p>
+                        <p class="card-text"><i class="fa fa-water text-muted"></i> Hồ: @item.Pond.PondName</p>
 
                         <!-- Nút Xem Chi Tiết lớn -->
                         <a asp-page="./Details" asp-route-id="@item.FishId" class="btn btn-primary btn-block mb-2">

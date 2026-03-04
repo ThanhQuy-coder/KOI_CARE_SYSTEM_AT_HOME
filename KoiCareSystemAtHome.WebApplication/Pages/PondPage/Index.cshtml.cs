@@ -50,7 +50,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
             // Tìm kiếm theo tên hồ hoặc độ sâu
             if (!string.IsNullOrEmpty(SearchTerm))
             {
-                Pond = Pond.Where(p => p.NamePond.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+                Pond = Pond.Where(p => p.PondName.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
                                        p.Depth.ToString().Contains(SearchTerm)).ToList();
             }
 

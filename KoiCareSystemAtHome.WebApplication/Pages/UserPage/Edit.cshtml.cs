@@ -22,7 +22,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
         }
 
         [BindProperty]
-        public User User { get; set; } = default!;
+        public UserProfile User { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {

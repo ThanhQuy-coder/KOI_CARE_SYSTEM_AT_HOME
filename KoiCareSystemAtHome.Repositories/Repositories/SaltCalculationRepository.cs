@@ -32,7 +32,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
         {
             try
             {
-                var objDel = _DbContext.SaltCalculations.Where(p => p.SaltCalculationId.Equals(Id)).FirstOrDefault();
+                var objDel = _DbContext.SaltCalculations.Where(p => p.CalculationId.Equals(Id)).FirstOrDefault();
                 if (objDel != null)
                 {
                     _DbContext.SaltCalculations.Remove(objDel);
@@ -70,7 +70,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
 
         public async Task<SaltCalculation?> GetSaltCalculationById(Guid? Id)
         {
-            return await _DbContext.SaltCalculations.Where(p => p.SaltCalculationId.Equals(Id)).FirstOrDefaultAsync();
+            return await _DbContext.SaltCalculations.Where(p => p.CalculationId.Equals(Id)).FirstOrDefaultAsync();
         }
 
         public bool UpdateSaltCalculation(SaltCalculation SaltCalculation)

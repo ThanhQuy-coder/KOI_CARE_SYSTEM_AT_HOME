@@ -9,12 +9,12 @@ namespace KoiCareSystemAtHome.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<List<User>> GetAllUser();
+        Task<List<UserProfile>> GetAllUser();
         Boolean DelUser(Guid Id);
-        Boolean DelUser(User user);
-        Boolean AddUser(User user);
-        Boolean UpdateUser(User user);
-        Task<User?> GetUserById(Guid? Id);
+        Boolean DelUser(UserProfile user);
+        Boolean AddUser(UserProfile user);
+        Boolean UpdateUser(UserProfile user);
+        Task<UserProfile?> GetUserById(Guid? Id);
 
         Boolean CheckUser(Guid AccountId,ref Guid UserId);
     }

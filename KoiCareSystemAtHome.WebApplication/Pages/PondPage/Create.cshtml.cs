@@ -53,7 +53,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
                 }
 
                 // Lưu đường dẫn ảnh vào `KoiFish`
-                Pond.ImagePond = fileName;
+                Pond.ImageUrl = fileName;
             }
 
             var result = _service.AddPond(Pond);

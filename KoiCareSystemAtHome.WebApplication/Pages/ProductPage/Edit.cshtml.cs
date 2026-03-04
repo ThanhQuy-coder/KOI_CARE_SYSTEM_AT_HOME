@@ -50,8 +50,8 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
             existingProduct.ProductName = Product.ProductName;
             existingProduct.Price = Product.Price;
             existingProduct.ProductType = Product.ProductType;
-            existingProduct.DatePlace = Product.DatePlace;
-            existingProduct.Desciption = Product.Desciption;
+            existingProduct.CreatedDate = Product.CreatedDate;
+            existingProduct.Description = Product.Description;
 
             // Xử lý ảnh mới (nếu có)
             if (ImageFile != null)
@@ -66,7 +66,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.ProductPage
                 }
 
                 // Cập nhật tên ảnh vào sản phẩm
-                existingProduct.ImageProduct = fileName;
+                existingProduct.ImageUrl = fileName;
             }
 
             // Cập nhật sản phẩm vào cơ sở dữ liệu

@@ -9,9 +9,9 @@ public partial class Account
 
     public string Username { get; set; } = null!;
 
-    public string PassWordHash { get; set; } = null!;
+    public string PasswordHash { get; set; } = null!;
 
     public string Email { get; set; } = null!;
 
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
+    public virtual UserProfile? UserProfile { get; set; }
 }

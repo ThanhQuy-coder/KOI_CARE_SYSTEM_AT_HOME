@@ -50,11 +50,11 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
             }
 
             // Cập nhật các trường cần thiết
-            existingKoiFish.NameFish = KoiFish.NameFish;
+            existingKoiFish.FishName = KoiFish.FishName;
             existingKoiFish.BodyShape = KoiFish.BodyShape;
-            existingKoiFish.AgeFish = KoiFish.AgeFish;
+            existingKoiFish.Age = KoiFish.Age;
             existingKoiFish.Size = KoiFish.Size;
-            existingKoiFish.WeightFish = KoiFish.WeightFish;
+            existingKoiFish.Weight = KoiFish.Weight;
             existingKoiFish.Gender = KoiFish.Gender;
             existingKoiFish.Breed = KoiFish.Breed;
             existingKoiFish.Origin = KoiFish.Origin;
@@ -75,7 +75,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
                 }
 
                 // Cập nhật đường dẫn ảnh mới
-                existingKoiFish.ImageFish = fileName;
+                existingKoiFish.ImageUrl = fileName;
             }
 
             // Cập nhật cá Koi vào cơ sở dữ liệu

@@ -17,7 +17,7 @@ namespace KoiCareSystemAtHome.Services.Services
             _repository = repository;
         }
 
-        public bool AddUser(User user)
+        public bool AddUser(UserProfile user)
         {
             return _repository.AddUser(user);
         }
@@ -27,22 +27,22 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.DelUser(Id);
         }
 
-        public bool DelUser(User user)
+        public bool DelUser(UserProfile user)
         {
             return _repository.DelUser(user);
         }
 
-        public Task<User?> GetUserById(Guid? Id)
+        public Task<UserProfile?> GetUserById(Guid? Id)
         {
             return _repository.GetUserById(Id);
         }
 
-        public Task<List<User>> GetAllUser()
+        public Task<List<UserProfile>> GetAllUser()
         {
             return _repository.GetAllUser();
         }
 
-        public bool UpdateUser(User user)
+        public bool UpdateUser(UserProfile user)
         {
             return _repository.UpdateUser(user);
         }

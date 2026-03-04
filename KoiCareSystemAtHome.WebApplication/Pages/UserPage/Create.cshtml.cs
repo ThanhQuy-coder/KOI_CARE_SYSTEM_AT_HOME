@@ -25,12 +25,12 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
         public IActionResult OnGet(Guid accountId)
         {
             // Gán PondId vào KoiFish
-            User = new User { AccountId = accountId };
+            User = new UserProfile { AccountId = accountId };
             return Page();
         }
 
         [BindProperty]
-        public User User { get; set; } = default!;
+        public UserProfile User { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         // Nhận AccountID từ query string khi chuyển hướng từ trang tạo Account

@@ -11,12 +11,12 @@
 
                 <!-- Tên Cá -->
                 <dt class="col-sm-4"><i class="fa fa-tag"></i> Tên Cá</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.NameFish)</dd>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.FishName)</dd>
 
                 <!-- Ảnh Cá -->
                 <dt class="col-sm-4"><i class="fa fa-image"></i> Ảnh Cá</dt>
                 <dd class="col-sm-8">
-                    <img src="/images/@Model.KoiFish.ImageFish" alt="Koi Fish Image" style="max-width: 100px;" />
+                    <img src="/images/@Model.KoiFish.ImageUrl" alt="Koi Fish Image" style="max-width: 100px;" />
                 </dd>
 
                 <!-- Dáng -->
@@ -25,7 +25,7 @@
 
                 <!-- Tuổi -->
                 <dt class="col-sm-4"><i class="fa fa-birthday-cake"></i> Tuổi</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.AgeFish)</dd>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.Age)</dd>
 
                 <!-- Kích thước -->
                 <dt class="col-sm-4"><i class="fa fa-arrows-alt-h"></i> Kích thước</dt>
@@ -33,7 +33,7 @@
 
                 <!-- Cân nặng -->
                 <dt class="col-sm-4"><i class="fa fa-weight-hanging"></i> Cân nặng</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.WeightFish)</dd>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.Weight)</dd>
 
                 <!-- Giới tính -->
                 <dt class="col-sm-4"><i class="fa fa-venus-mars"></i> Giới tính</dt>
@@ -53,7 +53,7 @@
 
                 <!-- Hồ -->
                 <dt class="col-sm-4"><i class="fa fa-water"></i> Hồ</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.Pond.NamePond)</dd>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.KoiFish.Pond.PondName)</dd>
 
             </dl>
 

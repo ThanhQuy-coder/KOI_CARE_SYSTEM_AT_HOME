@@ -23,17 +23,17 @@
 
                 <!-- Cá liên quan -->
                 <dt class="col-sm-4"><i class="fa fa-fish"></i> Cá</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.Fish.NameFish)</dd>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.Fish.FishName)</dd>
 
                 <!-- Hồ -->
                 <dt class="col-sm-4"><i class="fa fa-water"></i> Hồ</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.Fish.Pond.NamePond)</dd>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.FeedingSchedule.Fish.Pond.PondName)</dd>
 
             </dl>
 
             <!-- Nút Xác nhận Xóa -->
             <form method="post" class="text-center mt-4">
-                <input type="hidden" asp-for="FeedingSchedule.FeedingScheduleId" />
+                <input type="hidden" asp-for="FeedingSchedule.ScheduleId" />
                 <input type="submit" value="Xóa" class="btn btn-danger btn-lg" /> |
                 <a asp-page="./Index" class="btn btn-secondary btn-lg">Quay lại</a>
             </form>

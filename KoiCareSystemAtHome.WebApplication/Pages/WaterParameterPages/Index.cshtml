@@ -62,29 +62,29 @@
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">Hồ: @item.Pond.NamePond</h5>
+                        <h5 class="card-title">Hồ: @item.Pond.PondName</h5>
 
                         <!-- Thông tin về thông số nước -->
                         <p class="card-text"><i class="fa fa-thermometer-half text-muted"></i> Nhiệt độ: @item.Temperature °C</p>
                         <p class="card-text"><i class="fa fa-water text-muted"></i> Mức muối: @item.SaltLevel %</p>
-                        <p class="card-text"><i class="fa fa-vial text-muted"></i> pH: @item.PH</p>
+                        <p class="card-text"><i class="fa fa-vial text-muted"></i> pH: @item.Ph</p>
                         <p class="card-text"><i class="fa fa-wind text-muted"></i> Oxy: @item.Oxygen mg/L</p>
-                        <p class="card-text"><i class="fa fa-dna text-muted"></i> Nitrit: @item.Nitrie mg/L</p>
+                        <p class="card-text"><i class="fa fa-dna text-muted"></i> Nitrit: @item.Nitrite mg/L</p>
                         <p class="card-text"><i class="fa fa-dna text-muted"></i> Nitrat: @item.Nitrate mg/L</p>
-                        <p class="card-text"><i class="fa fa-leaf text-muted"></i> Phosphat: @item.Phospate mg/L</p>
+                        <p class="card-text"><i class="fa fa-leaf text-muted"></i> Phosphat: @item.Phosphate mg/L</p>
                         <p class="card-text"><i class="fa fa-clock text-muted"></i> Thời gian đo: @item.MeasurementTime.ToShortDateString()</p>
 
                         <!-- Nút Xem Chi Tiết lớn -->
-                        <a asp-page="./Details" asp-route-id="@item.WaterParameterId" class="btn btn-primary btn-block mb-2">
+                        <a asp-page="./Details" asp-route-id="@item.ParameterId" class="btn btn-primary btn-block mb-2">
                             <i class="fa fa-eye"></i> Xem chi tiết
                         </a>
 
                         <!-- Nút Edit và Delete nhỏ với biểu tượng -->
                         <div class="d-flex justify-content-between">
-                            <a asp-page="./Edit" asp-route-id="@item.WaterParameterId" class="btn btn-warning flex-fill mx-1">
+                            <a asp-page="./Edit" asp-route-id="@item.ParameterId" class="btn btn-warning flex-fill mx-1">
                                 <i class="fa fa-edit"></i> Edit
                             </a>
-                            <a asp-page="./Delete" asp-route-id="@item.WaterParameterId" class="btn btn-danger flex-fill mx-1">
+                            <a asp-page="./Delete" asp-route-id="@item.ParameterId" class="btn btn-danger flex-fill mx-1">
                                 <i class="fa fa-trash"></i> Delete
                             </a>
                         </div>

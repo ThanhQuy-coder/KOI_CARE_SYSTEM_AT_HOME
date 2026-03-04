@@ -103,7 +103,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
         public async Task<List<Pond>> SearchPondAsync(string searchTerm)
         {
             return await _dbContext.Ponds
-                .Where(n => n.NamePond.Contains(searchTerm) || // Kiểm tra với NamePond
+                .Where(n => n.PondName.Contains(searchTerm) || // Kiểm tra với PondName
                             n.User.FullName.Contains(searchTerm)) // Kiểm tra với UserName
                 .ToListAsync();
         }

@@ -19,7 +19,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
             _userService = userService;
         }
 
-        public IList<User> User { get;set; } = default!;
+        public IList<UserProfile> User { get;set; } = default!;
 
         public async Task OnGetAsync()
         {

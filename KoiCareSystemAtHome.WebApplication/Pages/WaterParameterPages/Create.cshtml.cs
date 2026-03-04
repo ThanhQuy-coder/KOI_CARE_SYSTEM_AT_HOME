@@ -48,11 +48,11 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             {
                 WarningMessages.Add("Nhiệt độ nằm ngoài giới hạn ổn định của hồ.");
             }
-            if (WaterParameter.SaltLevel < 0.1 || WaterParameter.SaltLevel > 0.5)
+            if (WaterParameter.SaltLevel < (decimal)0.1 || WaterParameter.SaltLevel > (decimal)0.5)
             {
                 WarningMessages.Add("Mức muối nằm ngoài giới hạn ổn định của hồ.");
             }
-            if (WaterParameter.PH < 6.5 || WaterParameter.PH > 8.5)
+            if (WaterParameter.Ph < (decimal)6.5 || WaterParameter.Ph > (decimal)8.5)
             {
                 WarningMessages.Add("PH nằm ngoài giới hạn ổn định của hồ.");
             }
@@ -60,7 +60,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             {
                 WarningMessages.Add("Oxy nằm ngoài giới hạn ổn định của hồ.");
             }
-            if (WaterParameter.Nitrie < 0 || WaterParameter.Nitrie > 0.2)
+            if (WaterParameter.Nitrite < 0 || WaterParameter.Nitrite > (decimal)0.2)
             {
                 WarningMessages.Add("Nitrit nằm ngoài giới hạn ổn định của hồ.");
             }
@@ -68,7 +68,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             {
                 WarningMessages.Add("Nitrat nằm ngoài giới hạn ổn định của hồ.");
             }
-            if (WaterParameter.Phospate < 0 || WaterParameter.Phospate > 1)
+            if (WaterParameter.Phosphate < 0 || WaterParameter.Phosphate > 1)
             {
                 WarningMessages.Add("Phosphat nằm ngoài giới hạn ổn định của hồ.");
             }

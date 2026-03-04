@@ -100,10 +100,10 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
         public async Task<List<KoiFish>> SearchKoiFishAsync(string searchTerm)
         {
             return await _dbContext.KoiFishes
-                .Where(n => n.NameFish.Contains(searchTerm) || // Kiểm tra với NameFish
+                .Where(n => n.FishName.Contains(searchTerm) || // Kiểm tra với FishName
                             n.Price.ToString().Contains(searchTerm) || // Chuyển đổi Price (double) sang chuỗi
                             n.Breed.Contains(searchTerm) || // Kiểm tra với Breed
-                            n.Pond.NamePond.Contains(searchTerm)) // Kiểm tra với NamePond
+                            n.Pond.PondName.Contains(searchTerm)) // Kiểm tra với PondName
                 .ToListAsync();
         }
 

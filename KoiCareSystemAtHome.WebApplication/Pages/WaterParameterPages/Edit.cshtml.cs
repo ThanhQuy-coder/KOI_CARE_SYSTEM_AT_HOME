@@ -55,11 +55,11 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             {
                 WarningMessages.Add("Nhiệt độ nằm ngoài giới hạn ổn định của hồ.");
             }
-            if (WaterParameter.SaltLevel < 0.1 || WaterParameter.SaltLevel > 0.5)
+            if (WaterParameter.SaltLevel < (Decimal)0.1 || WaterParameter.SaltLevel > (Decimal)0.5)
             {
                 WarningMessages.Add("Mức muối nằm ngoài giới hạn ổn định của hồ.");
             }
-            if (WaterParameter.PH < 6.5 || WaterParameter.PH > 8.5)
+            if (WaterParameter.Ph < (Decimal)6.5 || WaterParameter.Ph > (Decimal)8.5)
             {
                 WarningMessages.Add("PH nằm ngoài giới hạn ổn định của hồ.");
             }
@@ -67,7 +67,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             {
                 WarningMessages.Add("Oxy nằm ngoài giới hạn ổn định của hồ.");
             }
-            if (WaterParameter.Nitrie < 0 || WaterParameter.Nitrie > 0.2)
+            if (WaterParameter.Nitrite < 0 || WaterParameter.Nitrite > (Decimal)0.2)
             {
                 WarningMessages.Add("Nitrit nằm ngoài giới hạn ổn định của hồ.");
             }
@@ -75,7 +75,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             {
                 WarningMessages.Add("Nitrat nằm ngoài giới hạn ổn định của hồ.");
             }
-            if (WaterParameter.Phospate < 0 || WaterParameter.Phospate > 1)
+            if (WaterParameter.Phosphate < 0 || WaterParameter.Phosphate > 1)
             {
                 WarningMessages.Add("Phosphat nằm ngoài giới hạn ổn định của hồ.");
             }
@@ -92,7 +92,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
                 TempData.Remove("WarningMessages"); // Giữ lại cho các lần truy cập tiếp theo
             }
 
-            var existingWaterParameter = await _service.GetWaterParameterById(WaterParameter.WaterParameterId);
+            var existingWaterParameter = await _service.GetWaterParameterById(WaterParameter.ParameterId);
             if (existingWaterParameter == null)
             {
                 return NotFound();
@@ -101,11 +101,11 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.WaterParameterPages
             // Cập nhật các trường cần thiết
             existingWaterParameter.Temperature = WaterParameter.Temperature;
             existingWaterParameter.SaltLevel = WaterParameter.SaltLevel;
-            existingWaterParameter.PH = WaterParameter.PH;
+            existingWaterParameter.Ph = WaterParameter.Ph;
             existingWaterParameter.Oxygen = WaterParameter.Oxygen;
-            existingWaterParameter.Nitrie = WaterParameter.Nitrie;
+            existingWaterParameter.Nitrite = WaterParameter.Nitrite;
             existingWaterParameter.Nitrate = WaterParameter.Nitrate;
-            existingWaterParameter.Phospate = WaterParameter.Phospate;
+            existingWaterParameter.Phosphate = WaterParameter.Phosphate;
             existingWaterParameter.MeasurementTime = WaterParameter.MeasurementTime;
 
 

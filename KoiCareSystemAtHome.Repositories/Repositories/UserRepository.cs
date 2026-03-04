@@ -18,11 +18,11 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             _dbContext = dbcontext;
         }
 
-        public bool AddUser(User user)
+        public bool AddUser(UserProfile user)
         {
             try
             {
-                _dbContext.Users.Add(user);
+                _dbContext.UserProfiles.Add(user);
                 _dbContext.SaveChanges();
                 return true;
             }
@@ -36,10 +36,10 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
         {
             try
             {
-                var objDel = _dbContext.Users.Where(p => p.UserId.Equals(Id)).FirstOrDefault();
+                var objDel = _dbContext.UserProfiles.Where(p => p.UserId.Equals(Id)).FirstOrDefault();
                 if (objDel != null)
                 {
-                    _dbContext.Users.Remove(objDel);
+                    _dbContext.UserProfiles.Remove(objDel);
                     _dbContext.SaveChanges();
                     return true;
                 }
@@ -51,7 +51,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool DelUser(User user)
+        public bool DelUser(UserProfile user)
         {
             try
             {
@@ -65,21 +65,21 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public async Task<User?> GetUserById(Guid? Id)
+        public async Task<UserProfile?> GetUserById(Guid? Id)
         {
-            return await _dbContext.Users.Where(p => p.UserId.Equals(Id)).FirstOrDefaultAsync();
+            return await _dbContext.UserProfiles.Where(p => p.UserId.Equals(Id)).FirstOrDefaultAsync();
         }
 
-        public async Task<List<User>> GetAllUser()
+        public async Task<List<UserProfile>> GetAllUser()
         {
-            return await _dbContext.Users.ToListAsync();
+            return await _dbContext.UserProfiles.ToListAsync();
         }
 
-        public bool UpdateUser(User user)
+        public bool UpdateUser(UserProfile user)
         {
             try
             {
-                _dbContext.Users.Update(user);
+                _dbContext.UserProfiles.Update(user);
                 _dbContext.SaveChanges();
                 return true;
             }
@@ -91,7 +91,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
 
         public bool CheckUser(Guid AccountId,ref Guid UserId)
         {
-            foreach (var user in _dbContext.Users)
+            foreach (var user in _dbContext.UserProfiles)
             {
                 if(AccountId == user.AccountId)
                 {

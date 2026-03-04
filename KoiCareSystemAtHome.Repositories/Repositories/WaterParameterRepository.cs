@@ -53,7 +53,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
         {
             try
             {
-                var objDel = _dbContext.WaterParameters.Where(p => p.WaterParameterId.Equals(Id)).FirstOrDefault();
+                var objDel = _dbContext.WaterParameters.Where(p => p.ParameterId.Equals(Id)).FirstOrDefault();
                 if (objDel != null)
                 {
                     _dbContext.WaterParameters.Remove(objDel);
@@ -78,7 +78,7 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
 
         public async Task<WaterParameter> GetWaterParameterById(Guid Id)
         {
-            return await _dbContext.WaterParameters.Where(p => p.WaterParameterId.Equals(Id)).FirstOrDefaultAsync();
+            return await _dbContext.WaterParameters.Where(p => p.ParameterId.Equals(Id)).FirstOrDefaultAsync();
         }
 
         public bool UppWaterParameter(WaterParameter waterParameter)

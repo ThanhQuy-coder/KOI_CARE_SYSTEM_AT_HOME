@@ -50,7 +50,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
             // Tìm kiếm theo tên cá hoặc giá
             if (!string.IsNullOrEmpty(SearchTerm))
             {
-                KoiFish = KoiFish.Where(kf => kf.NameFish.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+                KoiFish = KoiFish.Where(kf => kf.FishName.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
                                                kf.Price.ToString().Contains(SearchTerm)).ToList();
             }
 
@@ -63,7 +63,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
             // Tìm kiếm theo tên hồ
             if (!string.IsNullOrEmpty(PondName))
             {
-                KoiFish = KoiFish.Where(kf => kf.Pond.NamePond.Contains(PondName, StringComparison.OrdinalIgnoreCase)).ToList();
+                KoiFish = KoiFish.Where(kf => kf.Pond.PondName.Contains(PondName, StringComparison.OrdinalIgnoreCase)).ToList();
             }
 
 

@@ -39,7 +39,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.FeedingSchedulePages
                 return Page();
             }
 
-            var existingFeedingSchedule = await _service.GetFeedingScheduleById(FeedingSchedule.FeedingScheduleId);
+            var existingFeedingSchedule = await _service.GetFeedingScheduleById(FeedingSchedule.ScheduleId);
             if (existingFeedingSchedule == null)
             {
                 return NotFound();

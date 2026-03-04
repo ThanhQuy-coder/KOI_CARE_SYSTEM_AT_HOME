@@ -5,27 +5,27 @@ namespace KoiCareSystemAtHome.Repositories.Entities;
 
 public partial class Pond
 {
-    public Guid? UserId { get; set; }
-
     public Guid PondId { get; set; }
 
-    public string NamePond { get; set; } = null!;
+    public Guid UserId { get; set; }
 
-    public string? ImagePond { get; set; }
+    public string PondName { get; set; } = null!;
 
-    public double? Depth { get; set; }
+    public string? ImageUrl { get; set; }
 
-    public double? Volume { get; set; }
+    public decimal Depth { get; set; }
 
-    public int? DrainCount { get; set; }
+    public decimal Volume { get; set; }
 
-    public double? PumpCapacity { get; set; }
+    public int DrainCount { get; set; }
+
+    public decimal PumpCapacity { get; set; }
 
     public virtual ICollection<KoiFish> KoiFishes { get; set; } = new List<KoiFish>();
 
     public virtual ICollection<SaltCalculation> SaltCalculations { get; set; } = new List<SaltCalculation>();
 
-    public virtual User? User { get; set; }
+    public virtual UserProfile User { get; set; } = null!;
 
     public virtual ICollection<WaterParameter> WaterParameters { get; set; } = new List<WaterParameter>();
 }

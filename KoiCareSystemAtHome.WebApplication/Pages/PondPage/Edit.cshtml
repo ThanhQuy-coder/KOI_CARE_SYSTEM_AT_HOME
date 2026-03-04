@@ -10,22 +10,22 @@
             <form method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                 <input type="hidden" asp-for="Pond.PondId" />
-                <input type="hidden" asp-for="Pond.ImagePond" /> <!-- Ẩn input để giữ giá trị ảnh cũ -->
+                <input type="hidden" asp-for="Pond.ImageUrl" /> <!-- Ẩn input để giữ giá trị ảnh cũ -->
                 <!-- Tên Hồ -->
                 <div class="form-group">
-                    <label asp-for="Pond.NamePond" class="control-label"><i class="fa fa-tag"></i> Tên Hồ</label>
-                    <input asp-for="Pond.NamePond" class="form-control" placeholder="Nhập tên hồ" />
-                    <span asp-validation-for="Pond.NamePond" class="text-danger"></span>
+                    <label asp-for="Pond.PondName" class="control-label"><i class="fa fa-tag"></i> Tên Hồ</label>
+                    <input asp-for="Pond.PondName" class="form-control" placeholder="Nhập tên hồ" />
+                    <span asp-validation-for="Pond.PondName" class="text-danger"></span>
                 </div>
 
                 <!-- Ảnh Hồ -->
                 <div class="form-group">
                     <label class="control-label"><i class="fa fa-image"></i> Ảnh hiện tại</label>
-                    @if (!string.IsNullOrEmpty(Model.Pond.ImagePond))
+                    @if (!string.IsNullOrEmpty(Model.Pond.ImageUrl))
                     {
                         <div class="mb-2">
-                            <img src="/images/@Model.Pond.ImagePond" alt="Pond Image" style="max-width: 200px;" />
-                            <p><small>Ảnh hiện tại: @Model.Pond.ImagePond</small></p>
+                            <img src="/images/@Model.Pond.ImageUrl" alt="Pond Image" style="max-width: 200px;" />
+                            <p><small>Ảnh hiện tại: @Model.Pond.ImageUrl</small></p>
                         </div>
                     }
                     <label asp-for="ImageFile" class="control-label"><i class="fa fa-upload"></i> Chọn ảnh mới (nếu có)</label>

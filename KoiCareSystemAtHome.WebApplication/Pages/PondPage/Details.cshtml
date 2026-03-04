@@ -10,12 +10,12 @@
             <div class="row">
                 <div class="col-md-4 text-center mb-4">
                     <!-- Ảnh hồ lớn hơn, căn giữa -->
-                    <img src="/images/@Model.Pond.ImagePond" alt="Pond Image" class="img-fluid rounded" style="max-width: 100%; height: auto; object-fit: cover;">
+                    <img src="/images/@Model.Pond.ImageUrl" alt="Pond Image" class="img-fluid rounded" style="max-width: 100%; height: auto; object-fit: cover;">
                 </div>
                 <div class="col-md-8">
                     <dl class="row">
                         <dt class="col-sm-4 text-muted"><i class="fa fa-tag"></i> Tên Hồ:</dt>
-                        <dd class="col-sm-8 font-weight-bold">@Html.DisplayFor(model => model.Pond.NamePond)</dd>
+                        <dd class="col-sm-8 font-weight-bold">@Html.DisplayFor(model => model.Pond.PondName)</dd>
 
                         <dt class="col-sm-4 text-muted"><i class="fa fa-arrows-alt-v"></i> Độ Sâu:</dt>
                         <dd class="col-sm-8">@Html.DisplayFor(model => model.Pond.Depth) m</dd>

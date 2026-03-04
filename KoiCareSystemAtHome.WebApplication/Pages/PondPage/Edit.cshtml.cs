@@ -49,7 +49,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
             }
 
             // Cập nhật các trường cần thiết
-            existingPond.NamePond = Pond.NamePond;
+            existingPond.PondName = Pond.PondName;
             existingPond.Depth = Pond.Depth;
             existingPond.Volume = Pond.Volume;
             existingPond.DrainCount = Pond.DrainCount;
@@ -69,7 +69,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.PondPage
                 }
 
                 // Cập nhật đường dẫn ảnh mới vào sản phẩm
-                existingPond.ImagePond = fileName;
+                existingPond.ImageUrl = fileName;
             }
 
             // Cập nhật hồ vào cơ sở dữ liệu

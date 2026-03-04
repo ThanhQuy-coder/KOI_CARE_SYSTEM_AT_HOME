@@ -55,7 +55,7 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.KoiFishPage
                 }
 
                 // Lưu đường dẫn ảnh vào `KoiFish`
-                KoiFish.ImageFish = fileName;
+                KoiFish.ImageUrl = fileName;
             }
 
             var result = _service.AddKoiFish(KoiFish);
