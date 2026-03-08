@@ -5,17 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KoiCareSystemAtHome.Services.Interfaces
+namespace KoiCareSystemAtHome.Repositories.Interfaces
 {
-    public interface IUserService
+    public interface IUserProfileRepository
     {
         Task<List<UserProfile>> GetAllUser();
-        Boolean DelUser(Guid Id);
+        Task<bool> DelUser(Guid Id);
         Boolean DelUser(UserProfile user);
-        Boolean AddUser(UserProfile user);
-        Boolean UpdateUser(UserProfile user);
+        Task<bool> AddUser(UserProfile user);
+        Task<bool> UpdateUser(UserProfile user);
         Task<UserProfile?> GetUserById(Guid? Id);
-
-        Boolean CheckUser(Guid AccountId,ref Guid UserId);
+        Task<(bool IsExisted, UserProfile? UserProfile)> CheckUser(Guid AccountId);
     }
 }

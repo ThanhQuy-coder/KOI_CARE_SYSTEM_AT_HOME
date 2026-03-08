@@ -16,9 +16,9 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
     {
         private readonly IAccountService _accountService;
 
-        public CreateModel(IAccountService context)
+        public CreateModel(IAccountService accountService)
         {
-            _accountService = context;
+            _accountService = accountService;
         }
 
         public IActionResult OnGet()
@@ -29,17 +29,18 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
         [BindProperty]
         public Account Account { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || Account == null)
             {
                 return Page();
             }
-            var result = _accountService.AddAccount(Account);
-            if (!result)
+
+            var isSuccess = await _accountService.AddAccount(Account);
+            
+            if (isSuccess != null)
             {
-                ModelState.AddModelError(string.Empty, "Error");
+                ModelState.AddModelError(string.Empty, "Đã xảy ra lỗi khi tạo tài khoản. Vui lòng thử lại.");
                 return Page();
             }
 

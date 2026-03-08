@@ -9,12 +9,13 @@ namespace KoiCareSystemAtHome.Repositories.Interfaces
 {
     public interface IAccountRepository
     {
-        Task<List<Account>> GetAllAccount();
-        Boolean DelAccount(Guid Id);
+        Task<Account?> AddAccount(Account account);
+        Task<Account?> checkAccount(string email, string password);
+        Task<bool> DelAccount(Guid Id);
         Boolean DelAccount(Account account);
-        Boolean AddAccount(Account account);
-        Boolean UpdateAccount(Account account);
         Task<Account?> GetAccountById(Guid? Id);
-        Boolean checkAccount(string email, string password,ref Guid getId);
+        Task<List<Account>> GetAllAccount();
+        Task<bool> UpdateAccount(Account account);
+        Task<Account?> GetAccountByEmail(string targetEmail);
     }
 }

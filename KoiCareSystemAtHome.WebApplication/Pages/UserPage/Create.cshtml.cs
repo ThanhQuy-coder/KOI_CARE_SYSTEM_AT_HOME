@@ -15,9 +15,9 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
 {
     public class CreateModel : PageModel
     {
-        private readonly IUserService _userService;
+        private readonly IUserProfileService _userService;
 
-        public CreateModel(IUserService userService)
+        public CreateModel(IUserProfileService userService)
         {
             _userService = userService;
         }
@@ -47,7 +47,8 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
             {
                 return Page();
             }
-            var result = _userService.AddUser(User);
+            var result = await _userService.AddUser(User);
+
             if (!result)
             {
                 ModelState.AddModelError(string.Empty, "Error");

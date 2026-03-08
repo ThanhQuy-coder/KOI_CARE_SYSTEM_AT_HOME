@@ -2,6 +2,7 @@
 using KoiCareSystemAtHome.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +11,20 @@ using System.Threading.Tasks;
 
 namespace KoiCareSystemAtHome.Repositories.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserProfileRepository : IUserProfileRepository
     {
         private readonly KoiCareSystemAtHomeContext _dbContext;
-        public UserRepository(KoiCareSystemAtHomeContext dbcontext)
+        public UserProfileRepository(KoiCareSystemAtHomeContext dbcontext)
         {
             _dbContext = dbcontext;
         }
 
-        public bool AddUser(UserProfile user)
+        public async Task<bool> AddUser(UserProfile user)
         {
             try
             {
-                _dbContext.UserProfiles.Add(user);
-                _dbContext.SaveChanges();
+                await _dbContext.UserProfiles.AddAsync(user);
+                await _dbContext.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
@@ -32,18 +33,22 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool DelUser(Guid Id)
+        public async Task<bool> DelUser(Guid id)
         {
             try
             {
-                var objDel = _dbContext.UserProfiles.Where(p => p.UserId.Equals(Id)).FirstOrDefault();
-                if (objDel != null)
+                var userProfile = await _dbContext.UserProfiles.FindAsync(id);
+
+                if (userProfile == null)
                 {
-                    _dbContext.UserProfiles.Remove(objDel);
-                    _dbContext.SaveChanges();
-                    return true;
+                    return false;
                 }
-                return false;
+
+                _dbContext.UserProfiles.Remove(userProfile);
+
+                await _dbContext.SaveChangesAsync();
+
+                return true;
             }
             catch (Exception ex)
             {
@@ -75,13 +80,15 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             return await _dbContext.UserProfiles.ToListAsync();
         }
 
-        public bool UpdateUser(UserProfile user)
+        public async Task<bool> UpdateUser(UserProfile user)
         {
             try
             {
                 _dbContext.UserProfiles.Update(user);
-                _dbContext.SaveChanges();
-                return true;
+
+                var result = await _dbContext.SaveChangesAsync();
+
+                return result > 0;
             }
             catch (Exception ex)
             {
@@ -89,17 +96,18 @@ namespace KoiCareSystemAtHome.Repositories.Repositories
             }
         }
 
-        public bool CheckUser(Guid AccountId,ref Guid UserId)
+        public async Task<(bool IsExisted, UserProfile? UserProfile)> CheckUser(Guid AccountId)
         {
-            foreach (var user in _dbContext.UserProfiles)
+            var user = await _dbContext.UserProfiles
+                .Where(u => u.AccountId == AccountId)
+                .FirstOrDefaultAsync();
+
+            if (user != null)
             {
-                if(AccountId == user.AccountId)
-                {
-                    UserId = user.UserId;
-                    return true;
-                }
+                return (true, user);
             }
-            return false;
+
+            return (false, null);
         }
     }
 }

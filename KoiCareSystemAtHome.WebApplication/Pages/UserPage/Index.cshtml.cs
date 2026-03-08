@@ -12,9 +12,9 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
 {
     public class IndexModel : PageModel
     {
-        private readonly IUserService _userService;
+        private readonly IUserProfileService _userService;
 
-        public IndexModel(IUserService userService)
+        public IndexModel(IUserProfileService userService)
         {
             _userService = userService;
         }

@@ -43,6 +43,7 @@ public partial class KoiCareSystemAtHomeContext : DbContext
 
             entity.Property(e => e.AccountId)
                 .HasDefaultValueSql("(newid())")
+                .ValueGeneratedOnAdd()
                 .HasColumnName("AccountID");
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.PasswordHash).HasMaxLength(255);

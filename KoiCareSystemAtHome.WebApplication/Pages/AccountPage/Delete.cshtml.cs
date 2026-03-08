@@ -49,13 +49,22 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
                 return NotFound();
             }
 
-            _accountService.DelAccount((Guid)id);
+            // Check Account exist
+            var account = await _accountService.GetAccountById(id.Value);
+            if (account == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _accountService.DelAccount(id.Value);
+            if (!result)
+            {
+                ModelState.AddModelError(string.Empty, "Không thể xóa tài khoản này. Có thể do dữ liệu liên quan vẫn tồn tại.");
+                Account = account;
+                return Page();
+            }
+
             return RedirectToPage("./Index");
-        }
-        private async Task<bool> AccountExists(Guid id)
-        {
-            var koiFish = await _accountService.GetAccountById((Guid)id);
-            return koiFish != null;
         }
     }
 }

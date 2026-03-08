@@ -31,7 +31,8 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
                 return NotFound();
             }
 
-            var account =  await _accountService.GetAccountById((Guid)id);  
+            var account = await _accountService.GetAccountById(id.Value);
+
             if (account == null)
             {
                 return NotFound();
@@ -40,21 +41,29 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            //_accountService.UpdateAccount(Account);
-            bool result = await Task.Run(() => _accountService.UpdateAccount(Account));
 
-            if (!result)
+            try
             {
-                return BadRequest();
+                var result = await _accountService.UpdateAccount(Account);
+
+                if (!result)
+                {
+                    ModelState.AddModelError(string.Empty, "Không thể cập nhật tài khoản. Vui lòng kiểm tra lại.");
+                    return Page();
+                }
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                ModelState.AddModelError(string.Empty, "Dữ liệu đã bị thay đổi bởi một người dùng khác. Hãy tải lại trang.");
+                return Page();
+            }
+
             return RedirectToPage("./Index");
         }
     }

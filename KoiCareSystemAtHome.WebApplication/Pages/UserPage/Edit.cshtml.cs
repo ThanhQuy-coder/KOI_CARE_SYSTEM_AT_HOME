@@ -14,9 +14,9 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
 {
     public class EditModel : PageModel
     {
-        private readonly IUserService _userService;
+        private readonly IUserProfileService _userService;
 
-        public EditModel(IUserService userService)
+        public EditModel(IUserProfileService userService)
         {
             _userService = userService;
         }

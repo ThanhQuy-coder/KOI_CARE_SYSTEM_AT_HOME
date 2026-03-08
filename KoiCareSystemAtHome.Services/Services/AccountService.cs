@@ -1,34 +1,39 @@
 ﻿using KoiCareSystemAtHome.Repositories.Entities;
 using KoiCareSystemAtHome.Repositories.Interfaces;
 using KoiCareSystemAtHome.Services.Interfaces;
+using BCrypt.Net;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace KoiCareSystemAtHome.Services.Services
 {
     public class AccountService : IAccountService
     {
         private readonly IAccountRepository _repository;
-        public AccountService(IAccountRepository repository) {
+        public AccountService(IAccountRepository repository)
+        {
             _repository = repository;
-        } 
-        public Task<List<Account>> GetAllAccount()
+        }
+        public async Task<List<Account>> GetAllAccount()
         {
-            return _repository.GetAllAccount();
+            return await _repository.GetAllAccount();
         }
 
-        public bool AddAccount(Account account)
+        public async Task<Account?> AddAccount(Account account)
         {
-            return _repository.AddAccount(account);
+            // Hash Password
+            account.PasswordHash = HashPassword(account.PasswordHash);
+            return await _repository.AddAccount(account);
         }
 
-        public bool DelAccount(Guid Id)
+        public async Task<bool> DelAccount(Guid Id)
         {
-            return _repository.DelAccount(Id);
+            return await _repository.DelAccount(Id);
         }
 
         public bool DelAccount(Account account)
@@ -36,19 +41,39 @@ namespace KoiCareSystemAtHome.Services.Services
             return _repository.DelAccount(account);
         }
 
-        public Task<Account?> GetAccountById(Guid? Id)
+        public async Task<Account?> GetAccountById(Guid? Id)
         {
-            return _repository.GetAccountById(Id);
+            return await _repository.GetAccountById(Id);
         }
 
-        public bool UpdateAccount(Account account)
+        public async Task<bool> UpdateAccount(Account account)
         {
-            return _repository.UpdateAccount(account);
+            return await _repository.UpdateAccount(account);
         }
 
-        public bool checkAccount(string email, string password,ref Guid getId)
+        public async Task<Account?> checkAccount(string email, string plainPassword)
         {
-            return _repository.checkAccount(email, password,ref getId);
+            var account = await _repository.GetAccountByEmail(email);
+
+            if (account == null)
+            {
+                return null;
+            }
+
+            bool isValid = BCrypt.Net.BCrypt.Verify(plainPassword, account.PasswordHash);
+
+            if (isValid)
+            {
+                return account;
+            }
+
+            return null;
+        }
+
+        // Function used to hash the password
+        private string HashPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password, workFactor: 12);
         }
     }
 }

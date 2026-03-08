@@ -10,10 +10,10 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.LoginPage
 {
     public class RegisterModel : PageModel
     {
-        private readonly IUserService _userService;
+        private readonly IUserProfileService _userService;
         private readonly IAccountService _accountService;
 
-        public RegisterModel(IUserService userService, IAccountService accountService)
+        public RegisterModel(IUserProfileService userService, IAccountService accountService)
         {
             _userService = userService;
             _accountService = accountService;
@@ -25,45 +25,59 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.LoginPage
         }
 
         [BindProperty]
-        public UserProfile User { get; set; } = default!;
+        public new UserProfile User { get; set; } = default!;
+
         [BindProperty]
         public Account Account { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        // Nhận AccountID từ query string khi chuyển hướng từ trang tạo Account
-
         public async Task<IActionResult> OnPostAsync()
         {
-            // Tạo Account
+            ModelState.Remove("User.Role");
+            ModelState.Remove("User.Account");
 
-            var resultAccount = _accountService.AddAccount(Account);
-            if (!resultAccount)
+            if (!ModelState.IsValid)
             {
-                
-                ModelState.AddModelError(string.Empty, "Error");
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        Console.WriteLine($"Validation Error: {error.ErrorMessage}");
+                    }
+                }
                 return Page();
             }
 
-            User.AccountId = Account.AccountId;
-            User.BirthDate = null;
-            User.Gender = "null";
-            User.Role = "null";
-
-            if (User.AccountId == Guid.Empty)
+            try
             {
-                ModelState.AddModelError(string.Empty, "AccountId is required.");
+                var createdAccount = await _accountService.AddAccount(Account);
+
+                if (createdAccount == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Không thể tạo tài khoản. Vui lòng thử lại.");
+                    return Page();
+                }
+
+                User.AccountId = createdAccount.AccountId;
+                User.BirthDate = null;
+                User.Gender = "Other";
+                User.Role = "User";
+
+                var isUserCreated = await _userService.AddUser(User);
+
+                if (!isUserCreated)
+                {
+                    ModelState.AddModelError(string.Empty, "Tài khoản đã tạo nhưng không thể khởi tạo thông tin người dùng.");
+                    return Page();
+                }
+
+                return RedirectToPage("/LoginPage/Index");
+            }
+            catch (Exception ex)
+            {
+                var innerMessage = ex.InnerException?.Message ?? ex.Message;
+                ModelState.AddModelError(string.Empty, "Lỗi hệ thống: " + innerMessage);
                 return Page();
             }
-
-            // Tạo User
-            var resultUser = _userService.AddUser(User);
-            if (!resultUser)
-            {
-                ModelState.AddModelError(string.Empty, "Error");
-                return Page();
-            }
-
-            return RedirectToPage("/LoginPage/Index");
         }
     }
 }

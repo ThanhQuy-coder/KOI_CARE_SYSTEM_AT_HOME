@@ -13,9 +13,9 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.UserPage
 {
     public class DeleteModel : PageModel
     {
-        private readonly IUserService _userService;
+        private readonly IUserProfileService _userService;
 
-        public DeleteModel(IUserService context)
+        public DeleteModel(IUserProfileService context)
         {
             _userService = context;
         }

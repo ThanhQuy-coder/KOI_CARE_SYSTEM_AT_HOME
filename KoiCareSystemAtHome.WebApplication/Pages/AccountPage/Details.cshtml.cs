@@ -28,15 +28,14 @@ namespace KoiCareSystemAtHome.WebApplication.Pages.AccountPage
                 return NotFound();
             }
 
-            var account = await _accountService.GetAccountById((Guid)id);
+            var account = await _accountService.GetAccountById(id.Value);
+
             if (account == null)
             {
                 return NotFound();
             }
-            else
-            {
-                Account = account;
-            }
+
+            Account = account;
             return Page();
         }
     }
